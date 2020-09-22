@@ -1,4 +1,5 @@
 # TFLint Ruleset for terraform-provider-google
+[![Build Status](https://github.com/terraform-linters/tflint-ruleset-google/workflows/build/badge.svg?branch=master)](https://github.com/terraform-linters/tflint-ruleset-google/actions)
 
 TFLint ruleset plugin for Terraform Google Cloud Platform provider
 
