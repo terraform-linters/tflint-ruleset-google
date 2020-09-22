@@ -1,0 +1,3 @@
+[submodule "tools/magic-modules"]
+	path = tools/magic-modules
+	url = git@github.com:terraform-linters/magic-modules.git
