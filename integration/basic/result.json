@@ -1,0 +1,27 @@
+{
+    "issues":[
+       {
+          "rule":{
+             "name":"google_app_engine_domain_mapping_invalid_override_strategy",
+             "severity":"error",
+             "link":""
+          },
+          "message":"expected override_strategy to be one of [STRICT OVERRIDE ], got DEFAULT",
+          "range":{
+             "filename":"main.tf",
+             "start":{
+                "line":3,
+                "column":23
+             },
+             "end":{
+                "line":3,
+                "column":32
+             }
+          },
+          "callers":[
+             
+          ]
+       }
+    ],
+    "errors":[]
+ }
