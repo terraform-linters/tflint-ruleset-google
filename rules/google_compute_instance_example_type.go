@@ -42,11 +42,10 @@ func (r *GoogleComputeInstanceExampleTypeRule) Check(runner tflint.Runner) error
 		err := runner.EvaluateExpr(attribute.Expr, &machineType)
 
 		return runner.EnsureNoError(err, func() error {
-			return runner.EmitIssue(
+			return runner.EmitIssueOnExpr(
 				r,
 				fmt.Sprintf("machine type is %s", machineType),
-				attribute.Expr.Range(),
-				tflint.Metadata{Expr: attribute.Expr},
+				attribute.Expr,
 			)
 		})
 	})
