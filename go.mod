@@ -1,6 +1,6 @@
 module github.com/terraform-linters/tflint-ruleset-google
 
-go 1.13
+go 1.15
 
 require (
 	github.com/hashicorp/hcl/v2 v2.6.0
