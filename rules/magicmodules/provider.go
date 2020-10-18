@@ -43,6 +43,7 @@ var Rules = []tflint.Rule{
 	NewGoogleComputeBackendServiceInvalidProtocolRule(),
 	NewGoogleComputeBackendServiceInvalidSessionAffinityRule(),
 	NewGoogleComputeBackendServiceSignedUrlKeyInvalidNameRule(),
+	NewGoogleComputeExternalVpnGatewayInvalidRedundancyTypeRule(),
 	NewGoogleComputeFirewallInvalidDirectionRule(),
 	NewGoogleComputeForwardingRuleInvalidIpProtocolRule(),
 	NewGoogleComputeForwardingRuleInvalidLoadBalancingSchemeRule(),
