@@ -64,7 +64,11 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Check(runner tflint.Run
 				err := runner.EvaluateExpr(attribute.Expr, &machineType)
 
 				err = runner.EnsureNoError(err, func() error {
-					if validMachineTypes[machineType] || strings.HasPrefix(machineType, "custom-") {
+					if validMachineTypes[machineType] ||
+						strings.HasPrefix(machineType, "e2-custom-") ||
+						strings.HasPrefix(machineType, "n2-custom-") ||
+						strings.HasPrefix(machineType, "n2d-custom-") ||
+						strings.HasPrefix(machineType, "n1-custom-") {
 						return nil
 					}
 

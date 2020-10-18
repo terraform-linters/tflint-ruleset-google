@@ -73,7 +73,7 @@ resource "google_container_cluster" "primary_preemptible_nodes" {
 
   node_config {
     preemptible  = true
-    machine_type = "custom-6-20480"
+    machine_type = "n2-custom-6-20480"
 
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",

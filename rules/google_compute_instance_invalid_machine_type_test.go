@@ -43,7 +43,7 @@ resource "google_compute_instance" "vm_instance" {
 			Name: "custom type",
 			Content: `
 resource "google_compute_instance" "vm_instance" {
-    machine_type = "custom-6-20480"
+    machine_type = "n2-custom-6-20480"
 }`,
 			Expected: helper.Issues{},
 		},

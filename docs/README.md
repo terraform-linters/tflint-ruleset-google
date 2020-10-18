@@ -6,7 +6,7 @@ This documentation describes a list of rules available by enabling this ruleset.
 
 ### Invalid machine types
 
-These rules warn you if a machine type not listed at https://cloud.google.com/compute/docs/machine-types is being used. Please note that custom machine types cannot be detected correctly. These rules consider all machine types starting with `custom-` to be valid.
+These rules warn you if a machine type not listed at https://cloud.google.com/compute/docs/machine-types is being used. Please note that custom machine types cannot be detected correctly. These rules consider all machine types starting with `[e2|n2|n2d|n1]-custom-` to be valid.
 
 |Name|Severity|Enabled|
 | --- | --- | --- |
