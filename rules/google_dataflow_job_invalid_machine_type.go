@@ -2,14 +2,13 @@ package rules
 
 import (
 	"fmt"
-	"strings"
 
 	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleDataflowJobInvalidMachineTypeRule checks whether the machine type is invalid
-type GoogleDataflowJobInvalidMachineTypeRule struct {}
+type GoogleDataflowJobInvalidMachineTypeRule struct{}
 
 // NewGoogleDataflowJobInvalidMachineTypeRule returns a new rule
 func NewGoogleDataflowJobInvalidMachineTypeRule() *GoogleDataflowJobInvalidMachineTypeRule {
@@ -43,11 +42,7 @@ func (r *GoogleDataflowJobInvalidMachineTypeRule) Check(runner tflint.Runner) er
 		err := runner.EvaluateExpr(attribute.Expr, &machineType)
 
 		return runner.EnsureNoError(err, func() error {
-			if validMachineTypes[machineType] ||
-				strings.HasPrefix(machineType, "e2-custom-") ||
-				strings.HasPrefix(machineType, "n2-custom-") ||
-				strings.HasPrefix(machineType, "n2d-custom-") ||
-				strings.HasPrefix(machineType, "n1-custom-") {
+			if validMachineTypes[machineType] || isCustomType(machineType) {
 				return nil
 			}
 

@@ -1,5 +1,7 @@
 package rules
 
+import "strings"
+
 var validMachineTypes = map[string]bool{
 	"e2-standard-2":    true,
 	"e2-standard-4":    true,
@@ -113,4 +115,11 @@ var validMachineTypes = map[string]bool{
 	"e2-medium":        true,
 	"f1-micro":         true,
 	"g1-small":         true,
+}
+
+func isCustomType(machineType string) bool {
+	return strings.HasPrefix(machineType, "e2-custom-") ||
+		strings.HasPrefix(machineType, "n2-custom-") ||
+		strings.HasPrefix(machineType, "n2d-custom-") ||
+		strings.HasPrefix(machineType, "n1-custom-")
 }

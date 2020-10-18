@@ -2,7 +2,6 @@ package rules
 
 import (
 	"fmt"
-	"strings"
 
 	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
@@ -53,11 +52,7 @@ func (r *GoogleContainerNodePoolInvalidMachineTypeRule) Check(runner tflint.Runn
 			err := runner.EvaluateExpr(attribute.Expr, &machineType)
 
 			return runner.EnsureNoError(err, func() error {
-				if validMachineTypes[machineType] ||
-					strings.HasPrefix(machineType, "e2-custom-") ||
-					strings.HasPrefix(machineType, "n2-custom-") ||
-					strings.HasPrefix(machineType, "n2d-custom-") ||
-					strings.HasPrefix(machineType, "n1-custom-") {
+				if validMachineTypes[machineType] || isCustomType(machineType) {
 					return nil
 				}
 
