@@ -121,5 +121,6 @@ func isCustomType(machineType string) bool {
 	return strings.HasPrefix(machineType, "e2-custom-") ||
 		strings.HasPrefix(machineType, "n2-custom-") ||
 		strings.HasPrefix(machineType, "n2d-custom-") ||
-		strings.HasPrefix(machineType, "n1-custom-")
+		strings.HasPrefix(machineType, "n1-custom-") ||
+		strings.HasPrefix(machineType, "custom-")
 }
