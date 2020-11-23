@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule struct {
+// GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule checks the pattern is valid
+type GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule() *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_region_backend_service",
-		attributeName: "load_balancing_scheme",
+// NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule returns new rule with default attributes
+func NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule() *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule {
+	return &GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule{
+		resourceType:  "google_compute_region_network_endpoint_group",
+		attributeName: "network_endpoint_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_region_backend_service_invalid_load_balancing_scheme"
+func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Name() string {
+	return "google_compute_region_network_endpoint_group_invalid_network_endpoint_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Severity() string {
+func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", "INTERNAL_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SERVERLESS", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

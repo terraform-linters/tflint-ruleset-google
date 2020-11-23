@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule struct {
+// GoogleBigqueryRoutineInvalidLanguageRule checks the pattern is valid
+type GoogleBigqueryRoutineInvalidLanguageRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule() *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_region_backend_service",
-		attributeName: "load_balancing_scheme",
+// NewGoogleBigqueryRoutineInvalidLanguageRule returns new rule with default attributes
+func NewGoogleBigqueryRoutineInvalidLanguageRule() *GoogleBigqueryRoutineInvalidLanguageRule {
+	return &GoogleBigqueryRoutineInvalidLanguageRule{
+		resourceType:  "google_bigquery_routine",
+		attributeName: "language",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_region_backend_service_invalid_load_balancing_scheme"
+func (r *GoogleBigqueryRoutineInvalidLanguageRule) Name() string {
+	return "google_bigquery_routine_invalid_language"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleBigqueryRoutineInvalidLanguageRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Severity() string {
+func (r *GoogleBigqueryRoutineInvalidLanguageRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleBigqueryRoutineInvalidLanguageRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigqueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", "INTERNAL_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SQL", "JAVASCRIPT", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

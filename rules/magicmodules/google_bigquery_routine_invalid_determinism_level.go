@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule struct {
+// GoogleBigqueryRoutineInvalidDeterminismLevelRule checks the pattern is valid
+type GoogleBigqueryRoutineInvalidDeterminismLevelRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule() *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_region_backend_service",
-		attributeName: "load_balancing_scheme",
+// NewGoogleBigqueryRoutineInvalidDeterminismLevelRule returns new rule with default attributes
+func NewGoogleBigqueryRoutineInvalidDeterminismLevelRule() *GoogleBigqueryRoutineInvalidDeterminismLevelRule {
+	return &GoogleBigqueryRoutineInvalidDeterminismLevelRule{
+		resourceType:  "google_bigquery_routine",
+		attributeName: "determinism_level",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_region_backend_service_invalid_load_balancing_scheme"
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Name() string {
+	return "google_bigquery_routine_invalid_determinism_level"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Severity() string {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", "INTERNAL_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"DETERMINISM_LEVEL_UNSPECIFIED", "DETERMINISTIC", "NOT_DETERMINISTIC", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

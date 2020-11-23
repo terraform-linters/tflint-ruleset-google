@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule struct {
+// GoogleBigqueryRoutineInvalidRoutineTypeRule checks the pattern is valid
+type GoogleBigqueryRoutineInvalidRoutineTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule() *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_region_backend_service",
-		attributeName: "load_balancing_scheme",
+// NewGoogleBigqueryRoutineInvalidRoutineTypeRule returns new rule with default attributes
+func NewGoogleBigqueryRoutineInvalidRoutineTypeRule() *GoogleBigqueryRoutineInvalidRoutineTypeRule {
+	return &GoogleBigqueryRoutineInvalidRoutineTypeRule{
+		resourceType:  "google_bigquery_routine",
+		attributeName: "routine_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_region_backend_service_invalid_load_balancing_scheme"
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Name() string {
+	return "google_bigquery_routine_invalid_routine_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Severity() string {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionBackendServiceInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", "INTERNAL_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
