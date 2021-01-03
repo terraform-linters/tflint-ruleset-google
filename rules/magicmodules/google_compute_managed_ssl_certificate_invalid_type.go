@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeAddressInvalidPurposeRule checks the pattern is valid
-type GoogleComputeAddressInvalidPurposeRule struct {
+// GoogleComputeManagedSslCertificateInvalidTypeRule checks the pattern is valid
+type GoogleComputeManagedSslCertificateInvalidTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeAddressInvalidPurposeRule returns new rule with default attributes
-func NewGoogleComputeAddressInvalidPurposeRule() *GoogleComputeAddressInvalidPurposeRule {
-	return &GoogleComputeAddressInvalidPurposeRule{
-		resourceType:  "google_compute_address",
-		attributeName: "purpose",
+// NewGoogleComputeManagedSslCertificateInvalidTypeRule returns new rule with default attributes
+func NewGoogleComputeManagedSslCertificateInvalidTypeRule() *GoogleComputeManagedSslCertificateInvalidTypeRule {
+	return &GoogleComputeManagedSslCertificateInvalidTypeRule{
+		resourceType:  "google_compute_managed_ssl_certificate",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeAddressInvalidPurposeRule) Name() string {
-	return "google_compute_address_invalid_purpose"
+func (r *GoogleComputeManagedSslCertificateInvalidTypeRule) Name() string {
+	return "google_compute_managed_ssl_certificate_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeAddressInvalidPurposeRule) Enabled() bool {
+func (r *GoogleComputeManagedSslCertificateInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeAddressInvalidPurposeRule) Severity() string {
+func (r *GoogleComputeManagedSslCertificateInvalidTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeAddressInvalidPurposeRule) Link() string {
+func (r *GoogleComputeManagedSslCertificateInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeAddressInvalidPurposeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeManagedSslCertificateInvalidTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"GCE_ENDPOINT", "VPC_PEERING", "SHARED_LOADBALANCER_VIP", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"MANAGED", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
