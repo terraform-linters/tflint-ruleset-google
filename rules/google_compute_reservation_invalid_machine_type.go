@@ -60,7 +60,7 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Check(runner tflint.Run
 
 			if attribute, exists := content.Attributes["machine_type"]; exists {
 				var machineType string
-				err := runner.EvaluateExpr(attribute.Expr, &machineType)
+				err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
 				err = runner.EnsureNoError(err, func() error {
 					if validMachineTypes[machineType] || isCustomType(machineType) {

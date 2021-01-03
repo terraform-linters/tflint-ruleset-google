@@ -58,7 +58,7 @@ func (r *GoogleHealthcareFhirStoreInvalidVersionRule) Link() string {
 func (r *GoogleHealthcareFhirStoreInvalidVersionRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"DSTU2", "STU3", "R4"}, false)
 

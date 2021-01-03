@@ -58,7 +58,7 @@ func (r *GoogleComputeGlobalNetworkEndpointGroupInvalidNetworkEndpointTypeRule) 
 func (r *GoogleComputeGlobalNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"INTERNET_IP_PORT", "INTERNET_FQDN_PORT"}, false)
 

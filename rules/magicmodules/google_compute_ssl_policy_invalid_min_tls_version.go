@@ -58,7 +58,7 @@ func (r *GoogleComputeSslPolicyInvalidMinTlsVersionRule) Link() string {
 func (r *GoogleComputeSslPolicyInvalidMinTlsVersionRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"TLS_1_0", "TLS_1_1", "TLS_1_2", ""}, false)
 

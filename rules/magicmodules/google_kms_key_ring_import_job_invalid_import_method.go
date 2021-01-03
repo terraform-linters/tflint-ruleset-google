@@ -58,7 +58,7 @@ func (r *GoogleKmsKeyRingImportJobInvalidImportMethodRule) Link() string {
 func (r *GoogleKmsKeyRingImportJobInvalidImportMethodRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"RSA_OAEP_3072_SHA1_AES_256", "RSA_OAEP_4096_SHA1_AES_256"}, false)
 

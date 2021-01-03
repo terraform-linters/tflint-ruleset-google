@@ -58,7 +58,7 @@ func (r *GoogleMonitoringAlertPolicyInvalidCombinerRule) Link() string {
 func (r *GoogleMonitoringAlertPolicyInvalidCombinerRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"AND", "OR", "AND_WITH_MATCHING_RESOURCE"}, false)
 
