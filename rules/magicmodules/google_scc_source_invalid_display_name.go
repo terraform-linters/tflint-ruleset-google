@@ -57,7 +57,7 @@ func (r *GoogleSccSourceInvalidDisplayNameRule) Link() string {
 func (r *GoogleSccSourceInvalidDisplayNameRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validateRegexp(`[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`)
 

@@ -58,7 +58,7 @@ func (r *GoogleAccessContextManagerServicePerimeterInvalidPerimeterTypeRule) Lin
 func (r *GoogleAccessContextManagerServicePerimeterInvalidPerimeterTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"PERIMETER_TYPE_REGULAR", "PERIMETER_TYPE_BRIDGE", ""}, false)
 

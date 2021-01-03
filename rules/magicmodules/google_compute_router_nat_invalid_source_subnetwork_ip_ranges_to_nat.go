@@ -58,7 +58,7 @@ func (r *GoogleComputeRouterNatInvalidSourceSubnetworkIpRangesToNatRule) Link() 
 func (r *GoogleComputeRouterNatInvalidSourceSubnetworkIpRangesToNatRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"ALL_SUBNETWORKS_ALL_IP_RANGES", "ALL_SUBNETWORKS_ALL_PRIMARY_IP_RANGES", "LIST_OF_SUBNETWORKS"}, false)
 

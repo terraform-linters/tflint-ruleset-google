@@ -57,7 +57,7 @@ func (r *GoogleSpannerDatabaseInvalidNameRule) Link() string {
 func (r *GoogleSpannerDatabaseInvalidNameRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validateRegexp(`^[a-z][a-z0-9_\-]*[a-z0-9]$`)
 

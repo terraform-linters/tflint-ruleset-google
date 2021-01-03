@@ -58,7 +58,7 @@ func (r *GoogleDialogflowEntityTypeInvalidKindRule) Link() string {
 func (r *GoogleDialogflowEntityTypeInvalidKindRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"KIND_MAP", "KIND_LIST", "KIND_REGEXP"}, false)
 

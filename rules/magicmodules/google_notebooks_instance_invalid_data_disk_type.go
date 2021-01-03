@@ -58,7 +58,7 @@ func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Link() string {
 func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val)
+		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"DISK_TYPE_UNSPECIFIED", "PD_STANDARD", "PD_SSD", "PD_BALANCED", ""}, false)
 

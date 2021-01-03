@@ -49,7 +49,7 @@ func (r *GoogleContainerNodePoolInvalidMachineTypeRule) Check(runner tflint.Runn
 
 		if attribute, exists := content.Attributes["machine_type"]; exists {
 			var machineType string
-			err := runner.EvaluateExpr(attribute.Expr, &machineType)
+			err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
 			return runner.EnsureNoError(err, func() error {
 				if validMachineTypes[machineType] || isCustomType(machineType) {

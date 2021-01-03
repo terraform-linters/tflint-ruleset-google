@@ -39,7 +39,7 @@ func (r *GoogleDataflowJobInvalidMachineTypeRule) Link() string {
 func (r *GoogleDataflowJobInvalidMachineTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes("google_dataflow_job", "machine_type", func(attribute *hcl.Attribute) error {
 		var machineType string
-		err := runner.EvaluateExpr(attribute.Expr, &machineType)
+		err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
 		return runner.EnsureNoError(err, func() error {
 			if validMachineTypes[machineType] || isCustomType(machineType) {
