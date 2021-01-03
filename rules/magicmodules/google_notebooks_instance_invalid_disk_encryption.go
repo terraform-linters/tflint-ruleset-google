@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeAddressInvalidPurposeRule checks the pattern is valid
-type GoogleComputeAddressInvalidPurposeRule struct {
+// GoogleNotebooksInstanceInvalidDiskEncryptionRule checks the pattern is valid
+type GoogleNotebooksInstanceInvalidDiskEncryptionRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeAddressInvalidPurposeRule returns new rule with default attributes
-func NewGoogleComputeAddressInvalidPurposeRule() *GoogleComputeAddressInvalidPurposeRule {
-	return &GoogleComputeAddressInvalidPurposeRule{
-		resourceType:  "google_compute_address",
-		attributeName: "purpose",
+// NewGoogleNotebooksInstanceInvalidDiskEncryptionRule returns new rule with default attributes
+func NewGoogleNotebooksInstanceInvalidDiskEncryptionRule() *GoogleNotebooksInstanceInvalidDiskEncryptionRule {
+	return &GoogleNotebooksInstanceInvalidDiskEncryptionRule{
+		resourceType:  "google_notebooks_instance",
+		attributeName: "disk_encryption",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeAddressInvalidPurposeRule) Name() string {
-	return "google_compute_address_invalid_purpose"
+func (r *GoogleNotebooksInstanceInvalidDiskEncryptionRule) Name() string {
+	return "google_notebooks_instance_invalid_disk_encryption"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeAddressInvalidPurposeRule) Enabled() bool {
+func (r *GoogleNotebooksInstanceInvalidDiskEncryptionRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeAddressInvalidPurposeRule) Severity() string {
+func (r *GoogleNotebooksInstanceInvalidDiskEncryptionRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeAddressInvalidPurposeRule) Link() string {
+func (r *GoogleNotebooksInstanceInvalidDiskEncryptionRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeAddressInvalidPurposeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNotebooksInstanceInvalidDiskEncryptionRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val)
 
-		validateFunc := validation.StringInSlice([]string{"GCE_ENDPOINT", "VPC_PEERING", "SHARED_LOADBALANCER_VIP", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"DISK_ENCRYPTION_UNSPECIFIED", "GMEK", "CMEK", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
