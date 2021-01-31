@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule checks the pattern is valid
-type GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule struct {
+// GoogleApigeeOrganizationInvalidRuntimeTypeRule checks the pattern is valid
+type GoogleApigeeOrganizationInvalidRuntimeTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule returns new rule with default attributes
-func NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule() *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule {
-	return &GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule{
-		resourceType:  "google_sql_source_representation_instance",
-		attributeName: "database_version",
+// NewGoogleApigeeOrganizationInvalidRuntimeTypeRule returns new rule with default attributes
+func NewGoogleApigeeOrganizationInvalidRuntimeTypeRule() *GoogleApigeeOrganizationInvalidRuntimeTypeRule {
+	return &GoogleApigeeOrganizationInvalidRuntimeTypeRule{
+		resourceType:  "google_apigee_organization",
+		attributeName: "runtime_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Name() string {
-	return "google_sql_source_representation_instance_invalid_database_version"
+func (r *GoogleApigeeOrganizationInvalidRuntimeTypeRule) Name() string {
+	return "google_apigee_organization_invalid_runtime_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Enabled() bool {
+func (r *GoogleApigeeOrganizationInvalidRuntimeTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Severity() string {
+func (r *GoogleApigeeOrganizationInvalidRuntimeTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Link() string {
+func (r *GoogleApigeeOrganizationInvalidRuntimeTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleApigeeOrganizationInvalidRuntimeTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0"}, false)
+		validateFunc := validation.StringInSlice([]string{"CLOUD", "HYBRID", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

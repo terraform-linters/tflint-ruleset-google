@@ -23,6 +23,7 @@ var Rules = []tflint.Rule{
 	NewGoogleAccessContextManagerServicePerimeterInvalidPerimeterTypeRule(),
 	NewGoogleActiveDirectoryDomainTrustInvalidTrustDirectionRule(),
 	NewGoogleActiveDirectoryDomainTrustInvalidTrustTypeRule(),
+	NewGoogleApigeeOrganizationInvalidRuntimeTypeRule(),
 	NewGoogleAppEngineDomainMappingInvalidOverrideStrategyRule(),
 	NewGoogleAppEngineFirewallRuleInvalidActionRule(),
 	NewGoogleAppEngineFlexibleAppVersionInvalidServingStatusRule(),
