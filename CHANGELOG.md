@@ -1,3 +1,13 @@
+## 0.5.1 (2021-02-02)
+
+### BugFixes
+
+- [#73](https://github.com/terraform-linters/tflint-ruleset-google/pull/73): Bump tflint-plugin-sdk to v0.8.1
+
+### Chores
+
+- [#72](https://github.com/terraform-linters/tflint-ruleset-google/pull/72): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.4.1 to 2.4.2
+
 ## 0.5.0 (2021-02-01)
 
 The minimum supported version of TFLint has changed in this version. TFLint v0.24.0+ is required for this plugin to work.
