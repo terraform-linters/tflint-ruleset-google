@@ -1,3 +1,15 @@
+## 0.6.0 (2021-03-07)
+
+### Enhancements
+
+- [#79](https://github.com/terraform-linters/tflint-ruleset-google/pull/79): Update Magic Modules
+
+### Chores
+
+- [#76](https://github.com/terraform-linters/tflint-ruleset-google/pull/76): Upgrade to Go 1.16
+- [#77](https://github.com/terraform-linters/tflint-ruleset-google/pull/77): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.4.2 to 2.4.4
+- [#78](https://github.com/terraform-linters/tflint-ruleset-google/pull/78): Bump github.com/hashicorp/hcl/v2 from 2.8.2 to 2.9.0
+
 ## 0.5.1 (2021-02-02)
 
 ### BugFixes
