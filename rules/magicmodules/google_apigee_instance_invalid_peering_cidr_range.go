@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeGlobalAddressInvalidPurposeRule checks the pattern is valid
-type GoogleComputeGlobalAddressInvalidPurposeRule struct {
+// GoogleApigeeInstanceInvalidPeeringCidrRangeRule checks the pattern is valid
+type GoogleApigeeInstanceInvalidPeeringCidrRangeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeGlobalAddressInvalidPurposeRule returns new rule with default attributes
-func NewGoogleComputeGlobalAddressInvalidPurposeRule() *GoogleComputeGlobalAddressInvalidPurposeRule {
-	return &GoogleComputeGlobalAddressInvalidPurposeRule{
-		resourceType:  "google_compute_global_address",
-		attributeName: "purpose",
+// NewGoogleApigeeInstanceInvalidPeeringCidrRangeRule returns new rule with default attributes
+func NewGoogleApigeeInstanceInvalidPeeringCidrRangeRule() *GoogleApigeeInstanceInvalidPeeringCidrRangeRule {
+	return &GoogleApigeeInstanceInvalidPeeringCidrRangeRule{
+		resourceType:  "google_apigee_instance",
+		attributeName: "peering_cidr_range",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Name() string {
-	return "google_compute_global_address_invalid_purpose"
+func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Name() string {
+	return "google_apigee_instance_invalid_peering_cidr_range"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Enabled() bool {
+func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Severity() string {
+func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Link() string {
+func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Check(runner tflint.Runner) error {
+func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"VPC_PEERING", "PRIVATE_SERVICE_CONNECT", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SLASH_16", "SLASH_20", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
