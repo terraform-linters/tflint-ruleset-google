@@ -7,6 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/terraform/configs"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-google/google"
+	"github.com/terraform-linters/tflint-ruleset-google/project"
 	"github.com/terraform-linters/tflint-ruleset-google/rules/magicmodules"
 	"google.golang.org/api/serviceusage/v1"
 )
@@ -27,7 +28,7 @@ func NewGoogleDisabledAPIRule() *GoogleDisabledAPIRule {
 
 // Name returns the rule name
 func (r *GoogleDisabledAPIRule) Name() string {
-	return "google_disabled_api_rule"
+	return "google_disabled_api"
 }
 
 // Enabled returns whether the rule is enabled by default
@@ -42,7 +43,7 @@ func (r *GoogleDisabledAPIRule) Severity() string {
 
 // Link returns the rule reference link
 func (r *GoogleDisabledAPIRule) Link() string {
-	return ""
+	return project.ReferenceLink(r.Name())
 }
 
 // Check checks whether the API required by resources is disabled

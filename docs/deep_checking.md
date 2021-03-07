@@ -8,7 +8,7 @@ For example, you can confirm that the API you are trying to use in the project i
 $ tflint
 1 issue(s) found:
 
-Error: Compute Engine API has not been used in foo-bar-baz before or it is disabled. (google_disabled_api_rule)
+Error: Compute Engine API has not been used in foo-bar-baz before or it is disabled. (google_disabled_api)
 
   on template.tf line 25:
   25: resource "google_compute_network" "vpc_network" {

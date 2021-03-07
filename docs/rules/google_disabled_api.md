@@ -15,7 +15,7 @@ resource "google_compute_network" "vpc_network" {
 $ tflint
 1 issue(s) found:
 
-Error: Compute Engine API has not been used in foo-bar-baz before or it is disabled. (google_disabled_api_rule)
+Error: Compute Engine API has not been used in foo-bar-baz before or it is disabled. (google_disabled_api)
 
   on template.tf line 1:
    1: resource "google_compute_network" "vpc_network" {
