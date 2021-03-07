@@ -20,9 +20,11 @@ plugin "google" {
 }
 ```
 
+For more configuration about the plugin, see [Plugin Configuration](docs/configuration.md).
+
 ## Rules
 
-100+ rules are available. See the [documentation](docs/README.md).
+100+ rules are available. See the [documentation](docs/rules/README.md).
 
 ## Building the plugin
 

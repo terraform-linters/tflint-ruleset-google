@@ -20,6 +20,14 @@ These rules warn you if a machine type not listed at https://cloud.google.com/co
 
 ## Magic Modules Rules
 
-These are the rules that warn against invalid values generated from [Magic Modules](https://github.com/terraform-linters/magic-modules). These rules are defined under the [`rules/magicmodules`](../rules/magicmodules) directory.
+These are the rules that warn against invalid values generated from [Magic Modules](https://github.com/terraform-linters/magic-modules). These rules are defined under the [`rules/magicmodules`](../../rules/magicmodules) directory.
 
-See the [`tools`](../tools) directory for how to generate these rules.
+See the [`tools`](../../tools) directory for how to generate these rules.
+
+## Deep Checking Rules
+
+By enabling [Deep Checking](../deep_checking.md), you can enable rules that invoke API to perform more strict checking.
+
+|Name|Severity|Enabled|
+| --- | --- | --- |
+|google_disabled_api|ERROR|✔|
