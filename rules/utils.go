@@ -1,6 +1,12 @@
 package rules
 
-import "strings"
+import (
+	"fmt"
+	"regexp"
+	"strings"
+
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+)
 
 var validMachineTypes = map[string]bool{
 	"e2-standard-2":    true,
@@ -123,4 +129,16 @@ func isCustomType(machineType string) bool {
 		strings.HasPrefix(machineType, "n2d-custom-") ||
 		strings.HasPrefix(machineType, "n1-custom-") ||
 		strings.HasPrefix(machineType, "custom-")
+}
+
+func validateRegexp(re string) schema.SchemaValidateFunc {
+	return func(v interface{}, k string) (ws []string, errors []error) {
+		value := v.(string)
+		if !regexp.MustCompile(re).MatchString(value) {
+			errors = append(errors, fmt.Errorf(
+				"%q (%q) doesn't match regexp %q", k, value, re))
+		}
+
+		return
+	}
 }
