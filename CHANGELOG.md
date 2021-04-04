@@ -1,3 +1,22 @@
+## 0.7.0 (2021-04-04)
+
+This release adds support for deep checking. `google_disabled_api` rule finds resource declarations that depend on APIs that are not enabled. See [Deep Checking](docs/deep_checking.md) for details.
+
+### Enhancements
+
+- [#75](https://github.com/terraform-linters/tflint-ruleset-google/pull/75): rule: Add google_disabled_api rule
+- [#84](https://github.com/terraform-linters/tflint-ruleset-google/pull/84): rule: Add google_compute_resource_policy_invalid_name rule
+- [#88](https://github.com/terraform-linters/tflint-ruleset-google/pull/88): Update Magic Modules
+
+### Chores
+
+- [#80](https://github.com/terraform-linters/tflint-ruleset-google/pull/80): Bump github.com/google/go-cmp from 0.5.4 to 0.5.5
+- [#81](https://github.com/terraform-linters/tflint-ruleset-google/pull/81): Bump github.com/hashicorp/hcl/v2 from 2.9.0 to 2.9.1
+- [#83](https://github.com/terraform-linters/tflint-ruleset-google/pull/83): Add rule generator
+- [#86](https://github.com/terraform-linters/tflint-ruleset-google/pull/86): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.4.4 to 2.5.0
+- [#87](https://github.com/terraform-linters/tflint-ruleset-google/pull/87): Bump google.golang.org/api from 0.40.0 to 0.43.0
+- [#89](https://github.com/terraform-linters/tflint-ruleset-google/pull/89): Bump tflint-plugin-sdk
+
 ## 0.6.0 (2021-03-07)
 
 ### Enhancements
