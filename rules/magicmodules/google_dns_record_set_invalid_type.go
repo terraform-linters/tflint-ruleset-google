@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule checks the pattern is valid
-type GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule struct {
+// GoogleDnsRecordSetInvalidTypeRule checks the pattern is valid
+type GoogleDnsRecordSetInvalidTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule returns new rule with default attributes
-func NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule() *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule {
-	return &GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule{
-		resourceType:  "google_sql_source_representation_instance",
-		attributeName: "database_version",
+// NewGoogleDnsRecordSetInvalidTypeRule returns new rule with default attributes
+func NewGoogleDnsRecordSetInvalidTypeRule() *GoogleDnsRecordSetInvalidTypeRule {
+	return &GoogleDnsRecordSetInvalidTypeRule{
+		resourceType:  "google_dns_record_set",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Name() string {
-	return "google_sql_source_representation_instance_invalid_database_version"
+func (r *GoogleDnsRecordSetInvalidTypeRule) Name() string {
+	return "google_dns_record_set_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Enabled() bool {
+func (r *GoogleDnsRecordSetInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Severity() string {
+func (r *GoogleDnsRecordSetInvalidTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Link() string {
+func (r *GoogleDnsRecordSetInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleDnsRecordSetInvalidTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"MYSQL_5_5", "MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0"}, false)
+		validateFunc := validation.StringInSlice([]string{"A", "AAAA", "CAA", "CNAME", "MX", "NAPTR", "NS", "PTR", "SOA", "SPF", "SRV", "TLSA", "TXT"}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

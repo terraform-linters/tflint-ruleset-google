@@ -53,6 +53,16 @@ var Products = map[string]Product{
 			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
 		},
 	},
+	"google_apigee_envgroup": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_instance_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
 	"google_kms_key_ring": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Key Management Service (KMS) API", URL: "https://console.cloud.google.com/apis/library/cloudkms.googleapis.com/"},
@@ -178,6 +188,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_healthcare_hl7_v2_store": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Healthcare API", URL: "https://console.cloud.google.com/apis/library/healthcare.googleapis.com/"},
+		},
+	},
+	"google_healthcare_consent_store": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Healthcare API", URL: "https://console.cloud.google.com/apis/library/healthcare.googleapis.com/"},
 		},
@@ -802,6 +817,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_dns_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
+		},
+	},
+	"google_dns_record_set": {
 		APIsRequired: []APIReference{
 			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
 		},
