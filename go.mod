@@ -11,5 +11,5 @@ require (
 	github.com/onsi/gomega v1.11.0 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e
 	github.com/terraform-linters/tflint-plugin-sdk v0.8.2
-	google.golang.org/api v0.43.0
+	google.golang.org/api v0.44.0
 )
