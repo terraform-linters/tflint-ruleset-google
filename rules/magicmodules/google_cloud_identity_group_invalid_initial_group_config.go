@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeGlobalAddressInvalidPurposeRule checks the pattern is valid
-type GoogleComputeGlobalAddressInvalidPurposeRule struct {
+// GoogleCloudIdentityGroupInvalidInitialGroupConfigRule checks the pattern is valid
+type GoogleCloudIdentityGroupInvalidInitialGroupConfigRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeGlobalAddressInvalidPurposeRule returns new rule with default attributes
-func NewGoogleComputeGlobalAddressInvalidPurposeRule() *GoogleComputeGlobalAddressInvalidPurposeRule {
-	return &GoogleComputeGlobalAddressInvalidPurposeRule{
-		resourceType:  "google_compute_global_address",
-		attributeName: "purpose",
+// NewGoogleCloudIdentityGroupInvalidInitialGroupConfigRule returns new rule with default attributes
+func NewGoogleCloudIdentityGroupInvalidInitialGroupConfigRule() *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule {
+	return &GoogleCloudIdentityGroupInvalidInitialGroupConfigRule{
+		resourceType:  "google_cloud_identity_group",
+		attributeName: "initial_group_config",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Name() string {
-	return "google_compute_global_address_invalid_purpose"
+func (r *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule) Name() string {
+	return "google_cloud_identity_group_invalid_initial_group_config"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Enabled() bool {
+func (r *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Severity() string {
+func (r *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Link() string {
+func (r *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeGlobalAddressInvalidPurposeRule) Check(runner tflint.Runner) error {
+func (r *GoogleCloudIdentityGroupInvalidInitialGroupConfigRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"VPC_PEERING", "PRIVATE_SERVICE_CONNECT", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"INITIAL_GROUP_CONFIG_UNSPECIFIED", "WITH_INITIAL_OWNER", "EMPTY", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
