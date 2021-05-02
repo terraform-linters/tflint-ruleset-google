@@ -63,6 +63,11 @@ var Products = map[string]Product{
 			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
 		},
 	},
+	"google_apigee_envgroup_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
 	"google_kms_key_ring": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Key Management Service (KMS) API", URL: "https://console.cloud.google.com/apis/library/cloudkms.googleapis.com/"},
@@ -344,6 +349,15 @@ var Products = map[string]Product{
 			{Name: "Google Cloud Storage", URL: "https://console.cloud.google.com/apis/library/storage-component.googleapis.com/"},
 		},
 	},
+	"google_tags_tag_key": {
+		APIsRequired: []APIReference{},
+	},
+	"google_tags_tag_value": {
+		APIsRequired: []APIReference{},
+	},
+	"google_tags_tag_binding": {
+		APIsRequired: []APIReference{},
+	},
 	"google_cloud_run_domain_mapping": {
 		APIsRequired: []APIReference{},
 	},
@@ -354,6 +368,9 @@ var Products = map[string]Product{
 		APIsRequired: []APIReference{
 			{Name: "Cloud Datastore API", URL: "https://console.cloud.google.com/apis/library/datastore.googleapis.com"},
 		},
+	},
+	"google_memcache_instance": {
+		APIsRequired: []APIReference{},
 	},
 	"google_iap_brand": {
 		APIsRequired: []APIReference{
