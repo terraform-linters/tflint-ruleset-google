@@ -1,3 +1,16 @@
+## 0.8.0 (2021-05-02)
+
+### Breaking Changes
+
+- [#94](https://github.com/terraform-linters/tflint-ruleset-google/pull/94): Update Magic Modules
+  - `google_compute_address_invalid_purpose` rule and `google_compute_global_address_invalid_purpose` rule are removed
+
+### Chores
+
+- [#91](https://github.com/terraform-linters/tflint-ruleset-google/pull/91): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.5.0 to 2.6.1
+- [#92](https://github.com/terraform-linters/tflint-ruleset-google/pull/92): Bump google.golang.org/api from 0.43.0 to 0.45.0
+- [#93](https://github.com/terraform-linters/tflint-ruleset-google/pull/93): Bump github.com/hashicorp/hcl/v2 from 2.9.1 to 2.10.0
+
 ## 0.7.0 (2021-04-04)
 
 This release adds support for deep checking. `google_disabled_api` rule finds resource declarations that depend on APIs that are not enabled. See [Deep Checking](docs/deep_checking.md) for details.
