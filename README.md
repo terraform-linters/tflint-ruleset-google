@@ -12,11 +12,13 @@ TFLint ruleset plugin for Terraform Google Cloud Platform provider
 
 ## Installation
 
-Download the plugin and place it in `~/.tflint.d/plugins/tflint-ruleset-google` (or `./.tflint.d/plugins/tflint-ruleset-google`). When using the plugin, configure as follows in `.tflint.hcl`:
+You can install the plugin by adding a config to `.tflint.hcl` and running `tflint --init`:
 
 ```hcl
 plugin "google" {
     enabled = true
+    version = "0.9.0"
+    source  = "github.com/terraform-linters/tflint-ruleset-google"
 }
 ```
 
@@ -38,6 +40,14 @@ You can easily install the built plugin with the following:
 
 ```
 $ make install
+```
+
+Note that if you install the plugin with `make install`, you must omit the `version` and `source` attributes in `.tflint.hcl`:
+
+```hcl
+plugin "google" {
+    enabled = true
+}
 ```
 
 ## Add a new rule

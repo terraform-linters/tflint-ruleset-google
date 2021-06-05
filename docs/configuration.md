@@ -6,7 +6,7 @@ Here's an example:
 
 ```hcl
 plugin "google" {
-    enabled = true
+    // Plugin common attributes
 
     deep_check = false
 }
