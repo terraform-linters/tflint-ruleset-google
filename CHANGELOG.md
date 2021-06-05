@@ -1,3 +1,15 @@
+## 0.9.0 (2021-06-06)
+
+### Enhancements
+
+- [#98](https://github.com/terraform-linters/tflint-ruleset-google/pull/98): Update Magic Modules
+
+### Chores
+
+- [#96](https://github.com/terraform-linters/tflint-ruleset-google/pull/96): Bump google.golang.org/api from 0.45.0 to 0.47.0
+- [#97](https://github.com/terraform-linters/tflint-ruleset-google/pull/97): Bump github.com/google/go-cmp from 0.5.5 to 0.5.6
+- [#99](https://github.com/terraform-linters/tflint-ruleset-google/pull/99): Add notes about auto installation
+
 ## 0.8.0 (2021-05-02)
 
 ### Breaking Changes
