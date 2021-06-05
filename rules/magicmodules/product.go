@@ -132,6 +132,11 @@ var Products = map[string]Product{
 			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
 		},
 	},
+	"google_dialogflow_fulfillment": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
 	"google_firestore_index": {
 		APIsRequired: []APIReference{},
 	},
@@ -771,6 +776,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_pubsub_subscription": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Pub/Sub API", URL: "https://console.cloud.google.com/apis/library/pubsub.googleapis.com/"},
+		},
+	},
+	"google_pubsub_schema": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Pub/Sub API", URL: "https://console.cloud.google.com/apis/library/pubsub.googleapis.com/"},
 		},
