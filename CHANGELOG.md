@@ -1,3 +1,9 @@
+## 0.9.1 (2021-06-12)
+
+### Chores
+
+- [#100](https://github.com/terraform-linters/tflint-ruleset-google/pull/100): build: Add support for darwin/arm64 build
+
 ## 0.9.0 (2021-06-06)
 
 ### Enhancements
