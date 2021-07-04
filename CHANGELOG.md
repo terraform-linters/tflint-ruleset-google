@@ -1,3 +1,20 @@
+## 0.10.0 (2021-07-05)
+
+The minimum supported version of TFLint has changed in this version. TFLint v0.30.0+ is required for this plugin to work.
+
+### Breaking Changes
+
+- [#104](https://github.com/terraform-linters/tflint-ruleset-google/pull/104): Bump tflint-plugin-sdk to v0.9.0
+
+### Enhancements
+
+- [#105](https://github.com/terraform-linters/tflint-ruleset-google/pull/105): Update Magic Modules
+
+### Chores
+
+- [#102](https://github.com/terraform-linters/tflint-ruleset-google/pull/102): Bump google.golang.org/api from 0.47.0 to 0.49.0
+- [#103](https://github.com/terraform-linters/tflint-ruleset-google/pull/103): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.6.1 to 2.7.0
+
 ## 0.9.1 (2021-06-12)
 
 ### Chores
