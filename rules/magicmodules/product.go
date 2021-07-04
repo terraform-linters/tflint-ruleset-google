@@ -32,6 +32,21 @@ var Products = map[string]Product{
 			{Name: "Cloud Resource Manager API", URL: "https://console.cloud.google.com/apis/library/cloudresourcemanager.googleapis.com/"},
 		},
 	},
+	"google_privateca_certificate_authority": {
+		APIsRequired: []APIReference{
+			{Name: "Certificate Authority API", URL: "https://console.cloud.google.com/apis/api/privateca.googleapis.com"},
+		},
+	},
+	"google_privateca_certificate": {
+		APIsRequired: []APIReference{
+			{Name: "Certificate Authority API", URL: "https://console.cloud.google.com/apis/api/privateca.googleapis.com"},
+		},
+	},
+	"google_privateca_ca_pool": {
+		APIsRequired: []APIReference{
+			{Name: "Certificate Authority API", URL: "https://console.cloud.google.com/apis/api/privateca.googleapis.com"},
+		},
+	},
 	"google_binary_authorization_attestor": {
 		APIsRequired: []APIReference{},
 	},
@@ -237,6 +252,11 @@ var Products = map[string]Product{
 			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
 		},
 	},
+	"google_app_engine_service_network_settings": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
 	"google_filestore_instance": {
 		APIsRequired: []APIReference{},
 	},
@@ -386,6 +406,9 @@ var Products = map[string]Product{
 		APIsRequired: []APIReference{
 			{Name: "Cloud Identity-Aware Proxy", URL: "https://console.cloud.google.com/apis/library/iap.googleapis.com/"},
 		},
+	},
+	"google_vertex_ai_dataset": {
+		APIsRequired: []APIReference{},
 	},
 	"google_cloud_asset_project_feed": {
 		APIsRequired: []APIReference{
@@ -797,6 +820,11 @@ var Products = map[string]Product{
 	},
 	"google_tpu_node": {
 		APIsRequired: []APIReference{},
+	},
+	"google_dialogflow_cx_agent": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
 	},
 	"google_monitoring_alert_policy": {
 		APIsRequired: []APIReference{
