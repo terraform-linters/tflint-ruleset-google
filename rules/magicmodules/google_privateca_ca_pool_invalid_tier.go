@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleApigeeInstanceInvalidPeeringCidrRangeRule checks the pattern is valid
-type GoogleApigeeInstanceInvalidPeeringCidrRangeRule struct {
+// GooglePrivatecaCaPoolInvalidTierRule checks the pattern is valid
+type GooglePrivatecaCaPoolInvalidTierRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleApigeeInstanceInvalidPeeringCidrRangeRule returns new rule with default attributes
-func NewGoogleApigeeInstanceInvalidPeeringCidrRangeRule() *GoogleApigeeInstanceInvalidPeeringCidrRangeRule {
-	return &GoogleApigeeInstanceInvalidPeeringCidrRangeRule{
-		resourceType:  "google_apigee_instance",
-		attributeName: "peering_cidr_range",
+// NewGooglePrivatecaCaPoolInvalidTierRule returns new rule with default attributes
+func NewGooglePrivatecaCaPoolInvalidTierRule() *GooglePrivatecaCaPoolInvalidTierRule {
+	return &GooglePrivatecaCaPoolInvalidTierRule{
+		resourceType:  "google_privateca_ca_pool",
+		attributeName: "tier",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Name() string {
-	return "google_apigee_instance_invalid_peering_cidr_range"
+func (r *GooglePrivatecaCaPoolInvalidTierRule) Name() string {
+	return "google_privateca_ca_pool_invalid_tier"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Enabled() bool {
+func (r *GooglePrivatecaCaPoolInvalidTierRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Severity() string {
+func (r *GooglePrivatecaCaPoolInvalidTierRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Link() string {
+func (r *GooglePrivatecaCaPoolInvalidTierRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Check(runner tflint.Runner) error {
+func (r *GooglePrivatecaCaPoolInvalidTierRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"SLASH_16", "SLASH_20", "SLASH_23", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"ENTERPRISE", "DEVOPS"}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
