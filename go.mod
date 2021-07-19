@@ -10,6 +10,6 @@ require (
 	github.com/onsi/ginkgo v1.15.2 // indirect
 	github.com/onsi/gomega v1.11.0 // indirect
 	github.com/serenize/snaker v0.0.0-20201027110005-a7ad2135616e
-	github.com/terraform-linters/tflint-plugin-sdk v0.9.0
+	github.com/terraform-linters/tflint-plugin-sdk v0.9.1
 	google.golang.org/api v0.49.0
 )
