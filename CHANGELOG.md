@@ -1,3 +1,16 @@
+## 0.11.0 (2021-08-08)
+
+### Breaking Changes
+
+- [#111](https://github.com/terraform-linters/tflint-ruleset-google/pull/111): Update Magic Modules
+  - Remove `google_privateca_certificate_authority_invalid_tier` rule
+
+### Chores
+
+- [#107](https://github.com/terraform-linters/tflint-ruleset-google/pull/107): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.9.0 to 0.9.1
+- [#108](https://github.com/terraform-linters/tflint-ruleset-google/pull/108): Bump github.com/hashicorp/hcl/v2 from 2.10.0 to 2.10.1
+- [#110](https://github.com/terraform-linters/tflint-ruleset-google/pull/110): Bump google.golang.org/api from 0.49.0 to 0.52.0
+
 ## 0.10.0 (2021-07-05)
 
 The minimum supported version of TFLint has changed in this version. TFLint v0.30.0+ is required for this plugin to work.
