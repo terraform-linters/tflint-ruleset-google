@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-//     ***     AUTO GENERATED CODE    ***    AUTO GENERATED CODE     ***
+//     ***     AUTO GENERATED CODE    ***    Type: MMv1     ***
 //
 // ----------------------------------------------------------------------------
 //
@@ -93,6 +93,8 @@ var Rules = []tflint.Rule{
 	NewGoogleDialogflowAgentInvalidApiVersionRule(),
 	NewGoogleDialogflowAgentInvalidMatchModeRule(),
 	NewGoogleDialogflowAgentInvalidTierRule(),
+	NewGoogleDialogflowCxEntityTypeInvalidAutoExpansionModeRule(),
+	NewGoogleDialogflowCxEntityTypeInvalidKindRule(),
 	NewGoogleDialogflowEntityTypeInvalidKindRule(),
 	NewGoogleDialogflowIntentInvalidWebhookStateRule(),
 	NewGoogleDnsManagedZoneInvalidVisibilityRule(),
@@ -111,12 +113,12 @@ var Rules = []tflint.Rule{
 	NewGoogleMonitoringMetricDescriptorInvalidValueTypeRule(),
 	NewGoogleMonitoringSloInvalidCalendarPeriodRule(),
 	NewGoogleMonitoringSloInvalidSloIdRule(),
+	NewGoogleNetworkServicesEdgeCacheOriginInvalidProtocolRule(),
 	NewGoogleNotebooksInstanceInvalidBootDiskTypeRule(),
 	NewGoogleNotebooksInstanceInvalidDataDiskTypeRule(),
 	NewGoogleNotebooksInstanceInvalidDiskEncryptionRule(),
 	NewGoogleOsConfigPatchDeploymentInvalidPatchDeploymentIdRule(),
 	NewGooglePrivatecaCaPoolInvalidTierRule(),
-	NewGooglePrivatecaCertificateAuthorityInvalidTierRule(),
 	NewGooglePrivatecaCertificateAuthorityInvalidTypeRule(),
 	NewGooglePubsubSchemaInvalidTypeRule(),
 	NewGoogleRedisInstanceInvalidConnectModeRule(),
