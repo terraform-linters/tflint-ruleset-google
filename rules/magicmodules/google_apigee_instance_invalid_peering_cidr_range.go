@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-//     ***     AUTO GENERATED CODE    ***    AUTO GENERATED CODE     ***
+//     ***     AUTO GENERATED CODE    ***    Type: MMv1     ***
 //
 // ----------------------------------------------------------------------------
 //
@@ -60,7 +60,7 @@ func (r *GoogleApigeeInstanceInvalidPeeringCidrRangeRule) Check(runner tflint.Ru
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"SLASH_16", "SLASH_20", "SLASH_23", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SLASH_16", "SLASH_20", "SLASH_22", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

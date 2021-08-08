@@ -1,6 +1,6 @@
 // ----------------------------------------------------------------------------
 //
-//     ***     AUTO GENERATED CODE    ***    AUTO GENERATED CODE     ***
+//     ***     AUTO GENERATED CODE    ***    Type: MMv1     ***
 //
 // ----------------------------------------------------------------------------
 //
@@ -103,6 +103,21 @@ var Products = map[string]Product{
 			{Name: "Cloud Key Management Service (KMS) API", URL: "https://console.cloud.google.com/apis/library/cloudkms.googleapis.com/"},
 		},
 	},
+	"google_network_services_edge_cache_keyset": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/networkservices.googleapis.com"},
+		},
+	},
+	"google_network_services_edge_cache_origin": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/networkservices.googleapis.com"},
+		},
+	},
+	"google_network_services_edge_cache_service": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/networkservices.googleapis.com"},
+		},
+	},
 	"google_vpc_access_connector": {
 		APIsRequired: []APIReference{
 			{Name: "Serverless VPC Access API", URL: "https://console.cloud.google.com/apis/library/vpcaccess.googleapis.com/"},
@@ -124,12 +139,20 @@ var Products = map[string]Product{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
 		},
 	},
+	"google_gke_hub_membership": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
 	"google_network_management_connectivity_test": {
 		APIsRequired: []APIReference{
 			{Name: "Network Management API", URL: "https://console.cloud.google.com/apis/library/networkmanagement.googleapis.com/"},
 		},
 	},
 	"google_scc_source": {
+		APIsRequired: []APIReference{},
+	},
+	"google_scc_notification_config": {
 		APIsRequired: []APIReference{},
 	},
 	"google_dialogflow_agent": {
@@ -822,6 +845,36 @@ var Products = map[string]Product{
 		APIsRequired: []APIReference{},
 	},
 	"google_dialogflow_cx_agent": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_intent": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_flow": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_version": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_page": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_entity_type": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
+	"google_dialogflow_cx_environment": {
 		APIsRequired: []APIReference{
 			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
 		},
