@@ -77,6 +77,7 @@ var Rules = []tflint.Rule{
 	NewGoogleComputeRouterPeerInvalidAdvertiseModeRule(),
 	NewGoogleComputeSslPolicyInvalidMinTlsVersionRule(),
 	NewGoogleComputeSslPolicyInvalidProfileRule(),
+	NewGoogleComputeSubnetworkInvalidRoleRule(),
 	NewGoogleComputeTargetHttpsProxyInvalidQuicOverrideRule(),
 	NewGoogleComputeTargetInstanceInvalidNatPolicyRule(),
 	NewGoogleComputeTargetSslProxyInvalidProxyHeaderRule(),
