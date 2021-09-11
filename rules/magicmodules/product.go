@@ -47,6 +47,11 @@ var Products = map[string]Product{
 			{Name: "Certificate Authority API", URL: "https://console.cloud.google.com/apis/api/privateca.googleapis.com"},
 		},
 	},
+	"google_essential_contacts_contact": {
+		APIsRequired: []APIReference{
+			{Name: "Essential Contacts API", URL: "https://console.cloud.google.com/apis/api/essentialcontacts.googleapis.com/overview"},
+		},
+	},
 	"google_binary_authorization_attestor": {
 		APIsRequired: []APIReference{},
 	},
@@ -674,6 +679,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_compute_reservation": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
+	"google_compute_service_attachment": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},

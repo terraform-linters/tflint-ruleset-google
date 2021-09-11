@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeForwardingRuleInvalidIpProtocolRule checks the pattern is valid
-type GoogleComputeForwardingRuleInvalidIpProtocolRule struct {
+// GoogleComputeSubnetworkInvalidRoleRule checks the pattern is valid
+type GoogleComputeSubnetworkInvalidRoleRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeForwardingRuleInvalidIpProtocolRule returns new rule with default attributes
-func NewGoogleComputeForwardingRuleInvalidIpProtocolRule() *GoogleComputeForwardingRuleInvalidIpProtocolRule {
-	return &GoogleComputeForwardingRuleInvalidIpProtocolRule{
-		resourceType:  "google_compute_forwarding_rule",
-		attributeName: "ip_protocol",
+// NewGoogleComputeSubnetworkInvalidRoleRule returns new rule with default attributes
+func NewGoogleComputeSubnetworkInvalidRoleRule() *GoogleComputeSubnetworkInvalidRoleRule {
+	return &GoogleComputeSubnetworkInvalidRoleRule{
+		resourceType:  "google_compute_subnetwork",
+		attributeName: "role",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeForwardingRuleInvalidIpProtocolRule) Name() string {
-	return "google_compute_forwarding_rule_invalid_ip_protocol"
+func (r *GoogleComputeSubnetworkInvalidRoleRule) Name() string {
+	return "google_compute_subnetwork_invalid_role"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeForwardingRuleInvalidIpProtocolRule) Enabled() bool {
+func (r *GoogleComputeSubnetworkInvalidRoleRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeForwardingRuleInvalidIpProtocolRule) Severity() string {
+func (r *GoogleComputeSubnetworkInvalidRoleRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeForwardingRuleInvalidIpProtocolRule) Link() string {
+func (r *GoogleComputeSubnetworkInvalidRoleRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeForwardingRuleInvalidIpProtocolRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeSubnetworkInvalidRoleRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"TCP", "UDP", "ESP", "AH", "SCTP", "ICMP", "L3_DEFAULT", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"ACTIVE", "BACKUP", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
