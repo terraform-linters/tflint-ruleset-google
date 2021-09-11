@@ -1,3 +1,16 @@
+## 0.12.0 (2021-09-12)
+
+### Enhancements
+
+- [#117](https://github.com/terraform-linters/tflint-ruleset-google/pull/117): Update Magic Modules
+
+### Chores
+
+- [#113](https://github.com/terraform-linters/tflint-ruleset-google/pull/113): Bump actions/setup-go from 2.1.3 to 2.1.4
+- [#114](https://github.com/terraform-linters/tflint-ruleset-google/pull/114): Bump google.golang.org/api from 0.52.0 to 0.56.0
+- [#115](https://github.com/terraform-linters/tflint-ruleset-google/pull/115): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.7.0 to 2.7.1
+- [#116](https://github.com/terraform-linters/tflint-ruleset-google/pull/116): build: Go 1.17
+
 ## 0.11.0 (2021-08-08)
 
 ### Breaking Changes
