@@ -1,3 +1,10 @@
+## 0.12.1 (2021-09-12)
+
+### BugFixes
+
+- [#118](https://github.com/terraform-linters/tflint-ruleset-google/pull/118): build: Update GoReleaser version
+  - v0.12.0 release doesn't include darwin/arm64 build. This change fixes the issue.
+
 ## 0.12.0 (2021-09-12)
 
 ### Enhancements
