@@ -142,3 +142,12 @@ func validateRegexp(re string) schema.SchemaValidateFunc {
 		return
 	}
 }
+
+var iamMemberFormatDocumentLink string = "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam#member/members"
+
+func isValidIAMMemberFormat(s string) bool {
+	return strings.HasPrefix(s, "user:") ||
+		strings.HasPrefix(s, "serviceAccount:") ||
+		strings.HasPrefix(s, "group:") ||
+		strings.HasPrefix(s, "domain:")
+}
