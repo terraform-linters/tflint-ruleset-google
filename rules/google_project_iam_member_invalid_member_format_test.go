@@ -41,6 +41,15 @@ resource "google_project_iam_member" "iam_member" {
 `,
 			Expected: helper.Issues{},
 		},
+		{
+			Name: "valid member",
+			Content: `
+resource "google_project_iam_member" "iam_member" {
+	member = "allUsers"
+}
+`,
+			Expected: helper.Issues{},
+		},
 	}
 
 	rule := NewGoogleProjectIamMemberInvalidMemberFormatRule()
