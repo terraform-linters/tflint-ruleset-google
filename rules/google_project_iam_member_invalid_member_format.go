@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/project"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
@@ -32,7 +33,7 @@ func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Severity() string {
 
 // Link returns the rule reference link
 func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Link() string {
-	return iamMemberFormatDocumentLink
+	return project.ReferenceLink(r.Name())
 }
 
 // Check checks whether member format is invalid
