@@ -4,8 +4,8 @@ import (
 	"fmt"
 
 	hcl "github.com/hashicorp/hcl/v2"
-	"github.com/terraform-linters/tflint-plugin-sdk/project"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
+	"github.com/terraform-linters/tflint-ruleset-google/project"
 )
 
 // GoogleProjectIamMemberInvalidMemberFormatRule checks whether member value is invalid
