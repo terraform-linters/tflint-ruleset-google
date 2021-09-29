@@ -20,7 +20,7 @@ These rules warn you if a machine type not listed at https://cloud.google.com/co
 
 ### Invalid member format
 
-TODO
+This rule warn you if a member value in IAM related resources is invalid. 
 
 |Name|Severity|Enabled|
 | --- | --- | --- |
