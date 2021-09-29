@@ -24,6 +24,20 @@ Error: jane@example.com is an invalid member format. (google_project_iam_member)
 ## Why
 
 A member value you wrote is invalid. `terraform apply` will result in failure.
+In particular, don't forget to add a prefix to the value. Since the principal type is identified with a prefix, a value without a prefix cannot be interpreted correctly. There are two exceptions; `allUsers` and `allAuthenticatedUsers` are valid without a prefix. In conclusion, the valid member values are:
+
+- `allUsers`
+- `allAuthenticatedUsers`
+- `user:{emailid}`
+- `serviceAccount:{emailid}`
+- `group:{emailid}`
+- `domain:{domain}`
+
+See these documents in detail:
+
+ - https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam#member/members
+ - https://cloud.google.com/iam/docs/overview#concepts_related_identity
+ - https://cloud.google.com/iam/docs/overview#cloud-iam-policy
 
 ## How To Fix
 
