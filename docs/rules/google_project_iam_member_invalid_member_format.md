@@ -27,4 +27,10 @@ A member value you wrote is invalid. `terraform apply` will result in failure.
 
 ## How To Fix
 
-See the document. Probably you just need to add some prefixes.
+See the document. Probably you just need to add some prefixes. The example can be fixed as below:
+
+```hcl
+resource "google_project_iam_member" "iam_member" {
+	member = "user:jane@example.com"
+}
+```
