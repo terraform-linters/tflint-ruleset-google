@@ -143,8 +143,6 @@ func validateRegexp(re string) schema.SchemaValidateFunc {
 	}
 }
 
-var iamMemberFormatDocumentLink string = "https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/google_project_iam#member/members"
-
 func isValidIAMMemberFormat(s string) bool {
 	// See also https://cloud.google.com/iam/docs/overview
 	return s == "allUsers" ||
