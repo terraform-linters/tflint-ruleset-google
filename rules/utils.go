@@ -142,3 +142,13 @@ func validateRegexp(re string) schema.SchemaValidateFunc {
 		return
 	}
 }
+
+func isValidIAMMemberFormat(s string) bool {
+	// See also https://cloud.google.com/iam/docs/overview
+	return s == "allUsers" ||
+		s == "allAuthenticatedUsers" ||
+		strings.HasPrefix(s, "user:") ||
+		strings.HasPrefix(s, "serviceAccount:") ||
+		strings.HasPrefix(s, "group:") ||
+		strings.HasPrefix(s, "domain:")
+}

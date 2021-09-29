@@ -18,6 +18,14 @@ These rules warn you if a machine type not listed at https://cloud.google.com/co
 |google_container_node_pool_invalid_machine_type|ERROR|✔|
 |google_dataflow_job_invalid_machine_type|ERROR|✔|
 
+### Invalid member format
+
+This rule warn you if a member value in IAM related resources is invalid. 
+
+|Name|Severity|Enabled|
+| --- | --- | --- |
+|google_project_iam_member_invalid_member_format|ERROR|✔|
+
 ## Magic Modules Rules
 
 These are the rules that warn against invalid values generated from [Magic Modules](https://github.com/terraform-linters/magic-modules). These rules are defined under the [`rules/magicmodules`](../../rules/magicmodules) directory.
