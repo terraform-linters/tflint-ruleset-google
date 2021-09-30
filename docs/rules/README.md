@@ -24,6 +24,7 @@ This rule warn you if a member value in IAM related resources is invalid.
 
 |Name|Severity|Enabled|
 | --- | --- | --- |
+|google_project_iam_binding_invalid_member_format|ERROR|✔|
 |google_project_iam_member_invalid_member_format|ERROR|✔|
 
 ## Magic Modules Rules

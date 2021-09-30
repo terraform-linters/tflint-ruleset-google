@@ -16,4 +16,5 @@ var Rules = append([]tflint.Rule{
 	NewGoogleDataflowJobInvalidMachineTypeRule(),
 	NewGoogleComputeResourcePolicyInvalidNameRule(),
 	NewGoogleProjectIamMemberInvalidMemberFormatRule(),
+	NewGoogleProjectIamBindingInvalidMemberRule(),
 }, magicmodules.Rules...)
