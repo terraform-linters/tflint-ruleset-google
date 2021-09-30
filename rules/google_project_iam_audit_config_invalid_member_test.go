@@ -49,6 +49,16 @@ resource "google_project_iam_audit_config" "iam_audit_config" {
 `,
 			Expected: helper.Issues{},
 		},
+		{
+			Name: "no member",
+			Content: `
+resource "google_project_iam_audit_config" "iam_audit_config" {
+	audit_log_config {
+	}
+}
+`,
+			Expected: helper.Issues{},
+		},
 	}
 
 	rule := NewGoogleProjectIamAuditConfigInvalidMemberRule()
