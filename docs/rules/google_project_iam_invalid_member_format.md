@@ -1,4 +1,4 @@
-# google_project_iam_member_invalid_member_format
+# google_project_iam_invalid_member_format
 
 Check iam member format.
 

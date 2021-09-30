@@ -9,11 +9,17 @@ import (
 )
 
 // GoogleProjectIamMemberInvalidMemberFormatRule checks whether member value is invalid
-type GoogleProjectIamMemberInvalidMemberFormatRule struct{}
+type GoogleProjectIamMemberInvalidMemberFormatRule struct {
+	resourceType  string
+	attributeName string
+}
 
 // NewGoogleProjectIamMemberInvalidMemberFormatRule returns new rule with default attributes
 func NewGoogleProjectIamMemberInvalidMemberFormatRule() *GoogleProjectIamMemberInvalidMemberFormatRule {
-	return &GoogleProjectIamMemberInvalidMemberFormatRule{}
+	return &GoogleProjectIamMemberInvalidMemberFormatRule{
+		resourceType:  "google_project_iam_member",
+		attributeName: "member",
+	}
 }
 
 // Name returns the rule name
@@ -38,7 +44,7 @@ func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Link() string {
 
 // Check checks whether member format is invalid
 func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes("google_project_iam_member", "member", func(attribute *hcl.Attribute) error {
+	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 
 		var member string
 		err := runner.EvaluateExpr(attribute.Expr, &member, nil)
