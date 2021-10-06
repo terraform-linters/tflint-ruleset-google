@@ -15,7 +15,7 @@ var Rules = append([]tflint.Rule{
 	NewGoogleContainerNodePoolInvalidMachineTypeRule(),
 	NewGoogleDataflowJobInvalidMachineTypeRule(),
 	NewGoogleComputeResourcePolicyInvalidNameRule(),
-	NewGoogleProjectIamMemberInvalidMemberFormatRule(),
+	NewGoogleProjectIamMemberInvalidMemberRule(),
 	NewGoogleProjectIamAuditConfigInvalidMemberRule(),
 	NewGoogleProjectIamBindingInvalidMemberRule(),
 	NewGoogleProjectIamPolicyInvalidMemberRule(),

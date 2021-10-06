@@ -8,42 +8,42 @@ import (
 	"github.com/terraform-linters/tflint-ruleset-google/project"
 )
 
-// GoogleProjectIamMemberInvalidMemberFormatRule checks whether member value is invalid
-type GoogleProjectIamMemberInvalidMemberFormatRule struct {
+// GoogleProjectIamMemberInvalidMemberRule checks whether member value is invalid
+type GoogleProjectIamMemberInvalidMemberRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleProjectIamMemberInvalidMemberFormatRule returns new rule with default attributes
-func NewGoogleProjectIamMemberInvalidMemberFormatRule() *GoogleProjectIamMemberInvalidMemberFormatRule {
-	return &GoogleProjectIamMemberInvalidMemberFormatRule{
+// NewGoogleProjectIamMemberInvalidMemberRule returns new rule with default attributes
+func NewGoogleProjectIamMemberInvalidMemberRule() *GoogleProjectIamMemberInvalidMemberRule {
+	return &GoogleProjectIamMemberInvalidMemberRule{
 		resourceType:  "google_project_iam_member",
 		attributeName: "member",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Name() string {
-	return "google_project_iam_member_invalid_member_format"
+func (r *GoogleProjectIamMemberInvalidMemberRule) Name() string {
+	return "google_project_iam_member_invalid_member"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Enabled() bool {
+func (r *GoogleProjectIamMemberInvalidMemberRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Severity() string {
+func (r *GoogleProjectIamMemberInvalidMemberRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Link() string {
+func (r *GoogleProjectIamMemberInvalidMemberRule) Link() string {
 	return project.ReferenceLink(r.Name())
 }
 
 // Check checks whether member format is invalid
-func (r *GoogleProjectIamMemberInvalidMemberFormatRule) Check(runner tflint.Runner) error {
+func (r *GoogleProjectIamMemberInvalidMemberRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 
 		var member string
