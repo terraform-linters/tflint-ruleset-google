@@ -1,8 +1,15 @@
-# google_project_iam_member_invalid_member_format
+# google_project_iam_invalid_member
 
-Check iam member format.
+Check IAM member format against IAM policy for projects:
+
+- `google_project_iam_policy`
+- `google_project_iam_binding`
+- `google_project_iam_member`
+- `google_project_iam_audit_config`
 
 ## Example
+
+Here is an example of `google_project_iam_member`.
 
 ```hcl
 resource "google_project_iam_member" "iam_member" {

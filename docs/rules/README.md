@@ -18,13 +18,16 @@ These rules warn you if a machine type not listed at https://cloud.google.com/co
 |google_container_node_pool_invalid_machine_type|ERROR|✔|
 |google_dataflow_job_invalid_machine_type|ERROR|✔|
 
-### Invalid member format
+### Invalid member
 
 This rule warn you if a member value in IAM related resources is invalid. 
 
 |Name|Severity|Enabled|
 | --- | --- | --- |
-|google_project_iam_member_invalid_member_format|ERROR|✔|
+|google_project_iam_audit_config_invalid_member|ERROR|✔|
+|google_project_iam_binding_invalid_member|ERROR|✔|
+|google_project_iam_member_invalid_member|ERROR|✔|
+|google_project_iam_policy_invalid_member|ERROR|✔|
 
 ## Magic Modules Rules
 

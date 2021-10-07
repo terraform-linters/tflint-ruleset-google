@@ -7,7 +7,7 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/helper"
 )
 
-func Test_GoogleProjectIamMemberInvalidMemberFormat(t *testing.T) {
+func Test_GoogleProjectIamMemberInvalidMember(t *testing.T) {
 	cases := []struct {
 		Name     string
 		Content  string
@@ -22,7 +22,7 @@ resource "google_project_iam_member" "iam_member" {
 `,
 			Expected: helper.Issues{
 				{
-					Rule:    NewGoogleProjectIamMemberInvalidMemberFormatRule(),
+					Rule:    NewGoogleProjectIamMemberInvalidMemberRule(),
 					Message: "jane@example.com is an invalid member format",
 					Range: hcl.Range{
 						Filename: "resource.tf",
@@ -52,7 +52,7 @@ resource "google_project_iam_member" "iam_member" {
 		},
 	}
 
-	rule := NewGoogleProjectIamMemberInvalidMemberFormatRule()
+	rule := NewGoogleProjectIamMemberInvalidMemberRule()
 
 	for _, tc := range cases {
 		runner := helper.TestRunner(t, map[string]string{"resource.tf": tc.Content})
