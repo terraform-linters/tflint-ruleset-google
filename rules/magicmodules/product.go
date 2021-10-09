@@ -939,11 +939,6 @@ var Products = map[string]Product{
 			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
 		},
 	},
-	"google_dns_record_set": {
-		APIsRequired: []APIReference{
-			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
-		},
-	},
 	"google_notebooks_environment": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Notebooks API", URL: "https://console.cloud.google.com/apis/api/notebooks.googleapis.com"},
@@ -992,6 +987,11 @@ var Products = map[string]Product{
 	"google_os_config_patch_deployment": {
 		APIsRequired: []APIReference{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
+		},
+	},
+	"google_pubsub_lite_reservation": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Pub/Sub Lite API", URL: "https://console.cloud.google.com/apis/library/pubsublite.googleapis.com/"},
 		},
 	},
 	"google_pubsub_lite_topic": {
