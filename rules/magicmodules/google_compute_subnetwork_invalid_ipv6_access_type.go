@@ -20,47 +20,47 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleDnsRecordSetInvalidTypeRule checks the pattern is valid
-type GoogleDnsRecordSetInvalidTypeRule struct {
+// GoogleComputeSubnetworkInvalidIpv6AccessTypeRule checks the pattern is valid
+type GoogleComputeSubnetworkInvalidIpv6AccessTypeRule struct {
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleDnsRecordSetInvalidTypeRule returns new rule with default attributes
-func NewGoogleDnsRecordSetInvalidTypeRule() *GoogleDnsRecordSetInvalidTypeRule {
-	return &GoogleDnsRecordSetInvalidTypeRule{
-		resourceType:  "google_dns_record_set",
-		attributeName: "type",
+// NewGoogleComputeSubnetworkInvalidIpv6AccessTypeRule returns new rule with default attributes
+func NewGoogleComputeSubnetworkInvalidIpv6AccessTypeRule() *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule {
+	return &GoogleComputeSubnetworkInvalidIpv6AccessTypeRule{
+		resourceType:  "google_compute_subnetwork",
+		attributeName: "ipv6_access_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleDnsRecordSetInvalidTypeRule) Name() string {
-	return "google_dns_record_set_invalid_type"
+func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Name() string {
+	return "google_compute_subnetwork_invalid_ipv6_access_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleDnsRecordSetInvalidTypeRule) Enabled() bool {
+func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleDnsRecordSetInvalidTypeRule) Severity() string {
+func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Severity() string {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleDnsRecordSetInvalidTypeRule) Link() string {
+func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleDnsRecordSetInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Check(runner tflint.Runner) error {
 	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"A", "AAAA", "CAA", "CNAME", "DNSKEY", "DS", "IPSECVPNKEY", "MX", "NAPTR", "NS", "PTR", "SOA", "SPF", "SRV", "SSHFP", "TLSA", "TXT"}, false)
+		validateFunc := validation.StringInSlice([]string{"EXTERNAL", ""}, false)
 
 		return runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
