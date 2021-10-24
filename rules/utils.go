@@ -9,6 +9,7 @@ import (
 )
 
 var validMachineTypes = map[string]bool{
+	// Regular machine types: https://cloud.google.com/compute/docs/machine-types
 	"e2-standard-2":    true,
 	"e2-standard-4":    true,
 	"e2-standard-8":    true,
@@ -121,6 +122,13 @@ var validMachineTypes = map[string]bool{
 	"e2-medium":        true,
 	"f1-micro":         true,
 	"g1-small":         true,
+
+	// A100 machine types: https://cloud.google.com/compute/docs/gpus
+	"a2-highgpu-1g":  true,
+	"a2-highgpu-2g":  true,
+	"a2-highgpu-4g":  true,
+	"a2-highgpu-8g":  true,
+	"a2-megagpu-16g": true,
 }
 
 func isCustomType(machineType string) bool {
