@@ -1,16 +1,23 @@
+## 0.13.1 (2021-10-24)
+
+### Enhancements
+
+- [#125](https://github.com/terraform-linters/tflint-ruleset-google/pull/125): rules: Add a2 variants and information about machine type documentation
+- [#126](https://github.com/terraform-linters/tflint-ruleset-google/pull/126): rules: Add larger N2 machine types (Ice Lake) and Tau T2D types
+
 ## 0.13.0 (2021-10-09)
 
-## Breaking Changes
+### Breaking Changes
 
 - [#124](https://github.com/terraform-linters/tflint-ruleset-google/pull/124): Update Magic Modules
   - Removed `google_dns_record_set_invalid_type` rule
 
-## Enhancements
+### Enhancements
 
 - [#121](https://github.com/terraform-linters/tflint-ruleset-google/pull/121): rules: Add `google_project_iam_member_invalid_member` rule
 - [#122](https://github.com/terraform-linters/tflint-ruleset-google/pull/122): rules: Add more `google_project_iam_*_invalid_member` rules
 
-## Chores
+### Chores
 
 - [#120](https://github.com/terraform-linters/tflint-ruleset-google/pull/120): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.7.1 to 2.8.0
 - [#123](https://github.com/terraform-linters/tflint-ruleset-google/pull/123): Bump google.golang.org/api from 0.56.0 to 0.58.0
