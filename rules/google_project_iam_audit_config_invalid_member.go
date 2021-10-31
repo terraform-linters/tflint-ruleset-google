@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/terraform/configs"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-google/project"
 )
@@ -45,32 +46,44 @@ func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Link() string {
 
 // Check checks whether member format is invalid
 func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceBlocks(r.resourceType, r.blockName, func(block *hcl.Block) error {
-		content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
-			Attributes: []hcl.AttributeSchema{
-				{Name: r.attributeName},
-			},
+	return runner.WalkResources(r.resourceType, func(resource *configs.Resource) error {
+		content, _, diags := resource.Config.PartialContent(&hcl.BodySchema{
+			Blocks: []hcl.BlockHeaderSchema{{Type: r.blockName}},
 		})
 		if diags.HasErrors() {
 			return diags
 		}
 
-		if attribute, exists := content.Attributes[r.attributeName]; exists {
-			var members []string
-			err := runner.EvaluateExpr(attribute.Expr, &members, nil)
-
-			return runner.EnsureNoError(err, func() error {
-				for _, member := range members {
-					if !isValidIAMMemberFormat(member) {
-						return runner.EmitIssueOnExpr(
-							r,
-							fmt.Sprintf("%s is an invalid member format", member),
-							attribute.Expr,
-						)
-					}
-				}
-				return nil
+		for _, block := range content.Blocks {
+			content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
+				Attributes: []hcl.AttributeSchema{
+					{Name: r.attributeName},
+				},
 			})
+			if diags.HasErrors() {
+				return diags
+			}
+
+			if attribute, exists := content.Attributes[r.attributeName]; exists {
+				var members []string
+				err := runner.EvaluateExpr(attribute.Expr, &members, nil)
+
+				err = runner.EnsureNoError(err, func() error {
+					for _, member := range members {
+						if !isValidIAMMemberFormat(member) {
+							return runner.EmitIssueOnExpr(
+								r,
+								fmt.Sprintf("%s is an invalid member format", member),
+								attribute.Expr,
+							)
+						}
+					}
+					return nil
+				})
+				if err != nil {
+					return err
+				}
+			}
 		}
 
 		return nil
