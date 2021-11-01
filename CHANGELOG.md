@@ -1,3 +1,9 @@
+## 0.13.2 (2021-11-02)
+
+### BugFixes
+
+- [#130](https://github.com/terraform-linters/tflint-ruleset-google/pull/130): rules: Use WalkResources to avoid a bug in JSON syntax
+
 ## 0.13.1 (2021-10-24)
 
 ### Enhancements
