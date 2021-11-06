@@ -1,3 +1,14 @@
+## 0.14.0 (2021-11-07)
+
+### Breaking Changes
+
+- [#133](https://github.com/terraform-linters/tflint-ruleset-google/pull/133): build: Remove unsupported build targets
+
+### Chores
+
+- [#131](https://github.com/terraform-linters/tflint-ruleset-google/pull/131): Bump google.golang.org/api from 0.58.0 to 0.60.0
+- [#132](https://github.com/terraform-linters/tflint-ruleset-google/pull/132): Update Magic Modules
+
 ## 0.13.2 (2021-11-02)
 
 ### BugFixes
