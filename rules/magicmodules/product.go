@@ -359,22 +359,22 @@ var Products = map[string]Product{
 	},
 	"google_bigquery_dataset": {
 		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery-json.googleapis.com/"},
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
 		},
 	},
 	"google_bigquery_dataset_access": {
 		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery-json.googleapis.com/"},
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
 		},
 	},
 	"google_bigquery_job": {
 		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery-json.googleapis.com/"},
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
 		},
 	},
 	"google_bigquery_routine": {
 		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery-json.googleapis.com/"},
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
 		},
 	},
 	"google_sourcerepo_repository": {
