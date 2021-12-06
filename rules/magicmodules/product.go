@@ -949,6 +949,11 @@ var Products = map[string]Product{
 			{Name: "Cloud Notebooks API", URL: "https://console.cloud.google.com/apis/api/notebooks.googleapis.com"},
 		},
 	},
+	"google_notebooks_runtime": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Notebooks API", URL: "https://console.cloud.google.com/apis/api/notebooks.googleapis.com"},
+		},
+	},
 	"google_notebooks_location": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Notebooks API", URL: "https://console.cloud.google.com/apis/api/notebooks.googleapis.com"},
