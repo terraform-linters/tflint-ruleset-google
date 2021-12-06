@@ -1,3 +1,15 @@
+## 0.15.0 (2021-12-07)
+
+### Breaking Changes
+
+- [#136](https://github.com/terraform-linters/tflint-ruleset-google/pull/136): Update Magic Modules
+  - Removed `google_apigee_instance_invalid_peering_cidr_range` rule
+  - Removed `google_filestore_instance_invalid_tier` rule
+
+### Chores
+
+- [#135](https://github.com/terraform-linters/tflint-ruleset-google/pull/135): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.8.0 to 2.9.0
+
 ## 0.14.0 (2021-11-07)
 
 ### Breaking Changes
