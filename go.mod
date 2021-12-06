@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/dave/dst v0.26.2
 	github.com/google/go-cmp v0.5.6
-	github.com/hashicorp/hcl/v2 v2.10.1
+	github.com/hashicorp/hcl/v2 v2.11.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.9.0
 	github.com/onsi/ginkgo v1.15.2 // indirect
 	github.com/onsi/gomega v1.11.0 // indirect
