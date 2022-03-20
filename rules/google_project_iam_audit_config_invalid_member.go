@@ -3,14 +3,15 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
-	"github.com/terraform-linters/tflint-plugin-sdk/terraform/configs"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-google/project"
 )
 
 // GoogleProjectIamAuditConfigInvalidMemberRule checks whether member value is invalid
 type GoogleProjectIamAuditConfigInvalidMemberRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	blockName     string
 	attributeName string
@@ -35,7 +36,7 @@ func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Severity() string {
+func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -46,46 +47,47 @@ func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Link() string {
 
 // Check checks whether member format is invalid
 func (r *GoogleProjectIamAuditConfigInvalidMemberRule) Check(runner tflint.Runner) error {
-	return runner.WalkResources(r.resourceType, func(resource *configs.Resource) error {
-		content, _, diags := resource.Config.PartialContent(&hcl.BodySchema{
-			Blocks: []hcl.BlockHeaderSchema{{Type: r.blockName}},
-		})
-		if diags.HasErrors() {
-			return diags
-		}
-
-		for _, block := range content.Blocks {
-			content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
-				Attributes: []hcl.AttributeSchema{
-					{Name: r.attributeName},
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Blocks: []hclext.BlockSchema{
+			{
+				Type: r.blockName,
+				Body: &hclext.BodySchema{
+					Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 				},
-			})
-			if diags.HasErrors() {
-				return diags
+			},
+		},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		for _, config := range resource.Body.Blocks {
+			attribute, exists := config.Body.Attributes[r.attributeName]
+			if !exists {
+				continue
 			}
 
-			if attribute, exists := content.Attributes[r.attributeName]; exists {
-				var members []string
-				err := runner.EvaluateExpr(attribute.Expr, &members, nil)
+			var members []string
+			err := runner.EvaluateExpr(attribute.Expr, &members, nil)
 
-				err = runner.EnsureNoError(err, func() error {
-					for _, member := range members {
-						if !isValidIAMMemberFormat(member) {
-							return runner.EmitIssueOnExpr(
-								r,
-								fmt.Sprintf("%s is an invalid member format", member),
-								attribute.Expr,
-							)
-						}
+			err = runner.EnsureNoError(err, func() error {
+				for _, member := range members {
+					if !isValidIAMMemberFormat(member) {
+						return runner.EmitIssue(
+							r,
+							fmt.Sprintf("%s is an invalid member format", member),
+							attribute.Expr.Range(),
+						)
 					}
-					return nil
-				})
-				if err != nil {
-					return err
 				}
+				return nil
+			})
+			if err != nil {
+				return err
 			}
 		}
+	}
 
-		return nil
-	})
+	return nil
 }

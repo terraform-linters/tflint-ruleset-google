@@ -3,12 +3,14 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleComputeReservationInvalidMachineTypeRule checks whether the machine type is invalid
-type GoogleComputeReservationInvalidMachineTypeRule struct{}
+type GoogleComputeReservationInvalidMachineTypeRule struct {
+	tflint.DefaultRule
+}
 
 // NewGoogleComputeReservationInvalidMachineTypeRule returns a new rule
 func NewGoogleComputeReservationInvalidMachineTypeRule() *GoogleComputeReservationInvalidMachineTypeRule {
@@ -26,7 +28,7 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeReservationInvalidMachineTypeRule) Severity() string {
+func (r *GoogleComputeReservationInvalidMachineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -37,28 +39,35 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Link() string {
 
 // Check checks whether the machine type is invalid
 func (r *GoogleComputeReservationInvalidMachineTypeRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceBlocks("google_compute_reservation", "specific_reservation", func(block *hcl.Block) error {
-		content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
-			Blocks: []hcl.BlockHeaderSchema{
-				{Type: "instance_properties"},
-			},
-		})
-		if diags.HasErrors() {
-			return diags
-		}
-
-		for _, block := range content.Blocks {
-			content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
-				Attributes: []hcl.AttributeSchema{
-					{Name: "machine_type"},
+	resources, err := runner.GetResourceContent("google_compute_reservation", &hclext.BodySchema{
+		Blocks: []hclext.BlockSchema{
+			{
+				Type: "specific_reservation",
+				Body: &hclext.BodySchema{
+					Blocks: []hclext.BlockSchema{
+						{
+							Type: "instance_properties",
+							Body: &hclext.BodySchema{
+								Attributes: []hclext.AttributeSchema{{Name: "machine_type"}},
+							},
+						},
+					},
 				},
-			})
+			},
+		},
+	}, nil)
+	if err != nil {
+		return err
+	}
 
-			if diags.HasErrors() {
-				return diags
-			}
+	for _, resource := range resources.Blocks {
+		for _, reservations := range resource.Body.Blocks {
+			for _, properties := range reservations.Body.Blocks {
+				attribute, exists := properties.Body.Attributes["machine_type"]
+				if !exists {
+					continue
+				}
 
-			if attribute, exists := content.Attributes["machine_type"]; exists {
 				var machineType string
 				err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
@@ -67,10 +76,10 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Check(runner tflint.Run
 						return nil
 					}
 
-					return runner.EmitIssueOnExpr(
+					return runner.EmitIssue(
 						r,
 						fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
-						attribute.Expr,
+						attribute.Expr.Range(),
 					)
 				})
 
@@ -79,7 +88,7 @@ func (r *GoogleComputeReservationInvalidMachineTypeRule) Check(runner tflint.Run
 				}
 			}
 		}
+	}
 
-		return nil
-	})
+	return nil
 }

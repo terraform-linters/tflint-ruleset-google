@@ -6,7 +6,6 @@ import (
 	"github.com/terraform-linters/tflint-ruleset-google/google"
 	"github.com/terraform-linters/tflint-ruleset-google/project"
 	"github.com/terraform-linters/tflint-ruleset-google/rules"
-	"github.com/terraform-linters/tflint-ruleset-google/rules/api"
 )
 
 func main() {
@@ -17,7 +16,6 @@ func main() {
 				Version: project.Version,
 				Rules:   rules.Rules,
 			},
-			APIRules: api.Rules,
 		},
 	})
 }

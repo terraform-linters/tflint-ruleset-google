@@ -15,13 +15,15 @@
 package magicmodules
 
 import (
-	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleComputeInterconnectAttachmentInvalidBandwidthRule checks the pattern is valid
 type GoogleComputeInterconnectAttachmentInvalidBandwidthRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	attributeName string
 }
@@ -45,7 +47,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidBandwidthRule) Enabled() bool
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInterconnectAttachmentInvalidBandwidthRule) Severity() string {
+func (r *GoogleComputeInterconnectAttachmentInvalidBandwidthRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -56,18 +58,35 @@ func (r *GoogleComputeInterconnectAttachmentInvalidBandwidthRule) Link() string 
 
 // Check checks the pattern is valid
 func (r *GoogleComputeInterconnectAttachmentInvalidBandwidthRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"BPS_50M", "BPS_100M", "BPS_200M", "BPS_300M", "BPS_400M", "BPS_500M", "BPS_1G", "BPS_2G", "BPS_5G", "BPS_10G", "BPS_20G", "BPS_50G", ""}, false)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssueOnExpr(r, err.Error(), attribute.Expr)
+				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
 			}
 			return nil
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
