@@ -74,7 +74,7 @@ func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL_SELF_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "EXTERNAL_MANAGED", "INTERNAL_SELF_MANAGED", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

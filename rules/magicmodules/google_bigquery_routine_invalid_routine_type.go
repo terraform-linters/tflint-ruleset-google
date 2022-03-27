@@ -74,7 +74,7 @@ func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", "TABLE_VALUED_FUNCTION", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
