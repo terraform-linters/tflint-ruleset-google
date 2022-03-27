@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule struct {
+// GoogleDataFusionInstanceInvalidTypeRule checks the pattern is valid
+type GoogleDataFusionInstanceInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeBackendServiceInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeBackendServiceInvalidLoadBalancingSchemeRule() *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_backend_service",
-		attributeName: "load_balancing_scheme",
+// NewGoogleDataFusionInstanceInvalidTypeRule returns new rule with default attributes
+func NewGoogleDataFusionInstanceInvalidTypeRule() *GoogleDataFusionInstanceInvalidTypeRule {
+	return &GoogleDataFusionInstanceInvalidTypeRule{
+		resourceType:  "google_data_fusion_instance",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_backend_service_invalid_load_balancing_scheme"
+func (r *GoogleDataFusionInstanceInvalidTypeRule) Name() string {
+	return "google_data_fusion_instance_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleDataFusionInstanceInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
+func (r *GoogleDataFusionInstanceInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleDataFusionInstanceInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleDataFusionInstanceInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -74,7 +74,7 @@ func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Check(runner
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL_SELF_MANAGED", "EXTERNAL_MANAGED", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"BASIC", "ENTERPRISE", "DEVELOPER"}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

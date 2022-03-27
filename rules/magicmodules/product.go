@@ -52,6 +52,11 @@ var Products = map[string]Product{
 			{Name: "Essential Contacts API", URL: "https://console.cloud.google.com/apis/api/essentialcontacts.googleapis.com/overview"},
 		},
 	},
+	"google_cgc_snippet": {
+		APIsRequired: []APIReference{
+			{Name: "placeholder", URL: "placeholder"},
+		},
+	},
 	"google_binary_authorization_attestor": {
 		APIsRequired: []APIReference{},
 	},
@@ -84,6 +89,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_apigee_envgroup_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_endpoint_attachment": {
 		APIsRequired: []APIReference{
 			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
 		},
@@ -291,6 +301,11 @@ var Products = map[string]Product{
 	"google_deployment_manager_deployment": {
 		APIsRequired: []APIReference{
 			{Name: "Deployment Manager API", URL: "https://console.cloud.google.com/apis/library/deploymentmanager.googleapis.com/"},
+		},
+	},
+	"google_data_fusion_instance": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Data Fusion API", URL: "https://console.cloud.google.com/apis/library/datafusion.googleapis.com"},
 		},
 	},
 	"google_bigquery_reservation": {
