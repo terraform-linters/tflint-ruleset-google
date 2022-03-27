@@ -15,12 +15,14 @@
 package magicmodules
 
 import (
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleMonitoringCustomServiceInvalidServiceIdRule checks the pattern is valid
 type GoogleMonitoringCustomServiceInvalidServiceIdRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	attributeName string
 }
@@ -44,7 +46,7 @@ func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Severity() string {
+func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -55,18 +57,35 @@ func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Link() string {
 
 // Check checks the pattern is valid
 func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validateRegexp(`^[a-z0-9\-]+$`)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssueOnExpr(r, err.Error(), attribute.Expr)
+				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
 			}
 			return nil
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

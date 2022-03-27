@@ -15,13 +15,15 @@
 package magicmodules
 
 import (
-	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule checks the pattern is valid
 type GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	attributeName string
 }
@@ -45,7 +47,7 @@ func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Enable
 }
 
 // Severity returns the rule severity
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Severity() string {
+func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -56,18 +58,35 @@ func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Link()
 
 // Check checks the pattern is valid
 func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"MYSQL_5_5", "MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0"}, false)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssueOnExpr(r, err.Error(), attribute.Expr)
+				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
 			}
 			return nil
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

@@ -15,13 +15,15 @@
 package magicmodules
 
 import (
-	hcl "github.com/hashicorp/hcl/v2"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleDialogflowCxEntityTypeInvalidKindRule checks the pattern is valid
 type GoogleDialogflowCxEntityTypeInvalidKindRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	attributeName string
 }
@@ -45,7 +47,7 @@ func (r *GoogleDialogflowCxEntityTypeInvalidKindRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleDialogflowCxEntityTypeInvalidKindRule) Severity() string {
+func (r *GoogleDialogflowCxEntityTypeInvalidKindRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -56,18 +58,35 @@ func (r *GoogleDialogflowCxEntityTypeInvalidKindRule) Link() string {
 
 // Check checks the pattern is valid
 func (r *GoogleDialogflowCxEntityTypeInvalidKindRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
 		validateFunc := validation.StringInSlice([]string{"KIND_MAP", "KIND_LIST", "KIND_REGEXP"}, false)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssueOnExpr(r, err.Error(), attribute.Expr)
+				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
 			}
 			return nil
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

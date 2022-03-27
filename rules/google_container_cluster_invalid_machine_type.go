@@ -3,12 +3,14 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleContainerClusterInvalidMachineTypeRule checks whether the machine type is invalid
-type GoogleContainerClusterInvalidMachineTypeRule struct{}
+type GoogleContainerClusterInvalidMachineTypeRule struct {
+	tflint.DefaultRule
+}
 
 // NewGoogleContainerClusterInvalidMachineTypeRule returns a new rule
 func NewGoogleContainerClusterInvalidMachineTypeRule() *GoogleContainerClusterInvalidMachineTypeRule {
@@ -26,7 +28,7 @@ func (r *GoogleContainerClusterInvalidMachineTypeRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleContainerClusterInvalidMachineTypeRule) Severity() string {
+func (r *GoogleContainerClusterInvalidMachineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -37,33 +39,46 @@ func (r *GoogleContainerClusterInvalidMachineTypeRule) Link() string {
 
 // Check checks whether the machine type is invalid
 func (r *GoogleContainerClusterInvalidMachineTypeRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceBlocks("google_container_cluster", "node_config", func(block *hcl.Block) error {
-		content, _, diags := block.Body.PartialContent(&hcl.BodySchema{
-			Attributes: []hcl.AttributeSchema{
-				{Name: "machine_type"},
+	resources, err := runner.GetResourceContent("google_container_cluster", &hclext.BodySchema{
+		Blocks: []hclext.BlockSchema{
+			{
+				Type: "node_config",
+				Body: &hclext.BodySchema{
+					Attributes: []hclext.AttributeSchema{{Name: "machine_type"}},
+				},
 			},
-		})
-		if diags.HasErrors() {
-			return diags
-		}
+		},
+	}, nil)
+	if err != nil {
+		return err
+	}
 
-		if attribute, exists := content.Attributes["machine_type"]; exists {
+	for _, resource := range resources.Blocks {
+		for _, nodeConfig := range resource.Body.Blocks {
+			attribute, exists := nodeConfig.Body.Attributes["machine_type"]
+			if !exists {
+				continue
+			}
+
 			var machineType string
 			err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
-			return runner.EnsureNoError(err, func() error {
+			err = runner.EnsureNoError(err, func() error {
 				if validMachineTypes[machineType] || isCustomType(machineType) {
 					return nil
 				}
 
-				return runner.EmitIssueOnExpr(
+				return runner.EmitIssue(
 					r,
 					fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
-					attribute.Expr,
+					attribute.Expr.Range(),
 				)
 			})
+			if err != nil {
+				return err
+			}
 		}
+	}
 
-		return nil
-	})
+	return nil
 }

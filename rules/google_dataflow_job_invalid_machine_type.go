@@ -3,12 +3,14 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleDataflowJobInvalidMachineTypeRule checks whether the machine type is invalid
-type GoogleDataflowJobInvalidMachineTypeRule struct{}
+type GoogleDataflowJobInvalidMachineTypeRule struct {
+	tflint.DefaultRule
+}
 
 // NewGoogleDataflowJobInvalidMachineTypeRule returns a new rule
 func NewGoogleDataflowJobInvalidMachineTypeRule() *GoogleDataflowJobInvalidMachineTypeRule {
@@ -26,7 +28,7 @@ func (r *GoogleDataflowJobInvalidMachineTypeRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleDataflowJobInvalidMachineTypeRule) Severity() string {
+func (r *GoogleDataflowJobInvalidMachineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -37,20 +39,37 @@ func (r *GoogleDataflowJobInvalidMachineTypeRule) Link() string {
 
 // Check checks whether the machine type is invalid
 func (r *GoogleDataflowJobInvalidMachineTypeRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes("google_dataflow_job", "machine_type", func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent("google_dataflow_job", &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: "machine_type"}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes["machine_type"]
+		if !exists {
+			continue
+		}
+
 		var machineType string
 		err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			if validMachineTypes[machineType] || isCustomType(machineType) {
 				return nil
 			}
 
-			return runner.EmitIssueOnExpr(
+			return runner.EmitIssue(
 				r,
 				fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
-				attribute.Expr,
+				attribute.Expr.Range(),
 			)
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

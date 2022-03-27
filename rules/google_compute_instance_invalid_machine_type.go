@@ -3,12 +3,14 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
 // GoogleComputeInstanceInvalidMachineTypeRule checks whether the machine type is invalid
-type GoogleComputeInstanceInvalidMachineTypeRule struct{}
+type GoogleComputeInstanceInvalidMachineTypeRule struct {
+	tflint.DefaultRule
+}
 
 // NewGoogleComputeInstanceInvalidMachineTypeRule returns a new rule
 func NewGoogleComputeInstanceInvalidMachineTypeRule() *GoogleComputeInstanceInvalidMachineTypeRule {
@@ -26,7 +28,7 @@ func (r *GoogleComputeInstanceInvalidMachineTypeRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInstanceInvalidMachineTypeRule) Severity() string {
+func (r *GoogleComputeInstanceInvalidMachineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -37,20 +39,37 @@ func (r *GoogleComputeInstanceInvalidMachineTypeRule) Link() string {
 
 // Check checks whether the machine type is invalid
 func (r *GoogleComputeInstanceInvalidMachineTypeRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes("google_compute_instance", "machine_type", func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent("google_compute_instance", &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: "machine_type"}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes["machine_type"]
+		if !exists {
+			continue
+		}
+
 		var machineType string
 		err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			if validMachineTypes[machineType] || isCustomType(machineType) {
 				return nil
 			}
 
-			return runner.EmitIssueOnExpr(
+			return runner.EmitIssue(
 				r,
 				fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
-				attribute.Expr,
+				attribute.Expr.Range(),
 			)
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }

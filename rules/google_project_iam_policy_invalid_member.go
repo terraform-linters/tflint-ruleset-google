@@ -3,13 +3,15 @@ package rules
 import (
 	"fmt"
 
-	hcl "github.com/hashicorp/hcl/v2"
+	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 	"github.com/terraform-linters/tflint-ruleset-google/project"
 )
 
 // GoogleProjectIamPolicyInvalidMemberRule checks whether member value is invalid
 type GoogleProjectIamPolicyInvalidMemberRule struct {
+	tflint.DefaultRule
+
 	resourceType  string
 	attributeName string
 }
@@ -33,7 +35,7 @@ func (r *GoogleProjectIamPolicyInvalidMemberRule) Enabled() bool {
 }
 
 // Severity returns the rule severity
-func (r *GoogleProjectIamPolicyInvalidMemberRule) Severity() string {
+func (r *GoogleProjectIamPolicyInvalidMemberRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
@@ -44,22 +46,39 @@ func (r *GoogleProjectIamPolicyInvalidMemberRule) Link() string {
 
 // Check checks whether member format is invalid
 func (r *GoogleProjectIamPolicyInvalidMemberRule) Check(runner tflint.Runner) error {
-	return runner.WalkResourceAttributes(r.resourceType, r.attributeName, func(attribute *hcl.Attribute) error {
+	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
+		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		attribute, exists := resource.Body.Attributes[r.attributeName]
+		if !exists {
+			continue
+		}
+
 		var members []string
 		err := runner.EvaluateExpr(attribute.Expr, &members, nil)
 
-		return runner.EnsureNoError(err, func() error {
+		err = runner.EnsureNoError(err, func() error {
 			for _, member := range members {
 				if !isValidIAMMemberFormat(member) {
-					return runner.EmitIssueOnExpr(
+					return runner.EmitIssue(
 						r,
 						fmt.Sprintf("%s is an invalid member format", member),
-						attribute.Expr,
+						attribute.Expr.Range(),
 					)
 				}
 
 			}
 			return nil
 		})
-	})
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
