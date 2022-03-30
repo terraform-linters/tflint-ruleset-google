@@ -1,3 +1,9 @@
+## 0.16.1 (2022-03-31)
+
+### BugFixes
+
+- [#159](https://github.com/terraform-linters/tflint-ruleset-google/pull/159): Suppress unevaluable/unknown/null errors on provider block eval
+
 ## 0.16.0 (2022-03-27)
 
 The minimum supported version of TFLint has changed in this version. TFLint v0.35.0+ is required for this plugin to work.
