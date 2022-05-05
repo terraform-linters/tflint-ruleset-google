@@ -5,8 +5,8 @@ go 1.18
 require (
 	github.com/dave/dst v0.26.2
 	github.com/google/go-cmp v0.5.8
-	github.com/hashicorp/hcl/v2 v2.11.1
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.12.0
+	github.com/hashicorp/hcl/v2 v2.12.0
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.15.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.10.0
 	google.golang.org/api v0.77.0
 )
@@ -24,18 +24,18 @@ require (
 	github.com/hashicorp/go-hclog v1.2.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-plugin v1.4.3 // indirect
-	github.com/hashicorp/go-uuid v1.0.2 // indirect
+	github.com/hashicorp/go-uuid v1.0.3 // indirect
 	github.com/hashicorp/go-version v1.4.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
-	github.com/hashicorp/terraform-plugin-go v0.8.0 // indirect
-	github.com/hashicorp/terraform-plugin-log v0.3.0 // indirect
+	github.com/hashicorp/terraform-plugin-go v0.9.0 // indirect
+	github.com/hashicorp/terraform-plugin-log v0.4.0 // indirect
 	github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d // indirect
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-testing-interface v1.14.1 // indirect
 	github.com/mitchellh/go-wordwrap v1.0.0 // indirect
-	github.com/mitchellh/mapstructure v1.4.3 // indirect
+	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/oklog/run v1.0.0 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
