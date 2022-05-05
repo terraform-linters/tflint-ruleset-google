@@ -1,3 +1,19 @@
+## 0.17.0 (2022-05-05)
+
+### Enhancements
+
+- [#174](https://github.com/terraform-linters/tflint-ruleset-google/pull/174): Update Magic Modules
+
+### Chores
+
+- [#160](https://github.com/terraform-linters/tflint-ruleset-google/pull/160): chores: Remove snaker
+- [#161](https://github.com/terraform-linters/tflint-ruleset-google/pull/161): Fix rule template for rule generator
+- [#165](https://github.com/terraform-linters/tflint-ruleset-google/pull/165): Bump actions/setup-go from 2 to 3
+- [#169](https://github.com/terraform-linters/tflint-ruleset-google/pull/169) [#173](https://github.com/terraform-linters/tflint-ruleset-google/pull/173): Bump google.golang.org/api from 0.73.0 to 0.78.0
+- [#170](https://github.com/terraform-linters/tflint-ruleset-google/pull/170): Bump github.com/google/go-cmp from 0.5.7 to 0.5.8
+- [#171](https://github.com/terraform-linters/tflint-ruleset-google/pull/171): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.10.0 to 0.11.0
+- [#172](https://github.com/terraform-linters/tflint-ruleset-google/pull/172): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.12.0 to 2.15.0
+
 ## 0.16.1 (2022-03-31)
 
 ### BugFixes
