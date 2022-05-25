@@ -22,7 +22,7 @@ jobs:
           cd tools/magic-modules/mmv1
           bundle install
           bundle exec compiler -a --force tflint -v ga -e terraform -o ../../../rules/magicmodules
-          gofmt -s -w rules/magicmodules/*.go
+          gofmt -s -w ../../../rules/magicmodules/*.go
       - uses: peter-evans/create-pull-request@v4
         with:
           commit-message: |
