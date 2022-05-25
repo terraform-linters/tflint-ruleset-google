@@ -14,6 +14,7 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: 1.18
+      - uses: ruby/setup-ruby@v1
       - run: |
           git submodule update --remote
           cd tools/magic-modules/mmv1
