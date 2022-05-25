@@ -21,7 +21,7 @@ jobs:
           git submodule update --remote
           cd tools/magic-modules/mmv1
           bundle install
-          bundle exec compiler -a --force tflint -v ga -e terraform -o $GOPATH/src/github.com/terraform-linters/tflint-ruleset-google/rules/magicmodules
+          bundle exec compiler -a --force tflint -v ga -e terraform -o ../../../rules/magicmodules
       - uses: peter-evans/create-pull-request@v4
         with:
           commit-message: |
