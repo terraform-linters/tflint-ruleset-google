@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeSubnetworkInvalidIpv6AccessTypeRule checks the pattern is valid
-type GoogleComputeSubnetworkInvalidIpv6AccessTypeRule struct {
+// GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule checks the pattern is valid
+type GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeSubnetworkInvalidIpv6AccessTypeRule returns new rule with default attributes
-func NewGoogleComputeSubnetworkInvalidIpv6AccessTypeRule() *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule {
-	return &GoogleComputeSubnetworkInvalidIpv6AccessTypeRule{
-		resourceType:  "google_compute_subnetwork",
-		attributeName: "ipv6_access_type",
+// NewGoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule returns new rule with default attributes
+func NewGoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule() *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule {
+	return &GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule{
+		resourceType:  "google_monitoring_uptime_check_config",
+		attributeName: "checker_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Name() string {
-	return "google_compute_subnetwork_invalid_ipv6_access_type"
+func (r *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule) Name() string {
+	return "google_monitoring_uptime_check_config_invalid_checker_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Enabled() bool {
+func (r *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Severity() tflint.Severity {
+func (r *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Link() string {
+func (r *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -74,7 +74,7 @@ func (r *GoogleComputeSubnetworkInvalidIpv6AccessTypeRule) Check(runner tflint.R
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"STATIC_IP_CHECKERS", "VPC_CHECKERS", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

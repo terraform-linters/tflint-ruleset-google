@@ -74,7 +74,7 @@ func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) 
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"SERVERLESS", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"SERVERLESS", "PRIVATE_SERVICE_CONNECT", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
