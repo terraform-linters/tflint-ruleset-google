@@ -74,7 +74,7 @@ func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Check(runner tflint.Runner) error
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"ENCRYPT_DECRYPT", "ASYMMETRIC_SIGN", "ASYMMETRIC_DECRYPT", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"ENCRYPT_DECRYPT", "ASYMMETRIC_SIGN", "ASYMMETRIC_DECRYPT", "MAC", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

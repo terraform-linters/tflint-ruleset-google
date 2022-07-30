@@ -74,7 +74,7 @@ func (r *GoogleComputeNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"GCE_VM_IP_PORT", "NON_GCP_PRIVATE_IP_PORT", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"GCE_VM_IP", "GCE_VM_IP_PORT", "NON_GCP_PRIVATE_IP_PORT", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)

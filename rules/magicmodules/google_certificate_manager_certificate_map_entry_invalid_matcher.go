@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNotebooksInstanceInvalidDataDiskTypeRule checks the pattern is valid
-type GoogleNotebooksInstanceInvalidDataDiskTypeRule struct {
+// GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule checks the pattern is valid
+type GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNotebooksInstanceInvalidDataDiskTypeRule returns new rule with default attributes
-func NewGoogleNotebooksInstanceInvalidDataDiskTypeRule() *GoogleNotebooksInstanceInvalidDataDiskTypeRule {
-	return &GoogleNotebooksInstanceInvalidDataDiskTypeRule{
-		resourceType:  "google_notebooks_instance",
-		attributeName: "data_disk_type",
+// NewGoogleCertificateManagerCertificateMapEntryInvalidMatcherRule returns new rule with default attributes
+func NewGoogleCertificateManagerCertificateMapEntryInvalidMatcherRule() *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule {
+	return &GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule{
+		resourceType:  "google_certificate_manager_certificate_map_entry",
+		attributeName: "matcher",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Name() string {
-	return "google_notebooks_instance_invalid_data_disk_type"
+func (r *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule) Name() string {
+	return "google_certificate_manager_certificate_map_entry_invalid_matcher"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Enabled() bool {
+func (r *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Severity() tflint.Severity {
+func (r *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Link() string {
+func (r *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleCertificateManagerCertificateMapEntryInvalidMatcherRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -74,7 +74,7 @@ func (r *GoogleNotebooksInstanceInvalidDataDiskTypeRule) Check(runner tflint.Run
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"DISK_TYPE_UNSPECIFIED", "PD_STANDARD", "PD_SSD", "PD_BALANCED", "PD_EXTREME", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"MATCHER_UNSPECIFIED", "PRIMARY", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
