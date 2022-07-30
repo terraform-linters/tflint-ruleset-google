@@ -1,3 +1,16 @@
+## 0.19.0 (2022-07-31)
+
+### Enhancements
+
+- [#195](https://github.com/terraform-linters/tflint-ruleset-google/pull/195): Add c2d machines to validMachineTypes
+- [#197](https://github.com/terraform-linters/tflint-ruleset-google/pull/197): Update Magic Modules
+
+### Chores
+
+- [#187](https://github.com/terraform-linters/tflint-ruleset-google/pull/187): Bump github.com/hashicorp/hcl/v2 from 2.12.0 to 2.13.0
+- [#194](https://github.com/terraform-linters/tflint-ruleset-google/pull/194): Bump google.golang.org/api from 0.84.0 to 0.88.0
+- [#196](https://github.com/terraform-linters/tflint-ruleset-google/pull/196): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.17.0 to 2.20.0
+
 ## 0.18.0 (2022-06-19)
 
 ### Enhancements
