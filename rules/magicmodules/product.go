@@ -165,6 +165,16 @@ var Products = map[string]Product{
 			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
 		},
 	},
+	"google_iam_workload_identity_pool": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
+		},
+	},
+	"google_iam_workload_identity_pool_provider": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
+		},
+	},
 	"google_iap_brand": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Identity-Aware Proxy", URL: "https://console.cloud.google.com/apis/library/iap.googleapis.com/"},
@@ -339,6 +349,16 @@ var Products = map[string]Product{
 		},
 	},
 	"google_certificate_manager_certificate": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_certificate_map": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_certificate_map_entry": {
 		APIsRequired: []APIReference{
 			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
 		},
@@ -1001,6 +1021,11 @@ var Products = map[string]Product{
 			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
 		},
 	},
+	"google_dataproc_metastore_service": {
+		APIsRequired: []APIReference{
+			{Name: "Dataproc Metastore API", URL: "https://console.cloud.google.com/apis/library/metastore.googleapis.com"},
+		},
+	},
 	"google_filestore_instance": {
 		APIsRequired: []APIReference{},
 	},
@@ -1057,6 +1082,11 @@ var Products = map[string]Product{
 	"google_storage_hmac_key": {
 		APIsRequired: []APIReference{
 			{Name: "Google Cloud Storage", URL: "https://console.cloud.google.com/apis/library/storage-component.googleapis.com/"},
+		},
+	},
+	"google_artifact_registry_repository": {
+		APIsRequired: []APIReference{
+			{Name: "Artifact Registry API", URL: "https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com/"},
 		},
 	},
 	"google_bigtable_app_profile": {
