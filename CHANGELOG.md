@@ -1,3 +1,22 @@
+## 0.20.0 (2022-09-08)
+
+The minimum supported version of TFLint has changed in this version. TFLint v0.40.0+ is required for this plugin to work.
+
+### Breaking Changes
+
+- [#207](https://github.com/terraform-linters/tflint-ruleset-google/pull/207): Bump tflint-plugin-sdk to v0.12.0
+- [#209](https://github.com/terraform-linters/tflint-ruleset-google/pull/209): Update Magic Modules
+  - Removed `google_certificate_manager_certificate_invalid_scope` rule
+  - Removed `google_certificate_manager_certificate_map_entry_invalid_matcher` rule
+
+### Chores
+
+- [#199](https://github.com/terraform-linters/tflint-ruleset-google/pull/199): go 1.19
+- [#202](https://github.com/terraform-linters/tflint-ruleset-google/pull/202): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.20.0 to 2.21.0
+- [#204](https://github.com/terraform-linters/tflint-ruleset-google/pull/204) [#208](https://github.com/terraform-linters/tflint-ruleset-google/pull/208): Bump google.golang.org/api from 0.88.0 to 0.95.0
+- [#205](https://github.com/terraform-linters/tflint-ruleset-google/pull/205): Bump github.com/hashicorp/hcl/v2 from 2.13.0 to 2.14.0
+- [#206](https://github.com/terraform-linters/tflint-ruleset-google/pull/206): build: Use `go-version-file` instead of `go-version`
+
 ## 0.19.0 (2022-07-31)
 
 ### Enhancements

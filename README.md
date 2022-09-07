@@ -7,7 +7,7 @@ TFLint ruleset plugin for Terraform Google Cloud Platform provider
 
 ## Requirements
 
-- TFLint v0.35+
+- TFLint v0.40+
 - Go v1.19
 
 ## Installation
@@ -17,7 +17,7 @@ You can install the plugin by adding a config to `.tflint.hcl` and running `tfli
 ```hcl
 plugin "google" {
     enabled = true
-    version = "0.19.0"
+    version = "0.20.0"
     source  = "github.com/terraform-linters/tflint-ruleset-google"
 }
 ```
