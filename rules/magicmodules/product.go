@@ -541,6 +541,11 @@ var Products = map[string]Product{
 			{Name: "Cloud Spanner API", URL: "https://console.cloud.google.com/apis/library/spanner.googleapis.com/"},
 		},
 	},
+	"google_datastream_connection_profile": {
+		APIsRequired: []APIReference{
+			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
+		},
+	},
 	"google_pubsub_topic": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Pub/Sub API", URL: "https://console.cloud.google.com/apis/library/pubsub.googleapis.com/"},
@@ -616,6 +621,11 @@ var Products = map[string]Product{
 	"google_bigquery_data_transfer_config": {
 		APIsRequired: []APIReference{
 			{Name: "BigQueryDataTransfer API", URL: "https://console.cloud.google.com/apis/api/bigquerydatatransfer.googleapis.com/"},
+		},
+	},
+	"google_cloudfunctions2_function": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Functions API", URL: "https://console.cloud.google.com/apis/library/cloudfunctions.googleapis.com/"},
 		},
 	},
 	"google_game_services_realm": {

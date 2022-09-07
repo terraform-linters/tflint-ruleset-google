@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCertificateManagerCertificateInvalidScopeRule checks the pattern is valid
-type GoogleCertificateManagerCertificateInvalidScopeRule struct {
+// GoogleApigeeOrganizationInvalidRetentionRule checks the pattern is valid
+type GoogleApigeeOrganizationInvalidRetentionRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCertificateManagerCertificateInvalidScopeRule returns new rule with default attributes
-func NewGoogleCertificateManagerCertificateInvalidScopeRule() *GoogleCertificateManagerCertificateInvalidScopeRule {
-	return &GoogleCertificateManagerCertificateInvalidScopeRule{
-		resourceType:  "google_certificate_manager_certificate",
-		attributeName: "scope",
+// NewGoogleApigeeOrganizationInvalidRetentionRule returns new rule with default attributes
+func NewGoogleApigeeOrganizationInvalidRetentionRule() *GoogleApigeeOrganizationInvalidRetentionRule {
+	return &GoogleApigeeOrganizationInvalidRetentionRule{
+		resourceType:  "google_apigee_organization",
+		attributeName: "retention",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Name() string {
-	return "google_certificate_manager_certificate_invalid_scope"
+func (r *GoogleApigeeOrganizationInvalidRetentionRule) Name() string {
+	return "google_apigee_organization_invalid_retention"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Enabled() bool {
+func (r *GoogleApigeeOrganizationInvalidRetentionRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Severity() tflint.Severity {
+func (r *GoogleApigeeOrganizationInvalidRetentionRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Link() string {
+func (r *GoogleApigeeOrganizationInvalidRetentionRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Check(runner tflint.Runner) error {
+func (r *GoogleApigeeOrganizationInvalidRetentionRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -74,7 +74,7 @@ func (r *GoogleCertificateManagerCertificateInvalidScopeRule) Check(runner tflin
 		var val string
 		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
 
-		validateFunc := validation.StringInSlice([]string{"DEFAULT", "EDGE_CACHE", ""}, false)
+		validateFunc := validation.StringInSlice([]string{"DELETION_RETENTION_UNSPECIFIED", "MINIMUM", ""}, false)
 
 		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
