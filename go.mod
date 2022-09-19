@@ -4,10 +4,10 @@ go 1.19
 
 require (
 	github.com/dave/dst v0.27.0
-	github.com/google/go-cmp v0.5.8
+	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/hcl/v2 v2.14.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.21.0
-	github.com/terraform-linters/tflint-plugin-sdk v0.12.0
+	github.com/terraform-linters/tflint-plugin-sdk v0.13.0
 	google.golang.org/api v0.95.0
 )
 
