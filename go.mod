@@ -3,7 +3,7 @@ module github.com/terraform-linters/tflint-ruleset-google
 go 1.19
 
 require (
-	github.com/dave/dst v0.27.0
+	github.com/dave/dst v0.27.1
 	github.com/google/go-cmp v0.5.8
 	github.com/hashicorp/hcl/v2 v2.14.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.21.0
