@@ -165,6 +165,11 @@ var Products = map[string]Product{
 			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
 		},
 	},
+	"google_dialogflow_cx_webhook": {
+		APIsRequired: []APIReference{
+			{Name: "Dialogflow API", URL: "https://console.cloud.google.com/apis/library/dialogflow.googleapis.com"},
+		},
+	},
 	"google_iam_workload_identity_pool": {
 		APIsRequired: []APIReference{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
@@ -203,6 +208,11 @@ var Products = map[string]Product{
 	"google_data_catalog_tag": {
 		APIsRequired: []APIReference{
 			{Name: "Google Cloud Data Catalog API", URL: "https://console.cloud.google.com/apis/library/datacatalog.googleapis.com"},
+		},
+	},
+	"google_identity_platform_config": {
+		APIsRequired: []APIReference{
+			{Name: "Google Identity Platform", URL: "https://console.cloud.google.com/marketplace/details/google-cloud-platform/customer-identity/"},
 		},
 	},
 	"google_identity_platform_default_supported_idp_config": {
@@ -446,6 +456,18 @@ var Products = map[string]Product{
 	"google_vertex_ai_dataset": {
 		APIsRequired: []APIReference{},
 	},
+	"google_vertex_ai_endpoint": {
+		APIsRequired: []APIReference{},
+	},
+	"google_vertex_ai_featurestore": {
+		APIsRequired: []APIReference{},
+	},
+	"google_vertex_ai_featurestore_entitytype": {
+		APIsRequired: []APIReference{},
+	},
+	"google_vertex_ai_featurestore_entitytype_feature": {
+		APIsRequired: []APIReference{},
+	},
 	"google_os_config_patch_deployment": {
 		APIsRequired: []APIReference{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
@@ -454,6 +476,11 @@ var Products = map[string]Product{
 	"google_cloud_tasks_queue": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Tasks", URL: "https://console.cloud.google.com/apis/library/cloudtasks.googleapis.com/"},
+		},
+	},
+	"google_cloud_ids_endpoint": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Intrusion Detection Service (IDS) API", URL: "https://console.cloud.google.com/apis/library/ids.googleapis.com/"},
 		},
 	},
 	"google_network_management_connectivity_test": {
@@ -477,6 +504,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_monitoring_custom_service": {
+		APIsRequired: []APIReference{
+			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
+		},
+	},
+	"google_monitoring_service": {
 		APIsRequired: []APIReference{
 			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
 		},
@@ -526,11 +558,6 @@ var Products = map[string]Product{
 			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
 		},
 	},
-	"google_cgc_snippet": {
-		APIsRequired: []APIReference{
-			{Name: "placeholder", URL: "placeholder"},
-		},
-	},
 	"google_spanner_instance": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Spanner API", URL: "https://console.cloud.google.com/apis/library/spanner.googleapis.com/"},
@@ -542,6 +569,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_datastream_connection_profile": {
+		APIsRequired: []APIReference{
+			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
+		},
+	},
+	"google_datastream_private_connection": {
 		APIsRequired: []APIReference{
 			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
 		},
@@ -612,11 +644,26 @@ var Products = map[string]Product{
 			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
 		},
 	},
+	"google_apigee_nat_address": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
 	"google_cloud_run_domain_mapping": {
 		APIsRequired: []APIReference{},
 	},
 	"google_cloud_run_service": {
 		APIsRequired: []APIReference{},
+	},
+	"google_bigquery_analytics_hub_data_exchange": {
+		APIsRequired: []APIReference{
+			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
+		},
+	},
+	"google_bigquery_analytics_hub_listing": {
+		APIsRequired: []APIReference{
+			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
+		},
 	},
 	"google_bigquery_data_transfer_config": {
 		APIsRequired: []APIReference{
@@ -1037,6 +1084,9 @@ var Products = map[string]Product{
 		},
 	},
 	"google_filestore_instance": {
+		APIsRequired: []APIReference{},
+	},
+	"google_filestore_snapshot": {
 		APIsRequired: []APIReference{},
 	},
 	"google_bigquery_connection": {
