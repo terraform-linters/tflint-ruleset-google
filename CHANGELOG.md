@@ -1,3 +1,16 @@
+## 0.22.0 (2022-12-05)
+
+### Enhancements
+
+- [#231](https://github.com/terraform-linters/tflint-ruleset-google/pull/231): Update Magic Modules
+
+### Chores
+
+- [#227](https://github.com/terraform-linters/tflint-ruleset-google/pull/227): Add signatures for keyless signing
+- [#228](https://github.com/terraform-linters/tflint-ruleset-google/pull/228): Bump google.golang.org/api from 0.100.0 to 0.103.0
+- [#229](https://github.com/terraform-linters/tflint-ruleset-google/pull/229): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.24.0 to 2.24.1
+- [#230](https://github.com/terraform-linters/tflint-ruleset-google/pull/230): Bump github.com/hashicorp/hcl/v2 from 2.14.1 to 2.15.0
+
 ## 0.21.0 (2022-10-28)
 
 ### Enhancements
