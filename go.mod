@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/dave/dst v0.27.2
 	github.com/google/go-cmp v0.5.9
-	github.com/hashicorp/hcl/v2 v2.14.1
+	github.com/hashicorp/hcl/v2 v2.15.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.24.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.14.0
 	google.golang.org/api v0.100.0
@@ -43,7 +43,7 @@ require (
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
 	github.com/vmihailenco/msgpack/v4 v4.3.12 // indirect
 	github.com/vmihailenco/tagparser v0.1.1 // indirect
-	github.com/zclconf/go-cty v1.11.0 // indirect
+	github.com/zclconf/go-cty v1.12.1 // indirect
 	go.opencensus.io v0.23.0 // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/net v0.0.0-20221014081412-f15817d10f9b // indirect
