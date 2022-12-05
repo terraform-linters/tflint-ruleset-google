@@ -1,3 +1,10 @@
+## 0.22.1 (2022-12-05)
+
+### Enhancements
+
+- [#232](https://github.com/terraform-linters/tflint-ruleset-google/pull/232): Add T2A machine types to validMachineTypes
+- [#233](https://github.com/terraform-linters/tflint-ruleset-google/pull/233): Add M3 machine types to validMachineTypes
+
 ## 0.22.0 (2022-12-05)
 
 ### Enhancements
