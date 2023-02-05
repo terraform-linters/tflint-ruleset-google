@@ -1,3 +1,17 @@
+## 0.22.2 (2023-02-05)
+
+### Enhancements
+
+- [#244](https://github.com/terraform-linters/tflint-ruleset-google/pull/244): Update Magic Modules
+
+### Chores
+
+- [#237](https://github.com/terraform-linters/tflint-ruleset-google/pull/237): Pass `GITHUB_TOKEN` to e2e test workflow
+- [#235](https://github.com/terraform-linters/tflint-ruleset-google/pull/235): Bump goreleaser/goreleaser-action from 3 to 4
+- [#238](https://github.com/terraform-linters/tflint-ruleset-google/pull/238): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.14.0 to 0.15.0
+- [#242](https://github.com/terraform-linters/tflint-ruleset-google/pull/242) [#245](https://github.com/terraform-linters/tflint-ruleset-google/pull/245): Bump google.golang.org/api from 0.103.0 to 0.109.0
+- [#243](https://github.com/terraform-linters/tflint-ruleset-google/pull/243): Bump github.com/hashicorp/hcl/v2 from 2.15.0 to 2.16.0
+
 ## 0.22.1 (2022-12-05)
 
 ### Enhancements
