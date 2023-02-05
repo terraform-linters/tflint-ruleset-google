@@ -69,12 +69,32 @@ var Products = map[string]Product{
 			{Name: "Billing Budget", URL: "https://console.cloud.google.com/apis/library/billingbudgets.googleapis.com/"},
 		},
 	},
+	"google_alloydb_cluster": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
+	"google_alloydb_instance": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
+	"google_alloydb_backup": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
 	"google_datastream_connection_profile": {
 		APIsRequired: []APIReference{
 			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
 		},
 	},
 	"google_datastream_private_connection": {
+		APIsRequired: []APIReference{
+			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
+		},
+	},
+	"google_datastream_stream": {
 		APIsRequired: []APIReference{
 			{Name: "Datastream API", URL: "https://console.cloud.google.com/apis/library/datastream.googleapis.com"},
 		},
@@ -107,6 +127,16 @@ var Products = map[string]Product{
 	"google_pubsub_lite_subscription": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Pub/Sub Lite API", URL: "https://console.cloud.google.com/apis/library/pubsublite.googleapis.com/"},
+		},
+	},
+	"google_gke_backup_backup_plan": {
+		APIsRequired: []APIReference{
+			{Name: "Backup for GKE API", URL: "https://console.cloud.google.com/apis/library/gkebackup.googleapis.com"},
+		},
+	},
+	"google_iam_access_boundary_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
 		},
 	},
 	"google_dialogflow_cx_agent": {
@@ -257,6 +287,9 @@ var Products = map[string]Product{
 	"google_filestore_snapshot": {
 		APIsRequired: []APIReference{},
 	},
+	"google_filestore_backup": {
+		APIsRequired: []APIReference{},
+	},
 	"google_dataproc_metastore_service": {
 		APIsRequired: []APIReference{
 			{Name: "Dataproc Metastore API", URL: "https://console.cloud.google.com/apis/library/metastore.googleapis.com"},
@@ -310,6 +343,16 @@ var Products = map[string]Product{
 	"google_dataproc_autoscaling_policy": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Dataproc API", URL: "https://console.cloud.google.com/apis/library/dataproc.googleapis.com"},
+		},
+	},
+	"google_iam_workforce_pool": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
+		},
+	},
+	"google_iam_workforce_pool_provider": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
 		},
 	},
 	"google_sql_database": {
@@ -392,30 +435,6 @@ var Products = map[string]Product{
 			{Name: "Workflows API", URL: "https://console.cloud.google.com/apis/library/workflows.googleapis.com/"},
 		},
 	},
-	"google_access_context_manager_access_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_level": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_levels": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_level_condition": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeters": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter_resource": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_gcp_user_access_binding": {
-		APIsRequired: []APIReference{},
-	},
 	"google_redis_instance": {
 		APIsRequired: []APIReference{},
 	},
@@ -489,6 +508,16 @@ var Products = map[string]Product{
 		},
 	},
 	"google_apigee_nat_address": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_sync_authorization": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_addons_config": {
 		APIsRequired: []APIReference{
 			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
 		},
@@ -812,6 +841,11 @@ var Products = map[string]Product{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
+	"google_compute_region_target_tcp_proxy": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
 	"google_compute_target_instance": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
@@ -964,16 +998,6 @@ var Products = map[string]Product{
 	},
 	"google_cloudiot_device": {
 		APIsRequired: []APIReference{},
-	},
-	"google_beyondcorp_app_connector": {
-		APIsRequired: []APIReference{
-			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
-		},
-	},
-	"google_beyondcorp_app_gateway": {
-		APIsRequired: []APIReference{
-			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
-		},
 	},
 	"google_monitoring_alert_policy": {
 		APIsRequired: []APIReference{
@@ -1172,6 +1196,9 @@ var Products = map[string]Product{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
 		},
 	},
+	"google_container_attached_cluster": {
+		APIsRequired: []APIReference{},
+	},
 	"google_cloud_identity_group": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
@@ -1184,5 +1211,44 @@ var Products = map[string]Product{
 	},
 	"google_memcache_instance": {
 		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_gcp_user_access_binding": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_level": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_levels": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_resource": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_level_condition": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeters": {
+		APIsRequired: []APIReference{},
+	},
+	"google_beyondcorp_app_connector": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
+	},
+	"google_beyondcorp_app_gateway": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
+	},
+	"google_beyondcorp_app_connection": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
 	},
 }
