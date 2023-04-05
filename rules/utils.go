@@ -175,6 +175,16 @@ var validMachineTypes = map[string]bool{
 	"a2-highgpu-4g":  true,
 	"a2-highgpu-8g":  true,
 	"a2-megagpu-16g": true,
+
+	// L4 machine types: https://cloud.google.com/compute/docs/gpus#l4-gpus
+	"g2-standard-4":  true,
+	"g2-standard-8":  true,
+	"g2-standard-12": true,
+	"g2-standard-16": true,
+	"g2-standard-24": true,
+	"g2-standard-32": true,
+	"g2-standard-48": true,
+	"g2-standard-96": true,
 }
 
 func isCustomType(machineType string) bool {
