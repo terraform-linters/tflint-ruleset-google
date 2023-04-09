@@ -1,3 +1,32 @@
+## 0.23.0 (2023-04-09)
+
+### Breaking Changes
+
+- [#262](https://github.com/terraform-linters/tflint-ruleset-google/pull/262): Update Magic Modules
+  - Rename `google_bigquery_routine_invalid_determinism_level` to `google_big_query_routine_invalid_determinism_level`
+  - Rename `google_bigquery_routine_invalid_language` to `google_big_query_routine_invalid_language`
+  - Rename `google_bigquery_routine_invalid_routine_type` to `google_big_query_routine_invalid_routine_type`
+  - Rename `google_cloudbuild_trigger_invalid_include_build_logs` to `google_cloud_build_trigger_invalid_include_build_logs`
+  - Rename `google_cloudiot_device_invalid_log_level` to `google_cloud_iot_device_invalid_log_level`
+  - Rename `google_scc_source_invalid_display_name` to `google_security_center_source_invalid_display_name`
+
+### Enhancements
+
+- [#260](https://github.com/terraform-linters/tflint-ruleset-google/pull/260): Add support for g2 instance types
+- [#261](https://github.com/terraform-linters/tflint-ruleset-google/pull/261): Add a2-ultra and m2-hypermem machine types
+
+### Chores
+
+- [#239](https://github.com/terraform-linters/tflint-ruleset-google/pull/239): Use NewRunner hook
+- [#247](https://github.com/terraform-linters/tflint-ruleset-google/pull/247): Bump golang.org/x/net from 0.3.0 to 0.7.0
+- [#250](https://github.com/terraform-linters/tflint-ruleset-google/pull/250): Bump sigstore/cosign-installer from 2 to 3
+- [#254](https://github.com/terraform-linters/tflint-ruleset-google/pull/254): Bump actions/setup-go from 3 to 4
+- [#256](https://github.com/terraform-linters/tflint-ruleset-google/pull/256): Bump google.golang.org/api from 0.109.0 to 0.114.0
+- [#257](https://github.com/terraform-linters/tflint-ruleset-google/pull/257): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.24.1 to 2.26.1
+- [#258](https://github.com/terraform-linters/tflint-ruleset-google/pull/258): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.15.0 to 0.16.0
+- [#263](https://github.com/terraform-linters/tflint-ruleset-google/pull/263): Follow up of the EnsureNoError deprecation
+- [#264](https://github.com/terraform-linters/tflint-ruleset-google/pull/264): deps: Go 1.20
+
 ## 0.22.2 (2023-02-05)
 
 ### Enhancements
