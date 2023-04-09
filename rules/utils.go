@@ -155,6 +155,7 @@ var validMachineTypes = map[string]bool{
 	"m2-ultramem-208":  true,
 	"m2-ultramem-416":  true,
 	"m2-megamem-416":   true,
+	"m2-hypermem-416":  true,
 	"m1-ultramem-40":   true,
 	"m1-ultramem-80":   true,
 	"m1-ultramem-160":  true,
@@ -175,6 +176,10 @@ var validMachineTypes = map[string]bool{
 	"a2-highgpu-4g":  true,
 	"a2-highgpu-8g":  true,
 	"a2-megagpu-16g": true,
+	"a2-ultragpu-1g": true,
+	"a2-ultragpu-2g": true,
+	"a2-ultragpu-4g": true,
+	"a2-ultragpu-8g": true,
 
 	// L4 machine types: https://cloud.google.com/compute/docs/gpus#l4-gpus
 	"g2-standard-4":  true,
