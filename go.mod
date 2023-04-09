@@ -1,6 +1,6 @@
 module github.com/terraform-linters/tflint-ruleset-google
 
-go 1.19
+go 1.20
 
 require (
 	github.com/dave/dst v0.27.2
