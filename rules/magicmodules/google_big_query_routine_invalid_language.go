@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSccSourceInvalidDisplayNameRule checks the pattern is valid
-type GoogleSccSourceInvalidDisplayNameRule struct {
+// GoogleBigQueryRoutineInvalidLanguageRule checks the pattern is valid
+type GoogleBigQueryRoutineInvalidLanguageRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSccSourceInvalidDisplayNameRule returns new rule with default attributes
-func NewGoogleSccSourceInvalidDisplayNameRule() *GoogleSccSourceInvalidDisplayNameRule {
-	return &GoogleSccSourceInvalidDisplayNameRule{
-		resourceType:  "google_scc_source",
-		attributeName: "display_name",
+// NewGoogleBigQueryRoutineInvalidLanguageRule returns new rule with default attributes
+func NewGoogleBigQueryRoutineInvalidLanguageRule() *GoogleBigQueryRoutineInvalidLanguageRule {
+	return &GoogleBigQueryRoutineInvalidLanguageRule{
+		resourceType:  "google_big_query_routine",
+		attributeName: "language",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSccSourceInvalidDisplayNameRule) Name() string {
-	return "google_scc_source_invalid_display_name"
+func (r *GoogleBigQueryRoutineInvalidLanguageRule) Name() string {
+	return "google_big_query_routine_invalid_language"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSccSourceInvalidDisplayNameRule) Enabled() bool {
+func (r *GoogleBigQueryRoutineInvalidLanguageRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSccSourceInvalidDisplayNameRule) Severity() tflint.Severity {
+func (r *GoogleBigQueryRoutineInvalidLanguageRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSccSourceInvalidDisplayNameRule) Link() string {
+func (r *GoogleBigQueryRoutineInvalidLanguageRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSccSourceInvalidDisplayNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigQueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -70,18 +71,17 @@ func (r *GoogleSccSourceInvalidDisplayNameRule) Check(runner tflint.Runner) erro
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"SQL", "JAVASCRIPT", ""}, false)
 
-		validateFunc := validateRegexp(`[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

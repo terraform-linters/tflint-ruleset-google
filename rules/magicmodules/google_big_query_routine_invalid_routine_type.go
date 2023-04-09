@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigqueryRoutineInvalidDeterminismLevelRule checks the pattern is valid
-type GoogleBigqueryRoutineInvalidDeterminismLevelRule struct {
+// GoogleBigQueryRoutineInvalidRoutineTypeRule checks the pattern is valid
+type GoogleBigQueryRoutineInvalidRoutineTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigqueryRoutineInvalidDeterminismLevelRule returns new rule with default attributes
-func NewGoogleBigqueryRoutineInvalidDeterminismLevelRule() *GoogleBigqueryRoutineInvalidDeterminismLevelRule {
-	return &GoogleBigqueryRoutineInvalidDeterminismLevelRule{
-		resourceType:  "google_bigquery_routine",
-		attributeName: "determinism_level",
+// NewGoogleBigQueryRoutineInvalidRoutineTypeRule returns new rule with default attributes
+func NewGoogleBigQueryRoutineInvalidRoutineTypeRule() *GoogleBigQueryRoutineInvalidRoutineTypeRule {
+	return &GoogleBigQueryRoutineInvalidRoutineTypeRule{
+		resourceType:  "google_big_query_routine",
+		attributeName: "routine_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Name() string {
-	return "google_bigquery_routine_invalid_determinism_level"
+func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Name() string {
+	return "google_big_query_routine_invalid_routine_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Enabled() bool {
+func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Severity() tflint.Severity {
+func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Link() string {
+func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,18 +71,17 @@ func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.R
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", "TABLE_VALUED_FUNCTION", ""}, false)
 
-		validateFunc := validation.StringInSlice([]string{"DETERMINISM_LEVEL_UNSPECIFIED", "DETERMINISTIC", "NOT_DETERMINISTIC", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

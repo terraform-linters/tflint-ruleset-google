@@ -70,18 +70,17 @@ func (r *GoogleComputeBackendBucketInvalidNameRule) Check(runner tflint.Runner) 
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validateRegexp(`^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$`)
 
-		validateFunc := validateRegexp(`^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$`)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

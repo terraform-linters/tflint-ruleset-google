@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule checks the pattern is valid
-type GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule struct {
+// GoogleArtifactRegistryRepositoryInvalidModeRule checks the pattern is valid
+type GoogleArtifactRegistryRepositoryInvalidModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudbuildTriggerInvalidIncludeBuildLogsRule returns new rule with default attributes
-func NewGoogleCloudbuildTriggerInvalidIncludeBuildLogsRule() *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule {
-	return &GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule{
-		resourceType:  "google_cloudbuild_trigger",
-		attributeName: "include_build_logs",
+// NewGoogleArtifactRegistryRepositoryInvalidModeRule returns new rule with default attributes
+func NewGoogleArtifactRegistryRepositoryInvalidModeRule() *GoogleArtifactRegistryRepositoryInvalidModeRule {
+	return &GoogleArtifactRegistryRepositoryInvalidModeRule{
+		resourceType:  "google_artifact_registry_repository",
+		attributeName: "mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Name() string {
-	return "google_cloudbuild_trigger_invalid_include_build_logs"
+func (r *GoogleArtifactRegistryRepositoryInvalidModeRule) Name() string {
+	return "google_artifact_registry_repository_invalid_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Enabled() bool {
+func (r *GoogleArtifactRegistryRepositoryInvalidModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Severity() tflint.Severity {
+func (r *GoogleArtifactRegistryRepositoryInvalidModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Link() string {
+func (r *GoogleArtifactRegistryRepositoryInvalidModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Check(runner tflint.Runner) error {
+func (r *GoogleArtifactRegistryRepositoryInvalidModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,18 +71,17 @@ func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Check(runner tflint
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"STANDARD_REPOSITORY", "VIRTUAL_REPOSITORY", "REMOTE_REPOSITORY", ""}, false)
 
-		validateFunc := validation.StringInSlice([]string{"INCLUDE_BUILD_LOGS_UNSPECIFIED", "INCLUDE_BUILD_LOGS_WITH_STATUS", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

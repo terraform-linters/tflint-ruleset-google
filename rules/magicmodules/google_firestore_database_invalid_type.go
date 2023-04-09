@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigqueryRoutineInvalidRoutineTypeRule checks the pattern is valid
-type GoogleBigqueryRoutineInvalidRoutineTypeRule struct {
+// GoogleFirestoreDatabaseInvalidTypeRule checks the pattern is valid
+type GoogleFirestoreDatabaseInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigqueryRoutineInvalidRoutineTypeRule returns new rule with default attributes
-func NewGoogleBigqueryRoutineInvalidRoutineTypeRule() *GoogleBigqueryRoutineInvalidRoutineTypeRule {
-	return &GoogleBigqueryRoutineInvalidRoutineTypeRule{
-		resourceType:  "google_bigquery_routine",
-		attributeName: "routine_type",
+// NewGoogleFirestoreDatabaseInvalidTypeRule returns new rule with default attributes
+func NewGoogleFirestoreDatabaseInvalidTypeRule() *GoogleFirestoreDatabaseInvalidTypeRule {
+	return &GoogleFirestoreDatabaseInvalidTypeRule{
+		resourceType:  "google_firestore_database",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Name() string {
-	return "google_bigquery_routine_invalid_routine_type"
+func (r *GoogleFirestoreDatabaseInvalidTypeRule) Name() string {
+	return "google_firestore_database_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Enabled() bool {
+func (r *GoogleFirestoreDatabaseInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Severity() tflint.Severity {
+func (r *GoogleFirestoreDatabaseInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Link() string {
+func (r *GoogleFirestoreDatabaseInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleFirestoreDatabaseInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,18 +71,17 @@ func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"FIRESTORE_NATIVE", "DATASTORE_MODE"}, false)
 
-		validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", "TABLE_VALUED_FUNCTION", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}
