@@ -59,10 +59,7 @@ func (r *GoogleProjectIamBindingInvalidMemberRule) Check(runner tflint.Runner) e
 			continue
 		}
 
-		var members []string
-		err := runner.EvaluateExpr(attribute.Expr, &members, nil)
-
-		err = runner.EnsureNoError(err, func() error {
+		err := runner.EvaluateExpr(attribute.Expr, func(members []string) error {
 			for _, member := range members {
 				if !isValidIAMMemberFormat(member) {
 					return runner.EmitIssue(
@@ -73,7 +70,7 @@ func (r *GoogleProjectIamBindingInvalidMemberRule) Check(runner tflint.Runner) e
 				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

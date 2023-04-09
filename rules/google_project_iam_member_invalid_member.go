@@ -59,10 +59,7 @@ func (r *GoogleProjectIamMemberInvalidMemberRule) Check(runner tflint.Runner) er
 			continue
 		}
 
-		var member string
-		err := runner.EvaluateExpr(attribute.Expr, &member, nil)
-
-		err = runner.EnsureNoError(err, func() error {
+		err := runner.EvaluateExpr(attribute.Expr, func(member string) error {
 			if isValidIAMMemberFormat(member) {
 				return nil
 			}
@@ -71,7 +68,7 @@ func (r *GoogleProjectIamMemberInvalidMemberRule) Check(runner tflint.Runner) er
 				fmt.Sprintf("%s is an invalid member format", member),
 				attribute.Expr.Range(),
 			)
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}
