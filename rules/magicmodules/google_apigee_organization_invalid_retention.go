@@ -71,18 +71,17 @@ func (r *GoogleApigeeOrganizationInvalidRetentionRule) Check(runner tflint.Runne
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"DELETION_RETENTION_UNSPECIFIED", "MINIMUM", ""}, false)
 
-		validateFunc := validation.StringInSlice([]string{"DELETION_RETENTION_UNSPECIFIED", "MINIMUM", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

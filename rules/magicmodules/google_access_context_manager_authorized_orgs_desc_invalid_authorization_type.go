@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudiotDeviceInvalidLogLevelRule checks the pattern is valid
-type GoogleCloudiotDeviceInvalidLogLevelRule struct {
+// GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule checks the pattern is valid
+type GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudiotDeviceInvalidLogLevelRule returns new rule with default attributes
-func NewGoogleCloudiotDeviceInvalidLogLevelRule() *GoogleCloudiotDeviceInvalidLogLevelRule {
-	return &GoogleCloudiotDeviceInvalidLogLevelRule{
-		resourceType:  "google_cloudiot_device",
-		attributeName: "log_level",
+// NewGoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule returns new rule with default attributes
+func NewGoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule() *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule {
+	return &GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule{
+		resourceType:  "google_access_context_manager_authorized_orgs_desc",
+		attributeName: "authorization_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Name() string {
-	return "google_cloudiot_device_invalid_log_level"
+func (r *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule) Name() string {
+	return "google_access_context_manager_authorized_orgs_desc_invalid_authorization_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Enabled() bool {
+func (r *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Severity() tflint.Severity {
+func (r *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Link() string {
+func (r *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Check(runner tflint.Runner) error {
+func (r *GoogleAccessContextManagerAuthorizedOrgsDescInvalidAuthorizationTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,18 +71,17 @@ func (r *GoogleCloudiotDeviceInvalidLogLevelRule) Check(runner tflint.Runner) er
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"AUTHORIZATION_TYPE_TRUST", ""}, false)
 
-		validateFunc := validation.StringInSlice([]string{"NONE", "ERROR", "INFO", "DEBUG", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

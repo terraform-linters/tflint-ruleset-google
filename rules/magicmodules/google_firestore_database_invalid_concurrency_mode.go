@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigqueryRoutineInvalidLanguageRule checks the pattern is valid
-type GoogleBigqueryRoutineInvalidLanguageRule struct {
+// GoogleFirestoreDatabaseInvalidConcurrencyModeRule checks the pattern is valid
+type GoogleFirestoreDatabaseInvalidConcurrencyModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigqueryRoutineInvalidLanguageRule returns new rule with default attributes
-func NewGoogleBigqueryRoutineInvalidLanguageRule() *GoogleBigqueryRoutineInvalidLanguageRule {
-	return &GoogleBigqueryRoutineInvalidLanguageRule{
-		resourceType:  "google_bigquery_routine",
-		attributeName: "language",
+// NewGoogleFirestoreDatabaseInvalidConcurrencyModeRule returns new rule with default attributes
+func NewGoogleFirestoreDatabaseInvalidConcurrencyModeRule() *GoogleFirestoreDatabaseInvalidConcurrencyModeRule {
+	return &GoogleFirestoreDatabaseInvalidConcurrencyModeRule{
+		resourceType:  "google_firestore_database",
+		attributeName: "concurrency_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigqueryRoutineInvalidLanguageRule) Name() string {
-	return "google_bigquery_routine_invalid_language"
+func (r *GoogleFirestoreDatabaseInvalidConcurrencyModeRule) Name() string {
+	return "google_firestore_database_invalid_concurrency_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigqueryRoutineInvalidLanguageRule) Enabled() bool {
+func (r *GoogleFirestoreDatabaseInvalidConcurrencyModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigqueryRoutineInvalidLanguageRule) Severity() tflint.Severity {
+func (r *GoogleFirestoreDatabaseInvalidConcurrencyModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigqueryRoutineInvalidLanguageRule) Link() string {
+func (r *GoogleFirestoreDatabaseInvalidConcurrencyModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigqueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) error {
+func (r *GoogleFirestoreDatabaseInvalidConcurrencyModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,18 +71,17 @@ func (r *GoogleBigqueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) e
 			continue
 		}
 
-		var val string
-		err := runner.EvaluateExpr(attribute.Expr, &val, nil)
+		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
+			validateFunc := validation.StringInSlice([]string{"OPTIMISTIC", "PESSIMISTIC", "OPTIMISTIC_WITH_ENTITY_GROUPS", ""}, false)
 
-		validateFunc := validation.StringInSlice([]string{"SQL", "JAVASCRIPT", ""}, false)
-
-		err = runner.EnsureNoError(err, func() error {
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
-				runner.EmitIssue(r, err.Error(), attribute.Expr.Range())
+				if err := runner.EmitIssue(r, err.Error(), attribute.Expr.Range()); err != nil {
+					return err
+				}
 			}
 			return nil
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}
