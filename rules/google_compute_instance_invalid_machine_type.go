@@ -52,10 +52,7 @@ func (r *GoogleComputeInstanceInvalidMachineTypeRule) Check(runner tflint.Runner
 			continue
 		}
 
-		var machineType string
-		err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
-
-		err = runner.EnsureNoError(err, func() error {
+		err := runner.EvaluateExpr(attribute.Expr, func(machineType string) error {
 			if validMachineTypes[machineType] || isCustomType(machineType) {
 				return nil
 			}
@@ -65,7 +62,7 @@ func (r *GoogleComputeInstanceInvalidMachineTypeRule) Check(runner tflint.Runner
 				fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
 				attribute.Expr.Range(),
 			)
-		})
+		}, nil)
 		if err != nil {
 			return err
 		}

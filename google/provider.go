@@ -41,9 +41,12 @@ func GetProject(runner tflint.Runner) (string, error) {
 
 		if attr, exists := provider.Body.Attributes["project"]; exists {
 			var project string
-			if err := runner.EnsureNoError(runner.EvaluateExpr(attr.Expr, &project, opts), func() error { return nil }); err != nil {
-				return project, err
-			}
+			err := runner.EvaluateExpr(attr.Expr, func(val string) error {
+				project = val
+				return nil
+			}, opts)
+
+			return project, err
 		}
 	}
 

@@ -60,10 +60,7 @@ func (r *GoogleContainerClusterInvalidMachineTypeRule) Check(runner tflint.Runne
 				continue
 			}
 
-			var machineType string
-			err := runner.EvaluateExpr(attribute.Expr, &machineType, nil)
-
-			err = runner.EnsureNoError(err, func() error {
+			err := runner.EvaluateExpr(attribute.Expr, func(machineType string) error {
 				if validMachineTypes[machineType] || isCustomType(machineType) {
 					return nil
 				}
@@ -73,7 +70,7 @@ func (r *GoogleContainerClusterInvalidMachineTypeRule) Check(runner tflint.Runne
 					fmt.Sprintf(`"%s" is an invalid as machine type`, machineType),
 					attribute.Expr.Range(),
 				)
-			})
+			}, nil)
 			if err != nil {
 				return err
 			}
