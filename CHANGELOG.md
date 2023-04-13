@@ -1,3 +1,9 @@
+## 0.23.1 (2023-04-13)
+
+### BugFixes
+
+- [#267](https://github.com/terraform-linters/tflint-ruleset-google/pull/267): Bump tflint-plugin-sdk to v0.16.1
+
 ## 0.23.0 (2023-04-09)
 
 ### Breaking Changes
