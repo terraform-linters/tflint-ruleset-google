@@ -72,7 +72,7 @@ func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MYSQL_5_5", "MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0"}, false)
+			validateFunc := validation.StringInSlice([]string{"MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0", "POSTGRES_9_6", "POSTGRES_10", "POSTGRES_11", "POSTGRES_12", "POSTGRES_13", "POSTGRES_14"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
