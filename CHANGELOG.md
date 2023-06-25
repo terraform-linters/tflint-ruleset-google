@@ -1,3 +1,16 @@
+## 0.24.0 (2023-06-26)
+
+### Breaking Changes
+
+- [#279](https://github.com/terraform-linters/tflint-ruleset-google/pull/279): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.16.1 to 0.17.0
+  - TFLint v0.40/v0.41 is no longer supported
+- [#280](https://github.com/terraform-linters/tflint-ruleset-google/pull/280): Update Magic Modules
+  - Remove `google_kms_crypto_key_invalid_purpose` rule
+
+### Chores
+
+- [#278](https://github.com/terraform-linters/tflint-ruleset-google/pull/278): Bump google.golang.org/api from 0.114.0 to 0.128.0
+
 ## 0.23.1 (2023-04-13)
 
 ### BugFixes
