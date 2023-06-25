@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudAssetFolderFeedInvalidContentTypeRule checks the pattern is valid
-type GoogleCloudAssetFolderFeedInvalidContentTypeRule struct {
+// GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule checks the pattern is valid
+type GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudAssetFolderFeedInvalidContentTypeRule returns new rule with default attributes
-func NewGoogleCloudAssetFolderFeedInvalidContentTypeRule() *GoogleCloudAssetFolderFeedInvalidContentTypeRule {
-	return &GoogleCloudAssetFolderFeedInvalidContentTypeRule{
-		resourceType:  "google_cloud_asset_folder_feed",
-		attributeName: "content_type",
+// NewGoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule returns new rule with default attributes
+func NewGoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule() *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule {
+	return &GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule{
+		resourceType:  "google_certificate_manager_certificate_issuance_config",
+		attributeName: "key_algorithm",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Name() string {
-	return "google_cloud_asset_folder_feed_invalid_content_type"
+func (r *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule) Name() string {
+	return "google_certificate_manager_certificate_issuance_config_invalid_key_algorithm"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Enabled() bool {
+func (r *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Severity() tflint.Severity {
+func (r *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Link() string {
+func (r *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleCertificateManagerCertificateIssuanceConfigInvalidKeyAlgorithmRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"CONTENT_TYPE_UNSPECIFIED", "RESOURCE", "IAM_POLICY", "ORG_POLICY", "OS_INVENTORY", "ACCESS_POLICY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"RSA_2048", "ECDSA_P256"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

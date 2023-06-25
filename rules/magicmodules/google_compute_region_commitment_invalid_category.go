@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleKmsCryptoKeyInvalidPurposeRule checks the pattern is valid
-type GoogleKmsCryptoKeyInvalidPurposeRule struct {
+// GoogleComputeRegionCommitmentInvalidCategoryRule checks the pattern is valid
+type GoogleComputeRegionCommitmentInvalidCategoryRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleKmsCryptoKeyInvalidPurposeRule returns new rule with default attributes
-func NewGoogleKmsCryptoKeyInvalidPurposeRule() *GoogleKmsCryptoKeyInvalidPurposeRule {
-	return &GoogleKmsCryptoKeyInvalidPurposeRule{
-		resourceType:  "google_kms_crypto_key",
-		attributeName: "purpose",
+// NewGoogleComputeRegionCommitmentInvalidCategoryRule returns new rule with default attributes
+func NewGoogleComputeRegionCommitmentInvalidCategoryRule() *GoogleComputeRegionCommitmentInvalidCategoryRule {
+	return &GoogleComputeRegionCommitmentInvalidCategoryRule{
+		resourceType:  "google_compute_region_commitment",
+		attributeName: "category",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Name() string {
-	return "google_kms_crypto_key_invalid_purpose"
+func (r *GoogleComputeRegionCommitmentInvalidCategoryRule) Name() string {
+	return "google_compute_region_commitment_invalid_category"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Enabled() bool {
+func (r *GoogleComputeRegionCommitmentInvalidCategoryRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionCommitmentInvalidCategoryRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Link() string {
+func (r *GoogleComputeRegionCommitmentInvalidCategoryRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionCommitmentInvalidCategoryRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleKmsCryptoKeyInvalidPurposeRule) Check(runner tflint.Runner) error
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"ENCRYPT_DECRYPT", "ASYMMETRIC_SIGN", "ASYMMETRIC_DECRYPT", "MAC", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"LICENSE", "MACHINE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

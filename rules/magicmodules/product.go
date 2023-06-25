@@ -57,10 +57,22 @@ var Products = map[string]Product{
 	"google_access_context_manager_authorized_orgs_desc": {
 		APIsRequired: []APIReference{},
 	},
+	"google_access_context_manager_egress_policy": {
+		APIsRequired: []APIReference{},
+	},
 	"google_access_context_manager_gcp_user_access_binding": {
 		APIsRequired: []APIReference{},
 	},
+	"google_access_context_manager_ingress_policy": {
+		APIsRequired: []APIReference{},
+	},
 	"google_access_context_manager_service_perimeter": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_egress_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_ingress_policy": {
 		APIsRequired: []APIReference{},
 	},
 	"google_access_context_manager_service_perimeter_resource": {
@@ -286,6 +298,11 @@ var Products = map[string]Product{
 			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
 		},
 	},
+	"google_certificate_manager_certificate_issuance_config": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
 	"google_certificate_manager_certificate_map": {
 		APIsRequired: []APIReference{
 			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
@@ -503,6 +520,11 @@ var Products = map[string]Product{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
+	"google_compute_network_endpoints": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
 	"google_compute_network_peering_routes_config": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
@@ -528,12 +550,27 @@ var Products = map[string]Product{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
+	"google_compute_public_advertised_prefix": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
+	"google_compute_public_delegated_prefix": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
 	"google_compute_region_autoscaler": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
 	"google_compute_region_backend_service": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
+	"google_compute_region_commitment": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
@@ -702,6 +739,11 @@ var Products = map[string]Product{
 	"google_container_attached_cluster": {
 		APIsRequired: []APIReference{},
 	},
+	"google_database_migration_service_connection_profile": {
+		APIsRequired: []APIReference{
+			{Name: "Database Migration API", URL: "https://console.cloud.google.com/apis/library/datamigration.googleapis.com"},
+		},
+	},
 	"google_data_catalog_entry": {
 		APIsRequired: []APIReference{
 			{Name: "Google Cloud Data Catalog API", URL: "https://console.cloud.google.com/apis/library/datacatalog.googleapis.com"},
@@ -735,6 +777,11 @@ var Products = map[string]Product{
 	"google_data_fusion_instance": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Data Fusion API", URL: "https://console.cloud.google.com/apis/library/datafusion.googleapis.com"},
+		},
+	},
+	"google_dataplex_datascan": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Dataplex API", URL: "https://cloud.google.com/dataplex/docs/reference/rest/"},
 		},
 	},
 	"google_dataproc_autoscaling_policy": {
@@ -873,6 +920,11 @@ var Products = map[string]Product{
 			{Name: "Google Cloud Firestore API", URL: "https://console.cloud.google.com/apis/library/firestore.googleapis.com"},
 		},
 	},
+	"google_firestore_field": {
+		APIsRequired: []APIReference{
+			{Name: "Google Cloud Firestore API", URL: "https://console.cloud.google.com/apis/library/firestore.googleapis.com"},
+		},
+	},
 	"google_firestore_index": {
 		APIsRequired: []APIReference{
 			{Name: "Google Cloud Firestore API", URL: "https://console.cloud.google.com/apis/library/firestore.googleapis.com"},
@@ -899,6 +951,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_gke_hub_membership": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
+	"google_gke_hub2_feature": {
 		APIsRequired: []APIReference{
 			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
 		},
@@ -1031,6 +1088,11 @@ var Products = map[string]Product{
 	"google_kms_secret_ciphertext": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Key Management Service (KMS) API", URL: "https://console.cloud.google.com/apis/library/cloudkms.googleapis.com/"},
+		},
+	},
+	"google_logging_linked_dataset": {
+		APIsRequired: []APIReference{
+			{Name: "Stackdriver Logging API", URL: "https://console.cloud.google.com/apis/library/logging.googleapis.com/"},
 		},
 	},
 	"google_logging_log_view": {
@@ -1296,6 +1358,9 @@ var Products = map[string]Product{
 		APIsRequired: []APIReference{},
 	},
 	"google_vertex_ai_index": {
+		APIsRequired: []APIReference{},
+	},
+	"google_vertex_ai_index_endpoint": {
 		APIsRequired: []APIReference{},
 	},
 	"google_vertex_ai_tensorboard": {

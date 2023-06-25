@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudAssetFolderFeedInvalidContentTypeRule checks the pattern is valid
-type GoogleCloudAssetFolderFeedInvalidContentTypeRule struct {
+// GoogleComputeRegionCommitmentInvalidPlanRule checks the pattern is valid
+type GoogleComputeRegionCommitmentInvalidPlanRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudAssetFolderFeedInvalidContentTypeRule returns new rule with default attributes
-func NewGoogleCloudAssetFolderFeedInvalidContentTypeRule() *GoogleCloudAssetFolderFeedInvalidContentTypeRule {
-	return &GoogleCloudAssetFolderFeedInvalidContentTypeRule{
-		resourceType:  "google_cloud_asset_folder_feed",
-		attributeName: "content_type",
+// NewGoogleComputeRegionCommitmentInvalidPlanRule returns new rule with default attributes
+func NewGoogleComputeRegionCommitmentInvalidPlanRule() *GoogleComputeRegionCommitmentInvalidPlanRule {
+	return &GoogleComputeRegionCommitmentInvalidPlanRule{
+		resourceType:  "google_compute_region_commitment",
+		attributeName: "plan",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Name() string {
-	return "google_cloud_asset_folder_feed_invalid_content_type"
+func (r *GoogleComputeRegionCommitmentInvalidPlanRule) Name() string {
+	return "google_compute_region_commitment_invalid_plan"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Enabled() bool {
+func (r *GoogleComputeRegionCommitmentInvalidPlanRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionCommitmentInvalidPlanRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Link() string {
+func (r *GoogleComputeRegionCommitmentInvalidPlanRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionCommitmentInvalidPlanRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleCloudAssetFolderFeedInvalidContentTypeRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"CONTENT_TYPE_UNSPECIFIED", "RESOURCE", "IAM_POLICY", "ORG_POLICY", "OS_INVENTORY", "ACCESS_POLICY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"TWELVE_MONTH", "THIRTY_SIX_MONTH"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

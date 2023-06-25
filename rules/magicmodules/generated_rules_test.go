@@ -69,7 +69,7 @@ resource "google_cloud_asset_folder_feed" "main" {
 			Expected: helper.Issues{
 				{
 					Rule:    NewGoogleCloudAssetFolderFeedInvalidContentTypeRule(),
-					Message: `expected content_type to be one of [CONTENT_TYPE_UNSPECIFIED RESOURCE IAM_POLICY ORG_POLICY ACCESS_POLICY ], got INVALID`,
+					Message: `expected content_type to be one of [CONTENT_TYPE_UNSPECIFIED RESOURCE IAM_POLICY ORG_POLICY OS_INVENTORY ACCESS_POLICY ], got INVALID`,
 					Range: hcl.Range{
 						Filename: "resource.tf",
 						Start:    hcl.Pos{Line: 3, Column: 18},
