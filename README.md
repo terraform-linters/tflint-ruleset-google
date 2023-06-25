@@ -7,7 +7,7 @@ TFLint ruleset plugin for Terraform Google Cloud Platform provider
 
 ## Requirements
 
-- TFLint v0.40+
+- TFLint v0.42+
 - Go v1.20
 
 ## Installation
