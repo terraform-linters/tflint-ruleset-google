@@ -1,3 +1,19 @@
+## 0.25.0 (2023-09-11)
+
+### Enhancements
+
+- [#296](https://github.com/terraform-linters/tflint-ruleset-google/pull/296): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.26.1 to 2.29.0
+- [#297](https://github.com/terraform-linters/tflint-ruleset-google/pull/297): Update Magic Modules
+
+### Chores
+
+- [#286](https://github.com/terraform-linters/tflint-ruleset-google/pull/286): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.17.0 to 0.18.0
+- [#288](https://github.com/terraform-linters/tflint-ruleset-google/pull/288): Add raw binary entries to checksums.txt
+- [#292](https://github.com/terraform-linters/tflint-ruleset-google/pull/292): Bump actions/checkout from 3 to 4
+- [#293](https://github.com/terraform-linters/tflint-ruleset-google/pull/293): Bump github.com/hashicorp/hcl/v2 from 2.17.0 to 2.18.0
+- [#294](https://github.com/terraform-linters/tflint-ruleset-google/pull/294): Go 1.21
+- [#295](https://github.com/terraform-linters/tflint-ruleset-google/pull/295): Bump google.golang.org/api from 0.128.0 to 0.139.0
+
 ## 0.24.0 (2023-06-26)
 
 ### Breaking Changes
