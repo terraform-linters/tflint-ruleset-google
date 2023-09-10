@@ -6,7 +6,7 @@
              "severity":"error",
              "link":""
           },
-          "message":"expected override_strategy to be one of [STRICT OVERRIDE ], got DEFAULT",
+          "message":"expected override_strategy to be one of [\"STRICT\" \"OVERRIDE\" \"\"], got DEFAULT",
           "range":{
              "filename":"main.tf",
              "start":{
