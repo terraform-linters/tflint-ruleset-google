@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule struct {
+// GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule checks the pattern is valid
+type GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule() *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_global_forwarding_rule",
-		attributeName: "load_balancing_scheme",
+// NewGoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule returns new rule with default attributes
+func NewGoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule() *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule {
+	return &GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule{
+		resourceType:  "google_document_ai_warehouse_location",
+		attributeName: "access_control_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_global_forwarding_rule_invalid_load_balancing_scheme"
+func (r *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule) Name() string {
+	return "google_document_ai_warehouse_location_invalid_access_control_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
+func (r *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleDocumentAiWarehouseLocationInvalidAccessControlModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "EXTERNAL_MANAGED", "INTERNAL_MANAGED", "INTERNAL_SELF_MANAGED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"ACL_MODE_DOCUMENT_LEVEL_ACCESS_CONTROL_GCI", "ACL_MODE_DOCUMENT_LEVEL_ACCESS_CONTROL_BYOID", "ACL_MODE_UNIVERSAL_ACCESS"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

@@ -72,7 +72,7 @@ func (r *GoogleComputeBackendServiceInvalidProtocolRule) Check(runner tflint.Run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"HTTP", "HTTPS", "HTTP2", "TCP", "SSL", "GRPC", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"HTTP", "HTTPS", "HTTP2", "TCP", "SSL", "GRPC", "UNSPECIFIED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
