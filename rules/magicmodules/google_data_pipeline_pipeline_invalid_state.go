@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule struct {
+// GoogleDataPipelinePipelineInvalidStateRule checks the pattern is valid
+type GoogleDataPipelinePipelineInvalidStateRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule() *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_global_forwarding_rule",
-		attributeName: "load_balancing_scheme",
+// NewGoogleDataPipelinePipelineInvalidStateRule returns new rule with default attributes
+func NewGoogleDataPipelinePipelineInvalidStateRule() *GoogleDataPipelinePipelineInvalidStateRule {
+	return &GoogleDataPipelinePipelineInvalidStateRule{
+		resourceType:  "google_data_pipeline_pipeline",
+		attributeName: "state",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_global_forwarding_rule_invalid_load_balancing_scheme"
+func (r *GoogleDataPipelinePipelineInvalidStateRule) Name() string {
+	return "google_data_pipeline_pipeline_invalid_state"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleDataPipelinePipelineInvalidStateRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
+func (r *GoogleDataPipelinePipelineInvalidStateRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleDataPipelinePipelineInvalidStateRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleDataPipelinePipelineInvalidStateRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "EXTERNAL_MANAGED", "INTERNAL_MANAGED", "INTERNAL_SELF_MANAGED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"STATE_UNSPECIFIED", "STATE_RESUMING", "STATE_ACTIVE", "STATE_STOPPING", "STATE_ARCHIVED", "STATE_PAUSED"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

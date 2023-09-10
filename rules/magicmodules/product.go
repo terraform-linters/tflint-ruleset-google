@@ -27,374 +27,6 @@ type APIReference struct {
 
 // Products is a list of Google API products defined in `magic-modules/products/*/api.yaml`
 var Products = map[string]Product{
-	"google_folder_access_approval_settings": {
-		APIsRequired: []APIReference{
-			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
-		},
-	},
-	"google_organization_access_approval_settings": {
-		APIsRequired: []APIReference{
-			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
-		},
-	},
-	"google_project_access_approval_settings": {
-		APIsRequired: []APIReference{
-			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
-		},
-	},
-	"google_access_context_manager_access_level": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_level_condition": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_levels": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_access_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_authorized_orgs_desc": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_egress_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_gcp_user_access_binding": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_ingress_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter_egress_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter_ingress_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeter_resource": {
-		APIsRequired: []APIReference{},
-	},
-	"google_access_context_manager_service_perimeters": {
-		APIsRequired: []APIReference{},
-	},
-	"google_active_directory_domain": {
-		APIsRequired: []APIReference{},
-	},
-	"google_active_directory_domain_trust": {
-		APIsRequired: []APIReference{},
-	},
-	"google_alloydb_backup": {
-		APIsRequired: []APIReference{
-			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
-		},
-	},
-	"google_alloydb_cluster": {
-		APIsRequired: []APIReference{
-			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
-		},
-	},
-	"google_alloydb_instance": {
-		APIsRequired: []APIReference{
-			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
-		},
-	},
-	"google_apigee_addons_config": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_endpoint_attachment": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_env_keystore": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_env_references": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_envgroup": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_envgroup_attachment": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_environment": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_instance": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_instance_attachment": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_keystores_aliases_self_signed_cert": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_nat_address": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_organization": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_apigee_sync_authorization": {
-		APIsRequired: []APIReference{
-			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
-		},
-	},
-	"google_app_engine_application_url_dispatch_rules": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_domain_mapping": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_firewall_rule": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_flexible_app_version": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_service_network_settings": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_service_split_traffic": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_app_engine_standard_app_version": {
-		APIsRequired: []APIReference{
-			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
-		},
-	},
-	"google_artifact_registry_repository": {
-		APIsRequired: []APIReference{
-			{Name: "Artifact Registry API", URL: "https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com/"},
-		},
-	},
-	"google_beyondcorp_app_connection": {
-		APIsRequired: []APIReference{
-			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
-		},
-	},
-	"google_beyondcorp_app_connector": {
-		APIsRequired: []APIReference{
-			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
-		},
-	},
-	"google_beyondcorp_app_gateway": {
-		APIsRequired: []APIReference{
-			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
-		},
-	},
-	"google_big_query_dataset": {
-		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
-		},
-	},
-	"google_big_query_dataset_access": {
-		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
-		},
-	},
-	"google_big_query_job": {
-		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
-		},
-	},
-	"google_big_query_routine": {
-		APIsRequired: []APIReference{
-			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
-		},
-	},
-	"google_bigquery_analytics_hub_data_exchange": {
-		APIsRequired: []APIReference{
-			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
-		},
-	},
-	"google_bigquery_analytics_hub_listing": {
-		APIsRequired: []APIReference{
-			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
-		},
-	},
-	"google_bigquery_connection_connection": {
-		APIsRequired: []APIReference{
-			{Name: "BigQueryConnection API", URL: "https://console.cloud.google.com/apis/api/bigqueryconnection.googleapis.com/"},
-		},
-	},
-	"google_bigquery_datapolicy_data_policy": {
-		APIsRequired: []APIReference{
-			{Name: "BigQuery Data Policy API", URL: "https://console.cloud.google.com/apis/library/bigquerydatapolicy.googleapis.com/"},
-		},
-	},
-	"google_bigquery_data_transfer_config": {
-		APIsRequired: []APIReference{
-			{Name: "BigQueryDataTransfer API", URL: "https://console.cloud.google.com/apis/api/bigquerydatatransfer.googleapis.com/"},
-		},
-	},
-	"google_bigquery_reservation_capacity_commitment": {
-		APIsRequired: []APIReference{
-			{Name: "BigQueryReservation API", URL: "https://console.cloud.google.com/apis/api/bigqueryreservation.googleapis.com/"},
-		},
-	},
-	"google_bigquery_reservation_reservation": {
-		APIsRequired: []APIReference{
-			{Name: "BigQueryReservation API", URL: "https://console.cloud.google.com/apis/api/bigqueryreservation.googleapis.com/"},
-		},
-	},
-	"google_bigtable_app_profile": {
-		APIsRequired: []APIReference{
-			{Name: "Bigtable API", URL: "https://console.cloud.google.com/apis/library/bigtable.googleapis.com/"},
-		},
-	},
-	"google_billing_budget": {
-		APIsRequired: []APIReference{
-			{Name: "Billing Budget", URL: "https://console.cloud.google.com/apis/library/billingbudgets.googleapis.com/"},
-		},
-	},
-	"google_binary_authorization_attestor": {
-		APIsRequired: []APIReference{},
-	},
-	"google_binary_authorization_policy": {
-		APIsRequired: []APIReference{},
-	},
-	"google_certificate_manager_certificate": {
-		APIsRequired: []APIReference{
-			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
-		},
-	},
-	"google_certificate_manager_certificate_issuance_config": {
-		APIsRequired: []APIReference{
-			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
-		},
-	},
-	"google_certificate_manager_certificate_map": {
-		APIsRequired: []APIReference{
-			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
-		},
-	},
-	"google_certificate_manager_certificate_map_entry": {
-		APIsRequired: []APIReference{
-			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
-		},
-	},
-	"google_certificate_manager_dns_authorization": {
-		APIsRequired: []APIReference{
-			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
-		},
-	},
-	"google_cloud_asset_folder_feed": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
-		},
-	},
-	"google_cloud_asset_organization_feed": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
-		},
-	},
-	"google_cloud_asset_project_feed": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
-		},
-	},
-	"google_cloud_build_bitbucket_server_config": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Build API", URL: "https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com/"},
-		},
-	},
-	"google_cloud_build_trigger": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Build API", URL: "https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com/"},
-		},
-	},
-	"google_cloudfunctions2_function": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Functions API", URL: "https://console.cloud.google.com/apis/library/cloudfunctions.googleapis.com/"},
-		},
-	},
-	"google_cloud_identity_group": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
-		},
-	},
-	"google_cloud_identity_group_membership": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
-		},
-	},
-	"google_cloud_ids_endpoint": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Intrusion Detection Service (IDS) API", URL: "https://console.cloud.google.com/apis/library/ids.googleapis.com/"},
-		},
-	},
-	"google_cloud_iot_device": {
-		APIsRequired: []APIReference{},
-	},
-	"google_cloudiot_registry": {
-		APIsRequired: []APIReference{},
-	},
-	"google_cloud_run_domain_mapping": {
-		APIsRequired: []APIReference{},
-	},
-	"google_cloud_run_service": {
-		APIsRequired: []APIReference{},
-	},
-	"google_cloud_run_v2_job": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Run API", URL: "https://console.cloud.google.com/apis/library/run.googleapis.com/"},
-		},
-	},
-	"google_cloud_run_v2_service": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Run API", URL: "https://console.cloud.google.com/apis/library/run.googleapis.com/"},
-		},
-	},
-	"google_cloud_scheduler_job": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Scheduler", URL: "https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com/"},
-		},
-	},
-	"google_cloud_tasks_queue": {
-		APIsRequired: []APIReference{
-			{Name: "Cloud Tasks", URL: "https://console.cloud.google.com/apis/library/cloudtasks.googleapis.com/"},
-		},
-	},
 	"google_compute_address": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
@@ -605,6 +237,11 @@ var Products = map[string]Product{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
+	"google_compute_region_ssl_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
+		},
+	},
 	"google_compute_region_target_http_proxy": {
 		APIsRequired: []APIReference{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
@@ -730,6 +367,409 @@ var Products = map[string]Product{
 			{Name: "Compute Engine API", URL: "https://console.cloud.google.com/apis/library/compute.googleapis.com/"},
 		},
 	},
+	"google_folder_access_approval_settings": {
+		APIsRequired: []APIReference{
+			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
+		},
+	},
+	"google_organization_access_approval_settings": {
+		APIsRequired: []APIReference{
+			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
+		},
+	},
+	"google_project_access_approval_settings": {
+		APIsRequired: []APIReference{
+			{Name: "Access Approval", URL: "https://console.cloud.google.com/apis/library/accessapproval.googleapis.com/"},
+		},
+	},
+	"google_access_context_manager_access_level": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_level_condition": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_levels": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_access_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_authorized_orgs_desc": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_egress_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_gcp_user_access_binding": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_ingress_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_egress_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_ingress_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeter_resource": {
+		APIsRequired: []APIReference{},
+	},
+	"google_access_context_manager_service_perimeters": {
+		APIsRequired: []APIReference{},
+	},
+	"google_active_directory_domain": {
+		APIsRequired: []APIReference{},
+	},
+	"google_active_directory_domain_trust": {
+		APIsRequired: []APIReference{},
+	},
+	"google_alloydb_backup": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
+	"google_alloydb_cluster": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
+	"google_alloydb_instance": {
+		APIsRequired: []APIReference{
+			{Name: "AlloyDB API", URL: "https://console.cloud.google.com/apis/library/alloydb.googleapis.com"},
+		},
+	},
+	"google_apigee_addons_config": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_endpoint_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_env_keystore": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_env_references": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_envgroup": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_envgroup_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_environment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_instance": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_instance_attachment": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_keystores_aliases_self_signed_cert": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_nat_address": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_organization": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_sync_authorization": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_apigee_target_server": {
+		APIsRequired: []APIReference{
+			{Name: "Apigee API", URL: "https://console.cloud.google.com/apis/library/apigee.googleapis.com/"},
+		},
+	},
+	"google_app_engine_application_url_dispatch_rules": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_domain_mapping": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_firewall_rule": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_flexible_app_version": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_service_network_settings": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_service_split_traffic": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_app_engine_standard_app_version": {
+		APIsRequired: []APIReference{
+			{Name: "App Engine Admin API", URL: "https://console.cloud.google.com/apis/library/appengine.googleapis.com/"},
+		},
+	},
+	"google_artifact_registry_repository": {
+		APIsRequired: []APIReference{
+			{Name: "Artifact Registry API", URL: "https://console.cloud.google.com/apis/library/artifactregistry.googleapis.com/"},
+		},
+	},
+	"google_beyondcorp_app_connection": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
+	},
+	"google_beyondcorp_app_connector": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
+	},
+	"google_beyondcorp_app_gateway": {
+		APIsRequired: []APIReference{
+			{Name: "Beyondcorp API", URL: "https://console.cloud.google.com/apis/library/beyondcorp.googleapis.com/"},
+		},
+	},
+	"google_biglake_catalog": {
+		APIsRequired: []APIReference{
+			{Name: "BigLake API", URL: "https://console.cloud.google.com/apis/library/biglake.googleapis.com/"},
+		},
+	},
+	"google_biglake_database": {
+		APIsRequired: []APIReference{
+			{Name: "BigLake API", URL: "https://console.cloud.google.com/apis/library/biglake.googleapis.com/"},
+		},
+	},
+	"google_biglake_table": {
+		APIsRequired: []APIReference{
+			{Name: "BigLake API", URL: "https://console.cloud.google.com/apis/library/biglake.googleapis.com/"},
+		},
+	},
+	"google_big_query_dataset": {
+		APIsRequired: []APIReference{
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
+		},
+	},
+	"google_big_query_dataset_access": {
+		APIsRequired: []APIReference{
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
+		},
+	},
+	"google_big_query_job": {
+		APIsRequired: []APIReference{
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
+		},
+	},
+	"google_big_query_routine": {
+		APIsRequired: []APIReference{
+			{Name: "BigQuery API", URL: "https://console.cloud.google.com/apis/library/bigquery.googleapis.com/"},
+		},
+	},
+	"google_bigquery_analytics_hub_data_exchange": {
+		APIsRequired: []APIReference{
+			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
+		},
+	},
+	"google_bigquery_analytics_hub_listing": {
+		APIsRequired: []APIReference{
+			{Name: "Bigquery Analytics Hub API", URL: "https://console.cloud.google.com/apis/library/analyticshub.googleapis.com/"},
+		},
+	},
+	"google_bigquery_connection_connection": {
+		APIsRequired: []APIReference{
+			{Name: "BigQueryConnection API", URL: "https://console.cloud.google.com/apis/api/bigqueryconnection.googleapis.com/"},
+		},
+	},
+	"google_bigquery_datapolicy_data_policy": {
+		APIsRequired: []APIReference{
+			{Name: "BigQuery Data Policy API", URL: "https://console.cloud.google.com/apis/library/bigquerydatapolicy.googleapis.com/"},
+		},
+	},
+	"google_bigquery_data_transfer_config": {
+		APIsRequired: []APIReference{
+			{Name: "BigQueryDataTransfer API", URL: "https://console.cloud.google.com/apis/api/bigquerydatatransfer.googleapis.com/"},
+		},
+	},
+	"google_bigquery_reservation_bi_reservation": {
+		APIsRequired: []APIReference{
+			{Name: "BigQueryReservation API", URL: "https://console.cloud.google.com/apis/api/bigqueryreservation.googleapis.com/"},
+		},
+	},
+	"google_bigquery_reservation_capacity_commitment": {
+		APIsRequired: []APIReference{
+			{Name: "BigQueryReservation API", URL: "https://console.cloud.google.com/apis/api/bigqueryreservation.googleapis.com/"},
+		},
+	},
+	"google_bigquery_reservation_reservation": {
+		APIsRequired: []APIReference{
+			{Name: "BigQueryReservation API", URL: "https://console.cloud.google.com/apis/api/bigqueryreservation.googleapis.com/"},
+		},
+	},
+	"google_bigtable_app_profile": {
+		APIsRequired: []APIReference{
+			{Name: "Bigtable API", URL: "https://console.cloud.google.com/apis/library/bigtable.googleapis.com/"},
+		},
+	},
+	"google_core_billing_project_info": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Billing", URL: "https://console.cloud.google.com/apis/library/cloudbilling.googleapis.com/"},
+		},
+	},
+	"google_billing_budget": {
+		APIsRequired: []APIReference{
+			{Name: "Billing Budget", URL: "https://console.cloud.google.com/apis/library/billingbudgets.googleapis.com/"},
+		},
+	},
+	"google_binary_authorization_attestor": {
+		APIsRequired: []APIReference{},
+	},
+	"google_binary_authorization_policy": {
+		APIsRequired: []APIReference{},
+	},
+	"google_certificate_manager_certificate": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_certificate_issuance_config": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_certificate_map": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_certificate_map_entry": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_dns_authorization": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_certificate_manager_trust_config": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/certificatemanager.googleapis.com"},
+		},
+	},
+	"google_cloud_asset_folder_feed": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
+		},
+	},
+	"google_cloud_asset_organization_feed": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
+		},
+	},
+	"google_cloud_asset_project_feed": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Asset API", URL: "https://console.cloud.google.com/apis/library/cloudasset.googleapis.com/"},
+		},
+	},
+	"google_cloud_build_bitbucket_server_config": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Build API", URL: "https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com/"},
+		},
+	},
+	"google_cloud_build_trigger": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Build API", URL: "https://console.cloud.google.com/apis/library/cloudbuild.googleapis.com/"},
+		},
+	},
+	"google_cloudfunctions2_function": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Functions API", URL: "https://console.cloud.google.com/apis/library/cloudfunctions.googleapis.com/"},
+		},
+	},
+	"google_cloud_identity_group": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
+		},
+	},
+	"google_cloud_identity_group_membership": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Identity API", URL: "https://console.cloud.google.com/apis/api/cloudidentity.googleapis.com/overview"},
+		},
+	},
+	"google_cloud_ids_endpoint": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Intrusion Detection Service (IDS) API", URL: "https://console.cloud.google.com/apis/library/ids.googleapis.com/"},
+		},
+	},
+	"google_cloud_iot_device": {
+		APIsRequired: []APIReference{},
+	},
+	"google_cloudiot_registry": {
+		APIsRequired: []APIReference{},
+	},
+	"google_cloud_run_domain_mapping": {
+		APIsRequired: []APIReference{},
+	},
+	"google_cloud_run_service": {
+		APIsRequired: []APIReference{},
+	},
+	"google_cloud_run_v2_job": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Run API", URL: "https://console.cloud.google.com/apis/library/run.googleapis.com/"},
+		},
+	},
+	"google_cloud_run_v2_service": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Run API", URL: "https://console.cloud.google.com/apis/library/run.googleapis.com/"},
+		},
+	},
+	"google_cloud_scheduler_job": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Scheduler", URL: "https://console.cloud.google.com/apis/library/cloudscheduler.googleapis.com/"},
+		},
+	},
+	"google_cloud_tasks_queue": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Tasks", URL: "https://console.cloud.google.com/apis/library/cloudtasks.googleapis.com/"},
+		},
+	},
 	"google_container_analysis_note": {
 		APIsRequired: []APIReference{},
 	},
@@ -779,9 +819,17 @@ var Products = map[string]Product{
 			{Name: "Cloud Data Fusion API", URL: "https://console.cloud.google.com/apis/library/datafusion.googleapis.com"},
 		},
 	},
+	"google_data_pipeline_pipeline": {
+		APIsRequired: []APIReference{},
+	},
 	"google_dataplex_datascan": {
 		APIsRequired: []APIReference{
-			{Name: "Cloud Dataplex API", URL: "https://cloud.google.com/dataplex/docs/reference/rest/"},
+			{Name: "Cloud Dataplex API", URL: "https://console.cloud.google.com/apis/library/dataplex.googleapis.com"},
+		},
+	},
+	"google_dataplex_task": {
+		APIsRequired: []APIReference{
+			{Name: "Cloud Dataplex API", URL: "https://console.cloud.google.com/apis/library/dataplex.googleapis.com"},
 		},
 	},
 	"google_dataproc_autoscaling_policy": {
@@ -886,6 +934,16 @@ var Products = map[string]Product{
 			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
 		},
 	},
+	"google_dns_response_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
+		},
+	},
+	"google_dns_response_policy_rule": {
+		APIsRequired: []APIReference{
+			{Name: "Google Cloud DNS API", URL: "https://console.cloud.google.com/apis/library/dns.googleapis.com/"},
+		},
+	},
 	"google_document_ai_processor": {
 		APIsRequired: []APIReference{
 			{Name: "Document AI API", URL: "https://console.cloud.google.com/apis/api/documentai.googleapis.com/overview"},
@@ -894,6 +952,16 @@ var Products = map[string]Product{
 	"google_document_ai_processor_default_version": {
 		APIsRequired: []APIReference{
 			{Name: "Document AI API", URL: "https://console.cloud.google.com/apis/api/documentai.googleapis.com/overview"},
+		},
+	},
+	"google_document_ai_warehouse_document_schema": {
+		APIsRequired: []APIReference{
+			{Name: "Document AI Warehouse API", URL: "https://console.cloud.google.com/apis/library/contentwarehouse.googleapis.com/"},
+		},
+	},
+	"google_document_ai_warehouse_location": {
+		APIsRequired: []APIReference{
+			{Name: "Document AI Warehouse API", URL: "https://console.cloud.google.com/apis/library/contentwarehouse.googleapis.com/"},
 		},
 	},
 	"google_essential_contacts_contact": {
@@ -960,6 +1028,26 @@ var Products = map[string]Product{
 			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
 		},
 	},
+	"google_gke_hub2_membership_binding": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
+	"google_gke_hub2_namespace": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
+	"google_gke_hub2_scope": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
+	"google_gke_hub2_scope_rbac_role_binding": {
+		APIsRequired: []APIReference{
+			{Name: "GKEHub API", URL: "https://console.cloud.google.com/apis/library/gkehub.googleapis.com"},
+		},
+	},
 	"google_healthcare_consent_store": {
 		APIsRequired: []APIReference{
 			{Name: "Cloud Healthcare API", URL: "https://console.cloud.google.com/apis/library/healthcare.googleapis.com/"},
@@ -986,6 +1074,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_iam2_access_boundary_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
+		},
+	},
+	"google_iam2_deny_policy": {
 		APIsRequired: []APIReference{
 			{Name: "Identity and Access Management (IAM) API", URL: "https://console.cloud.google.com/apis/library/iam.googleapis.com/"},
 		},
@@ -1105,6 +1198,11 @@ var Products = map[string]Product{
 			{Name: "Stackdriver Logging API", URL: "https://console.cloud.google.com/apis/library/logging.googleapis.com/"},
 		},
 	},
+	"google_looker_instance": {
+		APIsRequired: []APIReference{
+			{Name: "Looker API", URL: "https://console.cloud.google.com/apis/library/looker.googleapis.com/"},
+		},
+	},
 	"google_memcache_instance": {
 		APIsRequired: []APIReference{},
 	},
@@ -1138,6 +1236,11 @@ var Products = map[string]Product{
 			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
 		},
 	},
+	"google_monitoring_monitored_project": {
+		APIsRequired: []APIReference{
+			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
+		},
+	},
 	"google_monitoring_notification_channel": {
 		APIsRequired: []APIReference{
 			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
@@ -1158,9 +1261,34 @@ var Products = map[string]Product{
 			{Name: "Stackdriver Monitoring API", URL: "https://console.cloud.google.com/apis/library/monitoring.googleapis.com/"},
 		},
 	},
+	"google_network_connectivity_service_connection_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Network Connectivity API", URL: "https://console.cloud.google.com/apis/library/networkconnectivity.googleapis.com/"},
+		},
+	},
 	"google_network_management_connectivity_test": {
 		APIsRequired: []APIReference{
 			{Name: "Network Management API", URL: "https://console.cloud.google.com/apis/library/networkmanagement.googleapis.com/"},
+		},
+	},
+	"google_network_security_address_group": {
+		APIsRequired: []APIReference{
+			{Name: "Network Security API", URL: "https://console.cloud.google.com/apis/library/networksecurity.googleapis.com"},
+		},
+	},
+	"google_network_security_gateway_security_policy": {
+		APIsRequired: []APIReference{
+			{Name: "Network Security API", URL: "https://console.cloud.google.com/apis/library/networksecurity.googleapis.com"},
+		},
+	},
+	"google_network_security_gateway_security_policy_rule": {
+		APIsRequired: []APIReference{
+			{Name: "Network Security API", URL: "https://console.cloud.google.com/apis/library/networksecurity.googleapis.com"},
+		},
+	},
+	"google_network_security_url_lists": {
+		APIsRequired: []APIReference{
+			{Name: "Network Security API", URL: "https://console.cloud.google.com/apis/library/networksecurity.googleapis.com"},
 		},
 	},
 	"google_network_services_edge_cache_keyset": {
@@ -1174,6 +1302,11 @@ var Products = map[string]Product{
 		},
 	},
 	"google_network_services_edge_cache_service": {
+		APIsRequired: []APIReference{
+			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/networkservices.googleapis.com"},
+		},
+	},
+	"google_network_services_gateway": {
 		APIsRequired: []APIReference{
 			{Name: "Network Services API", URL: "https://console.cloud.google.com/apis/library/networkservices.googleapis.com"},
 		},
@@ -1221,6 +1354,11 @@ var Products = map[string]Product{
 	"google_privateca_certificate_authority": {
 		APIsRequired: []APIReference{
 			{Name: "Certificate Authority API", URL: "https://console.cloud.google.com/apis/api/privateca.googleapis.com"},
+		},
+	},
+	"google_public_ca_external_account_key": {
+		APIsRequired: []APIReference{
+			{Name: "Public Certificate Authority API", URL: "https://console.cloud.google.com/apis/library/publicca.googleapis.com"},
 		},
 	},
 	"google_pubsub_schema": {

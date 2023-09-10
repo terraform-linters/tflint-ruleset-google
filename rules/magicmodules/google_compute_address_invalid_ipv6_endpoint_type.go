@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule struct {
+// GoogleComputeAddressInvalidIpv6EndpointTypeRule checks the pattern is valid
+type GoogleComputeAddressInvalidIpv6EndpointTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule() *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule {
-	return &GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_compute_global_forwarding_rule",
-		attributeName: "load_balancing_scheme",
+// NewGoogleComputeAddressInvalidIpv6EndpointTypeRule returns new rule with default attributes
+func NewGoogleComputeAddressInvalidIpv6EndpointTypeRule() *GoogleComputeAddressInvalidIpv6EndpointTypeRule {
+	return &GoogleComputeAddressInvalidIpv6EndpointTypeRule{
+		resourceType:  "google_compute_address",
+		attributeName: "ipv6_endpoint_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_compute_global_forwarding_rule_invalid_load_balancing_scheme"
+func (r *GoogleComputeAddressInvalidIpv6EndpointTypeRule) Name() string {
+	return "google_compute_address_invalid_ipv6_endpoint_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleComputeAddressInvalidIpv6EndpointTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
+func (r *GoogleComputeAddressInvalidIpv6EndpointTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleComputeAddressInvalidIpv6EndpointTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeAddressInvalidIpv6EndpointTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeGlobalForwardingRuleInvalidLoadBalancingSchemeRule) Check(
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "EXTERNAL_MANAGED", "INTERNAL_MANAGED", "INTERNAL_SELF_MANAGED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"VM", "NETLB", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
