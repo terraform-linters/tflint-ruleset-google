@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMonitoringCustomServiceInvalidServiceIdRule checks the pattern is valid
-type GoogleMonitoringCustomServiceInvalidServiceIdRule struct {
+// GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule checks the pattern is valid
+type GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMonitoringCustomServiceInvalidServiceIdRule returns new rule with default attributes
-func NewGoogleMonitoringCustomServiceInvalidServiceIdRule() *GoogleMonitoringCustomServiceInvalidServiceIdRule {
-	return &GoogleMonitoringCustomServiceInvalidServiceIdRule{
-		resourceType:  "google_monitoring_custom_service",
-		attributeName: "service_id",
+// NewGoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule returns new rule with default attributes
+func NewGoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule() *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule {
+	return &GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule{
+		resourceType:  "google_network_connectivity_policy_based_route",
+		attributeName: "next_hop_other_routes",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Name() string {
-	return "google_monitoring_custom_service_invalid_service_id"
+func (r *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule) Name() string {
+	return "google_network_connectivity_policy_based_route_invalid_next_hop_other_routes"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Enabled() bool {
+func (r *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Severity() tflint.Severity {
+func (r *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Link() string {
+func (r *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkConnectivityPolicyBasedRouteInvalidNextHopOtherRoutesRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +72,7 @@ func (r *GoogleMonitoringCustomServiceInvalidServiceIdRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-zA-Z0-9\-_:.]+$`)
+			validateFunc := validation.StringInSlice([]string{"DEFAULT_ROUTING", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

@@ -71,7 +71,7 @@ func (r *GoogleMonitoringSloInvalidSloIdRule) Check(runner tflint.Runner) error 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-z0-9\-]+$`)
+			validateFunc := validateRegexp(`^[a-zA-Z0-9\-_:.]+$`)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

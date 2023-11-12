@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudiotRegistryInvalidLogLevelRule checks the pattern is valid
-type GoogleCloudiotRegistryInvalidLogLevelRule struct {
+// GoogleRedisClusterInvalidAuthorizationModeRule checks the pattern is valid
+type GoogleRedisClusterInvalidAuthorizationModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudiotRegistryInvalidLogLevelRule returns new rule with default attributes
-func NewGoogleCloudiotRegistryInvalidLogLevelRule() *GoogleCloudiotRegistryInvalidLogLevelRule {
-	return &GoogleCloudiotRegistryInvalidLogLevelRule{
-		resourceType:  "google_cloudiot_registry",
-		attributeName: "log_level",
+// NewGoogleRedisClusterInvalidAuthorizationModeRule returns new rule with default attributes
+func NewGoogleRedisClusterInvalidAuthorizationModeRule() *GoogleRedisClusterInvalidAuthorizationModeRule {
+	return &GoogleRedisClusterInvalidAuthorizationModeRule{
+		resourceType:  "google_redis_cluster",
+		attributeName: "authorization_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Name() string {
-	return "google_cloudiot_registry_invalid_log_level"
+func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Name() string {
+	return "google_redis_cluster_invalid_authorization_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Enabled() bool {
+func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Severity() tflint.Severity {
+func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Link() string {
+func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Check(runner tflint.Runner) error {
+func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleCloudiotRegistryInvalidLogLevelRule) Check(runner tflint.Runner) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"NONE", "ERROR", "INFO", "DEBUG", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"AUTH_MODE_UNSPECIFIED", "AUTH_MODE_IAM_AUTH", "AUTH_MODE_DISABLED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

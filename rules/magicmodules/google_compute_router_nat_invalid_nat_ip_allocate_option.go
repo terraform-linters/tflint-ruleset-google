@@ -72,7 +72,7 @@ func (r *GoogleComputeRouterNatInvalidNatIpAllocateOptionRule) Check(runner tfli
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MANUAL_ONLY", "AUTO_ONLY"}, false)
+			validateFunc := validation.StringInSlice([]string{"MANUAL_ONLY", "AUTO_ONLY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
