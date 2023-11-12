@@ -1,3 +1,25 @@
+## 0.26.0 (2023-11-13)
+
+### Breaking Changes
+
+- [#315](https://github.com/terraform-linters/tflint-ruleset-google/pull/315): Update Magic Modules
+  - Removed `google_cloudiot_registry_invalid_log_level` rule
+  - Removed `google_cloud_iot_device_invalid_log_level` rule
+
+### Enhancements
+
+- [#313](https://github.com/terraform-linters/tflint-ruleset-google/pull/313): update machine types
+
+### Chores
+
+- [#298](https://github.com/terraform-linters/tflint-ruleset-google/pull/298): Bump goreleaser/goreleaser-action from 4 to 5
+- [#304](https://github.com/terraform-linters/tflint-ruleset-google/pull/304): Bump golang.org/x/net from 0.14.0 to 0.17.0
+- [#306](https://github.com/terraform-linters/tflint-ruleset-google/pull/306): Bump github.com/google/go-cmp from 0.5.9 to 0.6.0
+- [#308](https://github.com/terraform-linters/tflint-ruleset-google/pull/308): Bump github.com/dave/dst from 0.27.2 to 0.27.3
+- [#309](https://github.com/terraform-linters/tflint-ruleset-google/pull/309): Bump github.com/hashicorp/hcl/v2 from 2.18.0 to 2.19.1
+- [#311](https://github.com/terraform-linters/tflint-ruleset-google/pull/311): Bump google.golang.org/grpc from 1.57.0 to 1.57.1
+- [#314](https://github.com/terraform-linters/tflint-ruleset-google/pull/314): Bump google.golang.org/api from 0.139.0 to 0.150.0
+
 ## 0.25.0 (2023-09-11)
 
 ### Enhancements
