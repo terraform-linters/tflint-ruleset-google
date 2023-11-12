@@ -72,7 +72,7 @@ func (r *GoogleAlloydbInstanceInvalidInstanceTypeRule) Check(runner tflint.Runne
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"PRIMARY", "READ_POOL"}, false)
+			validateFunc := validation.StringInSlice([]string{"PRIMARY", "READ_POOL", "SECONDARY"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

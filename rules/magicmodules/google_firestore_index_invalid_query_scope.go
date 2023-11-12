@@ -72,7 +72,7 @@ func (r *GoogleFirestoreIndexInvalidQueryScopeRule) Check(runner tflint.Runner) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"COLLECTION", "COLLECTION_GROUP", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"COLLECTION", "COLLECTION_GROUP", "COLLECTION_RECURSIVE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
