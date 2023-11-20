@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.19.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.18.0
-	google.golang.org/api v0.150.0
+	google.golang.org/api v0.151.0
 )
 
 require (
