@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule checks the pattern is valid
-type GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule struct {
+// GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule checks the pattern is valid
+type GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule returns new rule with default attributes
-func NewGoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule() *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule {
-	return &GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule{
-		resourceType:  "google_security_center_folder_custom_module",
-		attributeName: "enablement_state",
+// NewGoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule returns new rule with default attributes
+func NewGoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule() *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule {
+	return &GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule{
+		resourceType:  "google_discovery_engine_search_engine",
+		attributeName: "industry_vertical",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Name() string {
-	return "google_security_center_folder_custom_module_invalid_enablement_state"
+func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Name() string {
+	return "google_discovery_engine_search_engine_invalid_industry_vertical"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Enabled() bool {
+func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Severity() tflint.Severity {
+func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Link() string {
+func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Check(runner tflint.Runner) error {
+func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleSecurityCenterFolderCustomModuleInvalidEnablementStateRule) Check
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"ENABLED", "DISABLED"}, false)
+			validateFunc := validation.StringInSlice([]string{"GENERIC", "MEDIA", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

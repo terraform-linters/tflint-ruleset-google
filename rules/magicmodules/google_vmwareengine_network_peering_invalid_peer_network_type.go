@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigQueryRoutineInvalidLanguageRule checks the pattern is valid
-type GoogleBigQueryRoutineInvalidLanguageRule struct {
+// GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule checks the pattern is valid
+type GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigQueryRoutineInvalidLanguageRule returns new rule with default attributes
-func NewGoogleBigQueryRoutineInvalidLanguageRule() *GoogleBigQueryRoutineInvalidLanguageRule {
-	return &GoogleBigQueryRoutineInvalidLanguageRule{
-		resourceType:  "google_big_query_routine",
-		attributeName: "language",
+// NewGoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule returns new rule with default attributes
+func NewGoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule() *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule {
+	return &GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule{
+		resourceType:  "google_vmwareengine_network_peering",
+		attributeName: "peer_network_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigQueryRoutineInvalidLanguageRule) Name() string {
-	return "google_big_query_routine_invalid_language"
+func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Name() string {
+	return "google_vmwareengine_network_peering_invalid_peer_network_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigQueryRoutineInvalidLanguageRule) Enabled() bool {
+func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigQueryRoutineInvalidLanguageRule) Severity() tflint.Severity {
+func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigQueryRoutineInvalidLanguageRule) Link() string {
+func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigQueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) error {
+func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleBigQueryRoutineInvalidLanguageRule) Check(runner tflint.Runner) e
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SQL", "JAVASCRIPT", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"STANDARD", "VMWARE_ENGINE_NETWORK", "PRIVATE_SERVICES_ACCESS", "NETAPP_CLOUD_VOLUMES", "THIRD_PARTY_SERVICE", "DELL_POWERSCALE"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

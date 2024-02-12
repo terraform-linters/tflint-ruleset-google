@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMemcacheInstanceInvalidMemcacheVersionRule checks the pattern is valid
-type GoogleMemcacheInstanceInvalidMemcacheVersionRule struct {
+// GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule checks the pattern is valid
+type GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMemcacheInstanceInvalidMemcacheVersionRule returns new rule with default attributes
-func NewGoogleMemcacheInstanceInvalidMemcacheVersionRule() *GoogleMemcacheInstanceInvalidMemcacheVersionRule {
-	return &GoogleMemcacheInstanceInvalidMemcacheVersionRule{
-		resourceType:  "google_memcache_instance",
-		attributeName: "memcache_version",
+// NewGoogleCloudbuildTriggerInvalidIncludeBuildLogsRule returns new rule with default attributes
+func NewGoogleCloudbuildTriggerInvalidIncludeBuildLogsRule() *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule {
+	return &GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule{
+		resourceType:  "google_cloudbuild_trigger",
+		attributeName: "include_build_logs",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Name() string {
-	return "google_memcache_instance_invalid_memcache_version"
+func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Name() string {
+	return "google_cloudbuild_trigger_invalid_include_build_logs"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Enabled() bool {
+func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Severity() tflint.Severity {
+func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Link() string {
+func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleCloudbuildTriggerInvalidIncludeBuildLogsRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MEMCACHE_1_5", "MEMCACHE_1_6_15", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"INCLUDE_BUILD_LOGS_UNSPECIFIED", "INCLUDE_BUILD_LOGS_WITH_STATUS", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

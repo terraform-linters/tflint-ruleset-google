@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigQueryRoutineInvalidRoutineTypeRule checks the pattern is valid
-type GoogleBigQueryRoutineInvalidRoutineTypeRule struct {
+// GoogleSecurityposturePostureInvalidStateRule checks the pattern is valid
+type GoogleSecurityposturePostureInvalidStateRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigQueryRoutineInvalidRoutineTypeRule returns new rule with default attributes
-func NewGoogleBigQueryRoutineInvalidRoutineTypeRule() *GoogleBigQueryRoutineInvalidRoutineTypeRule {
-	return &GoogleBigQueryRoutineInvalidRoutineTypeRule{
-		resourceType:  "google_big_query_routine",
-		attributeName: "routine_type",
+// NewGoogleSecurityposturePostureInvalidStateRule returns new rule with default attributes
+func NewGoogleSecurityposturePostureInvalidStateRule() *GoogleSecurityposturePostureInvalidStateRule {
+	return &GoogleSecurityposturePostureInvalidStateRule{
+		resourceType:  "google_securityposture_posture",
+		attributeName: "state",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Name() string {
-	return "google_big_query_routine_invalid_routine_type"
+func (r *GoogleSecurityposturePostureInvalidStateRule) Name() string {
+	return "google_securityposture_posture_invalid_state"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Enabled() bool {
+func (r *GoogleSecurityposturePostureInvalidStateRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Severity() tflint.Severity {
+func (r *GoogleSecurityposturePostureInvalidStateRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Link() string {
+func (r *GoogleSecurityposturePostureInvalidStateRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleSecurityposturePostureInvalidStateRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleBigQueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", "TABLE_VALUED_FUNCTION"}, false)
+			validateFunc := validation.StringInSlice([]string{"DEPRECATED", "DRAFT", "ACTIVE"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

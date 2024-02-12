@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMemcacheInstanceInvalidMemcacheVersionRule checks the pattern is valid
-type GoogleMemcacheInstanceInvalidMemcacheVersionRule struct {
+// GoogleSccProjectCustomModuleInvalidEnablementStateRule checks the pattern is valid
+type GoogleSccProjectCustomModuleInvalidEnablementStateRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMemcacheInstanceInvalidMemcacheVersionRule returns new rule with default attributes
-func NewGoogleMemcacheInstanceInvalidMemcacheVersionRule() *GoogleMemcacheInstanceInvalidMemcacheVersionRule {
-	return &GoogleMemcacheInstanceInvalidMemcacheVersionRule{
-		resourceType:  "google_memcache_instance",
-		attributeName: "memcache_version",
+// NewGoogleSccProjectCustomModuleInvalidEnablementStateRule returns new rule with default attributes
+func NewGoogleSccProjectCustomModuleInvalidEnablementStateRule() *GoogleSccProjectCustomModuleInvalidEnablementStateRule {
+	return &GoogleSccProjectCustomModuleInvalidEnablementStateRule{
+		resourceType:  "google_scc_project_custom_module",
+		attributeName: "enablement_state",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Name() string {
-	return "google_memcache_instance_invalid_memcache_version"
+func (r *GoogleSccProjectCustomModuleInvalidEnablementStateRule) Name() string {
+	return "google_scc_project_custom_module_invalid_enablement_state"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Enabled() bool {
+func (r *GoogleSccProjectCustomModuleInvalidEnablementStateRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Severity() tflint.Severity {
+func (r *GoogleSccProjectCustomModuleInvalidEnablementStateRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Link() string {
+func (r *GoogleSccProjectCustomModuleInvalidEnablementStateRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleSccProjectCustomModuleInvalidEnablementStateRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MEMCACHE_1_5", "MEMCACHE_1_6_15", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"ENABLED", "DISABLED"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

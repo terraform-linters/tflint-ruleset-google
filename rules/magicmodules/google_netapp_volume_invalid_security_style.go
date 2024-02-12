@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMemcacheInstanceInvalidMemcacheVersionRule checks the pattern is valid
-type GoogleMemcacheInstanceInvalidMemcacheVersionRule struct {
+// GoogleNetappVolumeInvalidSecurityStyleRule checks the pattern is valid
+type GoogleNetappVolumeInvalidSecurityStyleRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMemcacheInstanceInvalidMemcacheVersionRule returns new rule with default attributes
-func NewGoogleMemcacheInstanceInvalidMemcacheVersionRule() *GoogleMemcacheInstanceInvalidMemcacheVersionRule {
-	return &GoogleMemcacheInstanceInvalidMemcacheVersionRule{
-		resourceType:  "google_memcache_instance",
-		attributeName: "memcache_version",
+// NewGoogleNetappVolumeInvalidSecurityStyleRule returns new rule with default attributes
+func NewGoogleNetappVolumeInvalidSecurityStyleRule() *GoogleNetappVolumeInvalidSecurityStyleRule {
+	return &GoogleNetappVolumeInvalidSecurityStyleRule{
+		resourceType:  "google_netapp_volume",
+		attributeName: "security_style",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Name() string {
-	return "google_memcache_instance_invalid_memcache_version"
+func (r *GoogleNetappVolumeInvalidSecurityStyleRule) Name() string {
+	return "google_netapp_volume_invalid_security_style"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Enabled() bool {
+func (r *GoogleNetappVolumeInvalidSecurityStyleRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Severity() tflint.Severity {
+func (r *GoogleNetappVolumeInvalidSecurityStyleRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Link() string {
+func (r *GoogleNetappVolumeInvalidSecurityStyleRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetappVolumeInvalidSecurityStyleRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MEMCACHE_1_5", "MEMCACHE_1_6_15", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"NTFS", "UNIX", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

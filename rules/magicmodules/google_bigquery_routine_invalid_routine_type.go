@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMemcacheInstanceInvalidMemcacheVersionRule checks the pattern is valid
-type GoogleMemcacheInstanceInvalidMemcacheVersionRule struct {
+// GoogleBigqueryRoutineInvalidRoutineTypeRule checks the pattern is valid
+type GoogleBigqueryRoutineInvalidRoutineTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMemcacheInstanceInvalidMemcacheVersionRule returns new rule with default attributes
-func NewGoogleMemcacheInstanceInvalidMemcacheVersionRule() *GoogleMemcacheInstanceInvalidMemcacheVersionRule {
-	return &GoogleMemcacheInstanceInvalidMemcacheVersionRule{
-		resourceType:  "google_memcache_instance",
-		attributeName: "memcache_version",
+// NewGoogleBigqueryRoutineInvalidRoutineTypeRule returns new rule with default attributes
+func NewGoogleBigqueryRoutineInvalidRoutineTypeRule() *GoogleBigqueryRoutineInvalidRoutineTypeRule {
+	return &GoogleBigqueryRoutineInvalidRoutineTypeRule{
+		resourceType:  "google_bigquery_routine",
+		attributeName: "routine_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Name() string {
-	return "google_memcache_instance_invalid_memcache_version"
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Name() string {
+	return "google_bigquery_routine_invalid_routine_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Enabled() bool {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Severity() tflint.Severity {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Link() string {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigqueryRoutineInvalidRoutineTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MEMCACHE_1_5", "MEMCACHE_1_6_15", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"SCALAR_FUNCTION", "PROCEDURE", "TABLE_VALUED_FUNCTION"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

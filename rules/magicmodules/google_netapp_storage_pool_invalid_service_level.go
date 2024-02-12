@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleMemcacheInstanceInvalidMemcacheVersionRule checks the pattern is valid
-type GoogleMemcacheInstanceInvalidMemcacheVersionRule struct {
+// GoogleNetappStoragePoolInvalidServiceLevelRule checks the pattern is valid
+type GoogleNetappStoragePoolInvalidServiceLevelRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleMemcacheInstanceInvalidMemcacheVersionRule returns new rule with default attributes
-func NewGoogleMemcacheInstanceInvalidMemcacheVersionRule() *GoogleMemcacheInstanceInvalidMemcacheVersionRule {
-	return &GoogleMemcacheInstanceInvalidMemcacheVersionRule{
-		resourceType:  "google_memcache_instance",
-		attributeName: "memcache_version",
+// NewGoogleNetappStoragePoolInvalidServiceLevelRule returns new rule with default attributes
+func NewGoogleNetappStoragePoolInvalidServiceLevelRule() *GoogleNetappStoragePoolInvalidServiceLevelRule {
+	return &GoogleNetappStoragePoolInvalidServiceLevelRule{
+		resourceType:  "google_netapp_storage_pool",
+		attributeName: "service_level",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Name() string {
-	return "google_memcache_instance_invalid_memcache_version"
+func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Name() string {
+	return "google_netapp_storage_pool_invalid_service_level"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Enabled() bool {
+func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Severity() tflint.Severity {
+func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Link() string {
+func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleMemcacheInstanceInvalidMemcacheVersionRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MEMCACHE_1_5", "MEMCACHE_1_6_15", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"PREMIUM", "EXTREME", "STANDARD"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
