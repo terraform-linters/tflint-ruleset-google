@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSecurityCenterSourceInvalidDisplayNameRule checks the pattern is valid
-type GoogleSecurityCenterSourceInvalidDisplayNameRule struct {
+// GoogleComputeInterconnectAttachmentInvalidStackTypeRule checks the pattern is valid
+type GoogleComputeInterconnectAttachmentInvalidStackTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSecurityCenterSourceInvalidDisplayNameRule returns new rule with default attributes
-func NewGoogleSecurityCenterSourceInvalidDisplayNameRule() *GoogleSecurityCenterSourceInvalidDisplayNameRule {
-	return &GoogleSecurityCenterSourceInvalidDisplayNameRule{
-		resourceType:  "google_security_center_source",
-		attributeName: "display_name",
+// NewGoogleComputeInterconnectAttachmentInvalidStackTypeRule returns new rule with default attributes
+func NewGoogleComputeInterconnectAttachmentInvalidStackTypeRule() *GoogleComputeInterconnectAttachmentInvalidStackTypeRule {
+	return &GoogleComputeInterconnectAttachmentInvalidStackTypeRule{
+		resourceType:  "google_compute_interconnect_attachment",
+		attributeName: "stack_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Name() string {
-	return "google_security_center_source_invalid_display_name"
+func (r *GoogleComputeInterconnectAttachmentInvalidStackTypeRule) Name() string {
+	return "google_compute_interconnect_attachment_invalid_stack_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Enabled() bool {
+func (r *GoogleComputeInterconnectAttachmentInvalidStackTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Severity() tflint.Severity {
+func (r *GoogleComputeInterconnectAttachmentInvalidStackTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Link() string {
+func (r *GoogleComputeInterconnectAttachmentInvalidStackTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeInterconnectAttachmentInvalidStackTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +72,7 @@ func (r *GoogleSecurityCenterSourceInvalidDisplayNameRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`[\p{L}\p{N}]({\p{L}\p{N}_- ]{0,30}[\p{L}\p{N}])?`)
+			validateFunc := validation.StringInSlice([]string{"IPV4_IPV6", "IPV4_ONLY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

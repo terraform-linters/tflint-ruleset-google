@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule checks the pattern is valid
-type GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule struct {
+// GoogleBigqueryRoutineInvalidDeterminismLevelRule checks the pattern is valid
+type GoogleBigqueryRoutineInvalidDeterminismLevelRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleCloudBuildTriggerInvalidIncludeBuildLogsRule returns new rule with default attributes
-func NewGoogleCloudBuildTriggerInvalidIncludeBuildLogsRule() *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule {
-	return &GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule{
-		resourceType:  "google_cloud_build_trigger",
-		attributeName: "include_build_logs",
+// NewGoogleBigqueryRoutineInvalidDeterminismLevelRule returns new rule with default attributes
+func NewGoogleBigqueryRoutineInvalidDeterminismLevelRule() *GoogleBigqueryRoutineInvalidDeterminismLevelRule {
+	return &GoogleBigqueryRoutineInvalidDeterminismLevelRule{
+		resourceType:  "google_bigquery_routine",
+		attributeName: "determinism_level",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Name() string {
-	return "google_cloud_build_trigger_invalid_include_build_logs"
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Name() string {
+	return "google_bigquery_routine_invalid_determinism_level"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Enabled() bool {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Severity() tflint.Severity {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Link() string {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Check(runner tflint.Runner) error {
+func (r *GoogleBigqueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleCloudBuildTriggerInvalidIncludeBuildLogsRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"INCLUDE_BUILD_LOGS_UNSPECIFIED", "INCLUDE_BUILD_LOGS_WITH_STATUS", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"DETERMINISM_LEVEL_UNSPECIFIED", "DETERMINISTIC", "NOT_DETERMINISTIC", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

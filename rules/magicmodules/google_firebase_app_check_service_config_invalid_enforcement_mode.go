@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule checks the pattern is valid
-type GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule struct {
+// GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule checks the pattern is valid
+type GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule returns new rule with default attributes
-func NewGoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule() *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule {
-	return &GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule{
-		resourceType:  "google_security_center_project_custom_module",
-		attributeName: "enablement_state",
+// NewGoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule returns new rule with default attributes
+func NewGoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule() *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule {
+	return &GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule{
+		resourceType:  "google_firebase_app_check_service_config",
+		attributeName: "enforcement_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Name() string {
-	return "google_security_center_project_custom_module_invalid_enablement_state"
+func (r *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule) Name() string {
+	return "google_firebase_app_check_service_config_invalid_enforcement_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Enabled() bool {
+func (r *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Severity() tflint.Severity {
+func (r *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Link() string {
+func (r *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Check(runner tflint.Runner) error {
+func (r *GoogleFirebaseAppCheckServiceConfigInvalidEnforcementModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleSecurityCenterProjectCustomModuleInvalidEnablementStateRule) Chec
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"ENABLED", "DISABLED"}, false)
+			validateFunc := validation.StringInSlice([]string{"UNENFORCED", "ENFORCED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

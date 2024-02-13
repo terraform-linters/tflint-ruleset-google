@@ -23,7 +23,7 @@ terraform {}`,
 			Expected: helper.Issues{},
 		},
 		{
-			Name: "Compute Engine API is not enabled",
+			Name: "compute.googleapis.com is not enabled",
 			Content: `
 resource "google_compute_network" "vpc_network" {
 	name                    = "terraform-network"
@@ -33,7 +33,7 @@ resource "google_compute_network" "vpc_network" {
 			Expected: helper.Issues{
 				{
 					Rule:    NewGoogleDisabledAPIRule(),
-					Message: "Compute Engine API has not been used in foo-bar-baz before or it is disabled.",
+					Message: "compute.googleapis.com has not been used in foo-bar-baz before or it is disabled.",
 					Range: hcl.Range{
 						Filename: "resource.tf",
 						Start:    hcl.Pos{Line: 2, Column: 1},
@@ -43,14 +43,22 @@ resource "google_compute_network" "vpc_network" {
 			},
 		},
 		{
-			Name: "Compute Engine API is enabled",
+			Name: "compute.googleapis.com is enabled",
 			Content: `
 resource "google_compute_network" "vpc_network" {
 	name                    = "terraform-network"
 	auto_create_subnetworks = "true"
 }`,
 			Response: map[string]*serviceusage.GoogleApiServiceusageV1Service{
-				"Compute Engine API": {},
+				"compute.googleapis.com": {
+					Config: &serviceusage.GoogleApiServiceusageV1ServiceConfig{
+						Title: "Compute Engine API",
+						Name:  "compute.googleapis.com",
+					},
+					Name:   "projects/123456789/services/compute.googleapis.com",
+					Parent: "projects/123456789",
+					State:  "ENABLED",
+				},
 			},
 			Expected: helper.Issues{},
 		},
@@ -59,14 +67,16 @@ resource "google_compute_network" "vpc_network" {
 	rule := NewGoogleDisabledAPIRule()
 
 	for _, tc := range cases {
-		runner := NewTestRunner(t, map[string]string{"resource.tf": tc.Content})
+		t.Run(tc.Name, func(t *testing.T) {
+			runner := NewTestRunner(t, map[string]string{"resource.tf": tc.Content})
 
-		rule.prepared = true
-		rule.enabledAPIs = tc.Response
+			rule.prepared = true
+			rule.enabledAPIs = tc.Response
 
-		if err := rule.Check(runner); err != nil {
-			t.Fatalf("Unexpected error occurred: %s", err)
-		}
-		helper.AssertIssues(t, tc.Expected, runner.Runner.(*helper.Runner).Issues)
+			if err := rule.Check(runner); err != nil {
+				t.Fatalf("Unexpected error occurred: %s", err)
+			}
+			helper.AssertIssues(t, tc.Expected, runner.Runner.(*helper.Runner).Issues)
+		})
 	}
 }

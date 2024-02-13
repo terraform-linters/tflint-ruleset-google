@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleBigQueryRoutineInvalidDeterminismLevelRule checks the pattern is valid
-type GoogleBigQueryRoutineInvalidDeterminismLevelRule struct {
+// GoogleDiscoveryEngineDataStoreInvalidContentConfigRule checks the pattern is valid
+type GoogleDiscoveryEngineDataStoreInvalidContentConfigRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleBigQueryRoutineInvalidDeterminismLevelRule returns new rule with default attributes
-func NewGoogleBigQueryRoutineInvalidDeterminismLevelRule() *GoogleBigQueryRoutineInvalidDeterminismLevelRule {
-	return &GoogleBigQueryRoutineInvalidDeterminismLevelRule{
-		resourceType:  "google_big_query_routine",
-		attributeName: "determinism_level",
+// NewGoogleDiscoveryEngineDataStoreInvalidContentConfigRule returns new rule with default attributes
+func NewGoogleDiscoveryEngineDataStoreInvalidContentConfigRule() *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule {
+	return &GoogleDiscoveryEngineDataStoreInvalidContentConfigRule{
+		resourceType:  "google_discovery_engine_data_store",
+		attributeName: "content_config",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Name() string {
-	return "google_big_query_routine_invalid_determinism_level"
+func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Name() string {
+	return "google_discovery_engine_data_store_invalid_content_config"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Enabled() bool {
+func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Severity() tflint.Severity {
+func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Link() string {
+func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.Runner) error {
+func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleBigQueryRoutineInvalidDeterminismLevelRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DETERMINISM_LEVEL_UNSPECIFIED", "DETERMINISTIC", "NOT_DETERMINISTIC", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"NO_CONTENT", "CONTENT_REQUIRED", "PUBLIC_WEBSITE"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRouterPeerInvalidAdvertiseModeRule checks the pattern is valid
-type GoogleComputeRouterPeerInvalidAdvertiseModeRule struct {
+// GoogleWorkflowsWorkflowInvalidCallLogLevelRule checks the pattern is valid
+type GoogleWorkflowsWorkflowInvalidCallLogLevelRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRouterPeerInvalidAdvertiseModeRule returns new rule with default attributes
-func NewGoogleComputeRouterPeerInvalidAdvertiseModeRule() *GoogleComputeRouterPeerInvalidAdvertiseModeRule {
-	return &GoogleComputeRouterPeerInvalidAdvertiseModeRule{
-		resourceType:  "google_compute_router_peer",
-		attributeName: "advertise_mode",
+// NewGoogleWorkflowsWorkflowInvalidCallLogLevelRule returns new rule with default attributes
+func NewGoogleWorkflowsWorkflowInvalidCallLogLevelRule() *GoogleWorkflowsWorkflowInvalidCallLogLevelRule {
+	return &GoogleWorkflowsWorkflowInvalidCallLogLevelRule{
+		resourceType:  "google_workflows_workflow",
+		attributeName: "call_log_level",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Name() string {
-	return "google_compute_router_peer_invalid_advertise_mode"
+func (r *GoogleWorkflowsWorkflowInvalidCallLogLevelRule) Name() string {
+	return "google_workflows_workflow_invalid_call_log_level"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Enabled() bool {
+func (r *GoogleWorkflowsWorkflowInvalidCallLogLevelRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Severity() tflint.Severity {
+func (r *GoogleWorkflowsWorkflowInvalidCallLogLevelRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Link() string {
+func (r *GoogleWorkflowsWorkflowInvalidCallLogLevelRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleWorkflowsWorkflowInvalidCallLogLevelRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeRouterPeerInvalidAdvertiseModeRule) Check(runner tflint.Ru
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEFAULT", "CUSTOM", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"CALL_LOG_LEVEL_UNSPECIFIED", "LOG_ALL_CALLS", "LOG_ERRORS_ONLY", "LOG_NONE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

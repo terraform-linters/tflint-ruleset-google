@@ -65,7 +65,7 @@ func (r *GoogleDisabledAPIRule) Check(rr tflint.Runner) error {
 		ctx := context.TODO()
 		err := runner.Client.ServiceUsage.Services.List(runner.ParentProject()).Filter("state:ENABLED").Pages(ctx, func(resp *serviceusage.ListServicesResponse) error {
 			for _, service := range resp.Services {
-				r.enabledAPIs[service.Config.Title] = service
+				r.enabledAPIs[service.Config.Name] = service
 			}
 			return nil
 		})
@@ -74,32 +74,30 @@ func (r *GoogleDisabledAPIRule) Check(rr tflint.Runner) error {
 		}
 	}
 
-	for resource, product := range magicmodules.Products {
-		if len(product.APIsRequired) == 0 {
+	resources, err := runner.GetModuleContent(&hclext.BodySchema{
+		Blocks: []hclext.BlockSchema{
+			{Type: "resource", LabelNames: []string{"type", "name"}},
+		},
+	}, nil)
+	if err != nil {
+		return err
+	}
+
+	for _, resource := range resources.Blocks {
+		url, exists := magicmodules.APIDefinition[resource.Labels[0]]
+		if !exists {
 			continue
 		}
 
-		resources, err := runner.GetResourceContent(resource, &hclext.BodySchema{}, nil)
-		if err != nil {
-			return err
-		}
-
-		for _, resource := range resources.Blocks {
-			for _, ref := range product.APIsRequired {
-				if _, ok := r.enabledAPIs[ref.Name]; !ok {
-					err := runner.EmitIssue(
-						r,
-						fmt.Sprintf("%s has not been used in %s before or it is disabled.", ref.Name, runner.Project),
-						resource.DefRange,
-					)
-					if err != nil {
-						return err
-					}
-				}
+		if _, ok := r.enabledAPIs[url]; !ok {
+			err := runner.EmitIssue(
+				r,
+				fmt.Sprintf("%s has not been used in %s before or it is disabled.", url, runner.Project),
+				resource.DefRange,
+			)
+			if err != nil {
+				return err
 			}
-		}
-		if err != nil {
-			return err
 		}
 	}
 
