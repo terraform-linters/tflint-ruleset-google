@@ -1,3 +1,26 @@
+## 0.27.0 (2024-12-14)
+
+### Breaking Changes
+
+- [#332](https://github.com/terraform-linters/tflint-ruleset-google/pull/332): Update Magic Module
+  - The following rules are renamed
+    - `google_big_query_routine_invalid_determinism_level` -> `google_bigquery_routine_invalid_determinism_level`
+    - `google_big_query_routine_invalid_language` -> `google_bigquery_routine_invalid_language`
+    - `google_big_query_routine_invalid_routine_type` -> `google_bigquery_routine_invalid_routine_type`
+    - `google_cloud_build_trigger_invalid_include_build_logs` -> `google_cloudbuild_trigger_invalid_include_build_logs`
+    - `google_security_center_organization_custom_module_invalid_enablement_state` -> `google_scc_event_threat_detection_custom_module_invalid_enablement_state`
+    - `google_security_center_folder_custom_module` -> `google_scc_folder_custom_module_invalid_enablement_state`
+    - `google_security_center_project_custom_module_invalid_enablement_state` -> `google_scc_project_custom_module_invalid_enablement_state`
+    - `google_security_center_source_invalid_display_name` -> `google_scc_source_invalid_display_name`
+  - Removed `google_compute_router_peer_invalid_advertise_mode` rule
+
+### Chores
+
+- [#320](https://github.com/terraform-linters/tflint-ruleset-google/pull/320): Bump actions/setup-go from 4 to 5
+- [#328](https://github.com/terraform-linters/tflint-ruleset-google/pull/328): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.29.0 to 2.32.0
+- [#331](https://github.com/terraform-linters/tflint-ruleset-google/pull/331): Bump google.golang.org/api from 0.150.0 to 0.163.0
+- [#333](https://github.com/terraform-linters/tflint-ruleset-google/pull/333): deps: Go 1.22
+
 ## 0.26.0 (2023-11-13)
 
 ### Breaking Changes
