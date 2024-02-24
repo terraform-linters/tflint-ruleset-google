@@ -1,3 +1,13 @@
+## 0.27.1 (2024-02-24)
+
+### Enhancements
+
+- [#335](https://github.com/terraform-linters/tflint-ruleset-google/pull/335): feat: add H100 machine-type to ruleset
+
+### Chores
+
+- [#334](https://github.com/terraform-linters/tflint-ruleset-google/pull/334): Bump google.golang.org/api from 0.163.0 to 0.165.0
+
 ## 0.27.0 (2024-02-14)
 
 ### Breaking Changes
