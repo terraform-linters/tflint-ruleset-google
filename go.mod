@@ -5,7 +5,7 @@ go 1.22.0
 require (
 	github.com/dave/dst v0.27.3
 	github.com/google/go-cmp v0.6.0
-	github.com/hashicorp/hcl/v2 v2.19.1
+	github.com/hashicorp/hcl/v2 v2.20.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.32.0
 	github.com/terraform-linters/tflint-plugin-sdk v0.18.0
 	google.golang.org/api v0.165.0
