@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleVmwareenginePrivateCloudInvalidTypeRule checks the pattern is valid
-type GoogleVmwareenginePrivateCloudInvalidTypeRule struct {
+// GoogleKmsEkmConnectionInvalidKeyManagementModeRule checks the pattern is valid
+type GoogleKmsEkmConnectionInvalidKeyManagementModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleVmwareenginePrivateCloudInvalidTypeRule returns new rule with default attributes
-func NewGoogleVmwareenginePrivateCloudInvalidTypeRule() *GoogleVmwareenginePrivateCloudInvalidTypeRule {
-	return &GoogleVmwareenginePrivateCloudInvalidTypeRule{
-		resourceType:  "google_vmwareengine_private_cloud",
-		attributeName: "type",
+// NewGoogleKmsEkmConnectionInvalidKeyManagementModeRule returns new rule with default attributes
+func NewGoogleKmsEkmConnectionInvalidKeyManagementModeRule() *GoogleKmsEkmConnectionInvalidKeyManagementModeRule {
+	return &GoogleKmsEkmConnectionInvalidKeyManagementModeRule{
+		resourceType:  "google_kms_ekm_connection",
+		attributeName: "key_management_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Name() string {
-	return "google_vmwareengine_private_cloud_invalid_type"
+func (r *GoogleKmsEkmConnectionInvalidKeyManagementModeRule) Name() string {
+	return "google_kms_ekm_connection_invalid_key_management_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Enabled() bool {
+func (r *GoogleKmsEkmConnectionInvalidKeyManagementModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleKmsEkmConnectionInvalidKeyManagementModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Link() string {
+func (r *GoogleKmsEkmConnectionInvalidKeyManagementModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleKmsEkmConnectionInvalidKeyManagementModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "TIME_LIMITED", "STRETCHED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"MANUAL", "CLOUD_KMS", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

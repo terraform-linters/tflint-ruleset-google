@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleVmwareenginePrivateCloudInvalidTypeRule checks the pattern is valid
-type GoogleVmwareenginePrivateCloudInvalidTypeRule struct {
+// GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule checks the pattern is valid
+type GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleVmwareenginePrivateCloudInvalidTypeRule returns new rule with default attributes
-func NewGoogleVmwareenginePrivateCloudInvalidTypeRule() *GoogleVmwareenginePrivateCloudInvalidTypeRule {
-	return &GoogleVmwareenginePrivateCloudInvalidTypeRule{
-		resourceType:  "google_vmwareengine_private_cloud",
-		attributeName: "type",
+// NewGoogleDataLossPreventionDiscoveryConfigInvalidStatusRule returns new rule with default attributes
+func NewGoogleDataLossPreventionDiscoveryConfigInvalidStatusRule() *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule {
+	return &GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule{
+		resourceType:  "google_data_loss_prevention_discovery_config",
+		attributeName: "status",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Name() string {
-	return "google_vmwareengine_private_cloud_invalid_type"
+func (r *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule) Name() string {
+	return "google_data_loss_prevention_discovery_config_invalid_status"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Enabled() bool {
+func (r *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Link() string {
+func (r *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleDataLossPreventionDiscoveryConfigInvalidStatusRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "TIME_LIMITED", "STRETCHED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"RUNNING", "PAUSED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

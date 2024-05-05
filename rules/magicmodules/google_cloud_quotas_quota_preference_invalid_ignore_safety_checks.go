@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleVmwareenginePrivateCloudInvalidTypeRule checks the pattern is valid
-type GoogleVmwareenginePrivateCloudInvalidTypeRule struct {
+// GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule checks the pattern is valid
+type GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleVmwareenginePrivateCloudInvalidTypeRule returns new rule with default attributes
-func NewGoogleVmwareenginePrivateCloudInvalidTypeRule() *GoogleVmwareenginePrivateCloudInvalidTypeRule {
-	return &GoogleVmwareenginePrivateCloudInvalidTypeRule{
-		resourceType:  "google_vmwareengine_private_cloud",
-		attributeName: "type",
+// NewGoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule returns new rule with default attributes
+func NewGoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule() *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule {
+	return &GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule{
+		resourceType:  "google_cloud_quotas_quota_preference",
+		attributeName: "ignore_safety_checks",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Name() string {
-	return "google_vmwareengine_private_cloud_invalid_type"
+func (r *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule) Name() string {
+	return "google_cloud_quotas_quota_preference_invalid_ignore_safety_checks"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Enabled() bool {
+func (r *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Link() string {
+func (r *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleCloudQuotasQuotaPreferenceInvalidIgnoreSafetyChecksRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "TIME_LIMITED", "STRETCHED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"QUOTA_SAFETY_CHECK_UNSPECIFIED", "QUOTA_DECREASE_BELOW_USAGE", "QUOTA_DECREASE_PERCENTAGE_TOO_HIGH", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
