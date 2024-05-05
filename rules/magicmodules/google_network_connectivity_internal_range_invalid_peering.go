@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleVmwareenginePrivateCloudInvalidTypeRule checks the pattern is valid
-type GoogleVmwareenginePrivateCloudInvalidTypeRule struct {
+// GoogleNetworkConnectivityInternalRangeInvalidPeeringRule checks the pattern is valid
+type GoogleNetworkConnectivityInternalRangeInvalidPeeringRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleVmwareenginePrivateCloudInvalidTypeRule returns new rule with default attributes
-func NewGoogleVmwareenginePrivateCloudInvalidTypeRule() *GoogleVmwareenginePrivateCloudInvalidTypeRule {
-	return &GoogleVmwareenginePrivateCloudInvalidTypeRule{
-		resourceType:  "google_vmwareengine_private_cloud",
-		attributeName: "type",
+// NewGoogleNetworkConnectivityInternalRangeInvalidPeeringRule returns new rule with default attributes
+func NewGoogleNetworkConnectivityInternalRangeInvalidPeeringRule() *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule {
+	return &GoogleNetworkConnectivityInternalRangeInvalidPeeringRule{
+		resourceType:  "google_network_connectivity_internal_range",
+		attributeName: "peering",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Name() string {
-	return "google_vmwareengine_private_cloud_invalid_type"
+func (r *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule) Name() string {
+	return "google_network_connectivity_internal_range_invalid_peering"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Enabled() bool {
+func (r *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Link() string {
+func (r *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkConnectivityInternalRangeInvalidPeeringRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "TIME_LIMITED", "STRETCHED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"FOR_SELF", "FOR_PEER", "NOT_SHARED"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

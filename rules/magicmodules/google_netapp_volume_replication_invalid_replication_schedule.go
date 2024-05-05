@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleVmwareenginePrivateCloudInvalidTypeRule checks the pattern is valid
-type GoogleVmwareenginePrivateCloudInvalidTypeRule struct {
+// GoogleNetappVolumeReplicationInvalidReplicationScheduleRule checks the pattern is valid
+type GoogleNetappVolumeReplicationInvalidReplicationScheduleRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleVmwareenginePrivateCloudInvalidTypeRule returns new rule with default attributes
-func NewGoogleVmwareenginePrivateCloudInvalidTypeRule() *GoogleVmwareenginePrivateCloudInvalidTypeRule {
-	return &GoogleVmwareenginePrivateCloudInvalidTypeRule{
-		resourceType:  "google_vmwareengine_private_cloud",
-		attributeName: "type",
+// NewGoogleNetappVolumeReplicationInvalidReplicationScheduleRule returns new rule with default attributes
+func NewGoogleNetappVolumeReplicationInvalidReplicationScheduleRule() *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule {
+	return &GoogleNetappVolumeReplicationInvalidReplicationScheduleRule{
+		resourceType:  "google_netapp_volume_replication",
+		attributeName: "replication_schedule",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Name() string {
-	return "google_vmwareengine_private_cloud_invalid_type"
+func (r *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule) Name() string {
+	return "google_netapp_volume_replication_invalid_replication_schedule"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Enabled() bool {
+func (r *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Link() string {
+func (r *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetappVolumeReplicationInvalidReplicationScheduleRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleVmwareenginePrivateCloudInvalidTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "TIME_LIMITED", "STRETCHED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"EVERY_10_MINUTES", "HOURLY", "DAILY"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
