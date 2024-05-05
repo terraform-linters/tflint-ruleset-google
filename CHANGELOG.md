@@ -1,3 +1,17 @@
+## 0.28.0 (2024-05-05)
+
+### Enhancements
+
+- [#350](https://github.com/terraform-linters/tflint-ruleset-google/pull/350): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.18.0 to 0.20.0
+  - This is required for provider-defined functions support
+- [#352](https://github.com/terraform-linters/tflint-ruleset-google/pull/352): Update Magic Modules
+
+### Chores
+
+- [#337](https://github.com/terraform-linters/tflint-ruleset-google/pull/337): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.32.0 to 2.33.0
+- [#349](https://github.com/terraform-linters/tflint-ruleset-google/pull/349): Bump google.golang.org/api from 0.165.0 to 0.177.0
+- [#351](https://github.com/terraform-linters/tflint-ruleset-google/pull/351): deps: Go 1.22.2
+
 ## 0.27.1 (2024-02-24)
 
 ### Enhancements
