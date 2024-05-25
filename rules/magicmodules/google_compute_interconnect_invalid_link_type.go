@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleLookerInstanceInvalidNameRule checks the pattern is valid
-type GoogleLookerInstanceInvalidNameRule struct {
+// GoogleComputeInterconnectInvalidLinkTypeRule checks the pattern is valid
+type GoogleComputeInterconnectInvalidLinkTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleLookerInstanceInvalidNameRule returns new rule with default attributes
-func NewGoogleLookerInstanceInvalidNameRule() *GoogleLookerInstanceInvalidNameRule {
-	return &GoogleLookerInstanceInvalidNameRule{
-		resourceType:  "google_looker_instance",
-		attributeName: "name",
+// NewGoogleComputeInterconnectInvalidLinkTypeRule returns new rule with default attributes
+func NewGoogleComputeInterconnectInvalidLinkTypeRule() *GoogleComputeInterconnectInvalidLinkTypeRule {
+	return &GoogleComputeInterconnectInvalidLinkTypeRule{
+		resourceType:  "google_compute_interconnect",
+		attributeName: "link_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleLookerInstanceInvalidNameRule) Name() string {
-	return "google_looker_instance_invalid_name"
+func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Name() string {
+	return "google_compute_interconnect_invalid_link_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleLookerInstanceInvalidNameRule) Enabled() bool {
+func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleLookerInstanceInvalidNameRule) Severity() tflint.Severity {
+func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleLookerInstanceInvalidNameRule) Link() string {
+func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +72,7 @@ func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-z][a-z0-9-]{0,61}[a-z0-9]$`)
+			validateFunc := validation.StringInSlice([]string{"LINK_TYPE_ETHERNET_10G_LR", "LINK_TYPE_ETHERNET_100G_LR"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
