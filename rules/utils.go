@@ -79,12 +79,19 @@ var validMachineTypes = map[string]bool{
 	"c3d-standard-360-lssd": true,
 	"c3d-highmem-4":         true,
 	"c3d-highmem-8":         true,
+	"c3d-highmem-8-lssd":    true,
 	"c3d-highmem-16":        true,
+	"c3d-highmem-16-lssd":   true,
 	"c3d-highmem-30":        true,
+	"c3d-highmem-30-lssd":   true,
 	"c3d-highmem-60":        true,
+	"c3d-highmem-60-lssd":   true,
 	"c3d-highmem-90":        true,
+	"c3d-highmem-90-lssd":   true,
 	"c3d-highmem-180":       true,
+	"c3d-highmem-180-lssd":  true,
 	"c3d-highmem-360":       true,
+	"c3d-highmem-360-lssd":  true,
 	"c3d-highcpu-4":         true,
 	"c3d-highcpu-8":         true,
 	"c3d-highcpu-16":        true,
@@ -210,7 +217,6 @@ var validMachineTypes = map[string]bool{
 	"n2d-highmem-64":   true,
 	"n2d-highmem-80":   true,
 	"n2d-highmem-96":   true,
-	"n2d-highcpu-80":   true,
 	"n2d-highcpu-2":    true,
 	"n2d-highcpu-4":    true,
 	"n2d-highcpu-8":    true,
@@ -218,6 +224,7 @@ var validMachineTypes = map[string]bool{
 	"n2d-highcpu-32":   true,
 	"n2d-highcpu-48":   true,
 	"n2d-highcpu-64":   true,
+	"n2d-highcpu-80":   true,
 	"n2d-highcpu-96":   true,
 	"n2d-highcpu-128":  true,
 	"n2d-highcpu-224":  true,
@@ -297,6 +304,10 @@ var validMachineTypes = map[string]bool{
 	"ct5lp-hightpu-1t": true,
 	"ct5lp-hightpu-4t": true,
 	"ct5lp-hightpu-8t": true,
+
+	// Z3
+	"z3-highmem-88":  true,
+	"z3-highmem-176": true,
 }
 
 func isCustomType(machineType string) bool {
@@ -304,6 +315,7 @@ func isCustomType(machineType string) bool {
 		strings.HasPrefix(machineType, "n2-custom-") ||
 		strings.HasPrefix(machineType, "n2d-custom-") ||
 		strings.HasPrefix(machineType, "n1-custom-") ||
+		strings.HasPrefix(machineType, "n4-custom-") ||
 		strings.HasPrefix(machineType, "custom-")
 }
 
