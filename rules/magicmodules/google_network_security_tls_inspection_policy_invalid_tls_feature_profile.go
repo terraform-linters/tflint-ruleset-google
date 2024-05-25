@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleLookerInstanceInvalidNameRule checks the pattern is valid
-type GoogleLookerInstanceInvalidNameRule struct {
+// GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule checks the pattern is valid
+type GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleLookerInstanceInvalidNameRule returns new rule with default attributes
-func NewGoogleLookerInstanceInvalidNameRule() *GoogleLookerInstanceInvalidNameRule {
-	return &GoogleLookerInstanceInvalidNameRule{
-		resourceType:  "google_looker_instance",
-		attributeName: "name",
+// NewGoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule returns new rule with default attributes
+func NewGoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule() *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule {
+	return &GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule{
+		resourceType:  "google_network_security_tls_inspection_policy",
+		attributeName: "tls_feature_profile",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleLookerInstanceInvalidNameRule) Name() string {
-	return "google_looker_instance_invalid_name"
+func (r *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule) Name() string {
+	return "google_network_security_tls_inspection_policy_invalid_tls_feature_profile"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleLookerInstanceInvalidNameRule) Enabled() bool {
+func (r *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleLookerInstanceInvalidNameRule) Severity() tflint.Severity {
+func (r *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleLookerInstanceInvalidNameRule) Link() string {
+func (r *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkSecurityTlsInspectionPolicyInvalidTlsFeatureProfileRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +72,7 @@ func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-z][a-z0-9-]{0,61}[a-z0-9]$`)
+			validateFunc := validation.StringInSlice([]string{"PROFILE_UNSPECIFIED", "PROFILE_COMPATIBLE", "PROFILE_MODERN", "PROFILE_RESTRICTED", "PROFILE_CUSTOM", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

@@ -19,44 +19,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleLookerInstanceInvalidNameRule checks the pattern is valid
-type GoogleLookerInstanceInvalidNameRule struct {
+// GoogleComputeInterconnectInvalidNameRule checks the pattern is valid
+type GoogleComputeInterconnectInvalidNameRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleLookerInstanceInvalidNameRule returns new rule with default attributes
-func NewGoogleLookerInstanceInvalidNameRule() *GoogleLookerInstanceInvalidNameRule {
-	return &GoogleLookerInstanceInvalidNameRule{
-		resourceType:  "google_looker_instance",
+// NewGoogleComputeInterconnectInvalidNameRule returns new rule with default attributes
+func NewGoogleComputeInterconnectInvalidNameRule() *GoogleComputeInterconnectInvalidNameRule {
+	return &GoogleComputeInterconnectInvalidNameRule{
+		resourceType:  "google_compute_interconnect",
 		attributeName: "name",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleLookerInstanceInvalidNameRule) Name() string {
-	return "google_looker_instance_invalid_name"
+func (r *GoogleComputeInterconnectInvalidNameRule) Name() string {
+	return "google_compute_interconnect_invalid_name"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleLookerInstanceInvalidNameRule) Enabled() bool {
+func (r *GoogleComputeInterconnectInvalidNameRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleLookerInstanceInvalidNameRule) Severity() tflint.Severity {
+func (r *GoogleComputeInterconnectInvalidNameRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleLookerInstanceInvalidNameRule) Link() string {
+func (r *GoogleComputeInterconnectInvalidNameRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeInterconnectInvalidNameRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +71,7 @@ func (r *GoogleLookerInstanceInvalidNameRule) Check(runner tflint.Runner) error 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-z][a-z0-9-]{0,61}[a-z0-9]$`)
+			validateFunc := validateRegexp(`^[a-z]([-a-z0-9]*[a-z0-9])?$`)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

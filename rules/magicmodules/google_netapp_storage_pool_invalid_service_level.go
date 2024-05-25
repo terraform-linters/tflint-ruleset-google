@@ -72,7 +72,7 @@ func (r *GoogleNetappStoragePoolInvalidServiceLevelRule) Check(runner tflint.Run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"PREMIUM", "EXTREME", "STANDARD"}, false)
+			validateFunc := validation.StringInSlice([]string{"PREMIUM", "EXTREME", "STANDARD", "FLEX"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
