@@ -1,3 +1,17 @@
+## 0.29.0 (2024-05-25)
+
+### Enhancements
+
+- [#357](https://github.com/terraform-linters/tflint-ruleset-google/pull/357): add missing n4 instance types
+- [#358](https://github.com/terraform-linters/tflint-ruleset-google/pull/358): Add C3D with local SSD, Z3, and custom N4 families
+- [#359](https://github.com/terraform-linters/tflint-ruleset-google/pull/359): Update Magic Modules
+
+### Chores
+
+- [#353](https://github.com/terraform-linters/tflint-ruleset-google/pull/353): release: Introduce Artifact Attestations
+- [#355](https://github.com/terraform-linters/tflint-ruleset-google/pull/355): Bump google.golang.org/api from 0.177.0 to 0.181.0
+- [#356](https://github.com/terraform-linters/tflint-ruleset-google/pull/356): Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.33.0 to 2.34.0
+
 ## 0.28.0 (2024-05-05)
 
 ### Enhancements
