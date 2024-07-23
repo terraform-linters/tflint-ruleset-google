@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule checks the pattern is valid
-type GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule struct {
+// GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule checks the pattern is valid
+type GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule returns new rule with default attributes
-func NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule() *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule {
-	return &GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule{
-		resourceType:  "google_compute_region_network_endpoint_group",
-		attributeName: "network_endpoint_type",
+// NewGoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule returns new rule with default attributes
+func NewGoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule() *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule {
+	return &GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule{
+		resourceType:  "google_compute_network_attachment",
+		attributeName: "connection_preference",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Name() string {
-	return "google_compute_region_network_endpoint_group_invalid_network_endpoint_type"
+func (r *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule) Name() string {
+	return "google_compute_network_attachment_invalid_connection_preference"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Enabled() bool {
+func (r *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Link() string {
+func (r *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeNetworkAttachmentInvalidConnectionPreferenceRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SERVERLESS", "PRIVATE_SERVICE_CONNECT", "INTERNET_IP_PORT", "INTERNET_FQDN_PORT", "GCE_VM_IP_PORTMAP", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"ACCEPT_AUTOMATIC", "ACCEPT_MANUAL", "INVALID"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
