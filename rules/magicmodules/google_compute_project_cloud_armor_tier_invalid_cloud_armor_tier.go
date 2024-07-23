@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule checks the pattern is valid
-type GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule struct {
+// GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule checks the pattern is valid
+type GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule returns new rule with default attributes
-func NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule() *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule {
-	return &GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule{
-		resourceType:  "google_compute_region_network_endpoint_group",
-		attributeName: "network_endpoint_type",
+// NewGoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule returns new rule with default attributes
+func NewGoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule() *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule {
+	return &GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule{
+		resourceType:  "google_compute_project_cloud_armor_tier",
+		attributeName: "cloud_armor_tier",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Name() string {
-	return "google_compute_region_network_endpoint_group_invalid_network_endpoint_type"
+func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Name() string {
+	return "google_compute_project_cloud_armor_tier_invalid_cloud_armor_tier"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Enabled() bool {
+func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Link() string {
+func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SERVERLESS", "PRIVATE_SERVICE_CONNECT", "INTERNET_IP_PORT", "INTERNET_FQDN_PORT", "GCE_VM_IP_PORTMAP", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"CA_STANDARD", "CA_ENTERPRISE_PAYGO"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

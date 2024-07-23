@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule checks the pattern is valid
-type GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule struct {
+// GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule checks the pattern is valid
+type GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule returns new rule with default attributes
-func NewGoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule() *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule {
-	return &GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule{
-		resourceType:  "google_compute_region_network_endpoint_group",
-		attributeName: "network_endpoint_type",
+// NewGoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule returns new rule with default attributes
+func NewGoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule() *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule {
+	return &GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule{
+		resourceType:  "google_compute_target_https_proxy",
+		attributeName: "tls_early_data",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Name() string {
-	return "google_compute_region_network_endpoint_group_invalid_network_endpoint_type"
+func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Name() string {
+	return "google_compute_target_https_proxy_invalid_tls_early_data"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Enabled() bool {
+func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Link() string {
+func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionNetworkEndpointGroupInvalidNetworkEndpointTypeRule) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SERVERLESS", "PRIVATE_SERVICE_CONNECT", "INTERNET_IP_PORT", "INTERNET_FQDN_PORT", "GCE_VM_IP_PORTMAP", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"STRICT", "PERMISSIVE", "DISABLED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
