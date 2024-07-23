@@ -337,6 +337,11 @@ var validMachineTypes = map[string]bool{
 	// Z3
 	"z3-highmem-88":  true,
 	"z3-highmem-176": true,
+
+	// X4 machine types: https://cloud.google.com/compute/docs/memory-optimized-machines#x4_machine_types
+	"x4-megamem-960-metal":  true,
+	"x4-megamem-1440-metal": true,
+	"x4-megamem-1920-metal": true,
 }
 
 func isCustomType(machineType string) bool {
