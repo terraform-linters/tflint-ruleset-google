@@ -285,6 +285,7 @@ var validMachineTypes = map[string]bool{
 
 	// H100 machine types: https://cloud.google.com/compute/docs/gpus#h100-gpus
 	"a3-highgpu-8g": true,
+	"a3-megagpu-8g": true,
 
 	// L4 machine types: https://cloud.google.com/compute/docs/gpus#l4-gpus
 	"g2-standard-4":  true,
