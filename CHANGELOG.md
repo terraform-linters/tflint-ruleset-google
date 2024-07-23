@@ -1,3 +1,18 @@
+## 0.30.0 (2024-07-23)
+
+### Enhancements
+
+- [#369](https://github.com/terraform-linters/tflint-ruleset-google/pull/369): feat: add one more H100 machine-type a3-megagpu-8g to ruleset
+- [#371](https://github.com/terraform-linters/tflint-ruleset-google/pull/371): Add C4, C3 metal, and X4 families as valid machine types
+- [#372](https://github.com/terraform-linters/tflint-ruleset-google/pull/372): Update Magic Modules
+
+### Chores
+
+- [#362](https://github.com/terraform-linters/tflint-ruleset-google/pull/362): Bump goreleaser/goreleaser-action from 5 to 6
+- [#364](https://github.com/terraform-linters/tflint-ruleset-google/pull/364): Bump github.com/hashicorp/hcl/v2 from 2.20.1 to 2.21.0
+- [#370](https://github.com/terraform-linters/tflint-ruleset-google/pull/370): Bump google.golang.org/api from 0.181.0 to 0.189.0
+- [#373](https://github.com/terraform-linters/tflint-ruleset-google/pull/373): deps: Go 1.22.5
+
 ## 0.29.0 (2024-05-25)
 
 ### Enhancements
