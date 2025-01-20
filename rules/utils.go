@@ -372,5 +372,7 @@ func isValidIAMMemberFormat(s string) bool {
 		strings.HasPrefix(s, "user:") ||
 		strings.HasPrefix(s, "serviceAccount:") ||
 		strings.HasPrefix(s, "group:") ||
-		strings.HasPrefix(s, "domain:")
+		strings.HasPrefix(s, "domain:") ||
+		strings.HasPrefix(s, "principalSet://") ||
+		strings.HasPrefix(s, "principal://")
 }
