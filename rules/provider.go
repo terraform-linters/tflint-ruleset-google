@@ -19,6 +19,7 @@ var manualRules = []tflint.Rule{
 	NewGoogleProjectIamAuditConfigInvalidMemberRule(),
 	NewGoogleProjectIamBindingInvalidMemberRule(),
 	NewGoogleProjectIamPolicyInvalidMemberRule(),
+	NewGoogleSQLDatabaseInstanceNameRule(),
 }
 
 // Rules is a list of all rules
