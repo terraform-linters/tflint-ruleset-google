@@ -72,7 +72,7 @@ func (r *GoogleDiscoveryEngineSearchEngineInvalidIndustryVerticalRule) Check(run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"GENERIC", "MEDIA", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"GENERIC", "MEDIA", "HEALTHCARE_FHIR", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

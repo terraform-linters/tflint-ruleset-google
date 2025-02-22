@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule checks the pattern is valid
-type GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule struct {
+// GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule checks the pattern is valid
+type GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule returns new rule with default attributes
-func NewGoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule() *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule {
-	return &GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule{
-		resourceType:  "google_sql_source_representation_instance",
-		attributeName: "database_version",
+// NewGoogleNetworkServicesAuthzExtensionInvalidWireFormatRule returns new rule with default attributes
+func NewGoogleNetworkServicesAuthzExtensionInvalidWireFormatRule() *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule {
+	return &GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule{
+		resourceType:  "google_network_services_authz_extension",
+		attributeName: "wire_format",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Name() string {
-	return "google_sql_source_representation_instance_invalid_database_version"
+func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Name() string {
+	return "google_network_services_authz_extension_invalid_wire_format"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Enabled() bool {
+func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Severity() tflint.Severity {
+func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Link() string {
+func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleSqlSourceRepresentationInstanceInvalidDatabaseVersionRule) Check(
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MYSQL_5_6", "MYSQL_5_7", "MYSQL_8_0", "POSTGRES_9_6", "POSTGRES_10", "POSTGRES_11", "POSTGRES_12", "POSTGRES_13", "POSTGRES_14"}, false)
+			validateFunc := validation.StringInSlice([]string{"WIRE_FORMAT_UNSPECIFIED", "EXT_PROC_GRPC", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

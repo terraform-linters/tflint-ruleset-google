@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeHaVpnGatewayInvalidStackTypeRule checks the pattern is valid
-type GoogleComputeHaVpnGatewayInvalidStackTypeRule struct {
+// GoogleApigeeAppGroupInvalidStatusRule checks the pattern is valid
+type GoogleApigeeAppGroupInvalidStatusRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeHaVpnGatewayInvalidStackTypeRule returns new rule with default attributes
-func NewGoogleComputeHaVpnGatewayInvalidStackTypeRule() *GoogleComputeHaVpnGatewayInvalidStackTypeRule {
-	return &GoogleComputeHaVpnGatewayInvalidStackTypeRule{
-		resourceType:  "google_compute_ha_vpn_gateway",
-		attributeName: "stack_type",
+// NewGoogleApigeeAppGroupInvalidStatusRule returns new rule with default attributes
+func NewGoogleApigeeAppGroupInvalidStatusRule() *GoogleApigeeAppGroupInvalidStatusRule {
+	return &GoogleApigeeAppGroupInvalidStatusRule{
+		resourceType:  "google_apigee_app_group",
+		attributeName: "status",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Name() string {
-	return "google_compute_ha_vpn_gateway_invalid_stack_type"
+func (r *GoogleApigeeAppGroupInvalidStatusRule) Name() string {
+	return "google_apigee_app_group_invalid_status"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Enabled() bool {
+func (r *GoogleApigeeAppGroupInvalidStatusRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Severity() tflint.Severity {
+func (r *GoogleApigeeAppGroupInvalidStatusRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Link() string {
+func (r *GoogleApigeeAppGroupInvalidStatusRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleApigeeAppGroupInvalidStatusRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"IPV4_ONLY", "IPV4_IPV6", "IPV6_ONLY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"active", "inactive", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

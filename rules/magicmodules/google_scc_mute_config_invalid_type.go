@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeHaVpnGatewayInvalidStackTypeRule checks the pattern is valid
-type GoogleComputeHaVpnGatewayInvalidStackTypeRule struct {
+// GoogleSccMuteConfigInvalidTypeRule checks the pattern is valid
+type GoogleSccMuteConfigInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeHaVpnGatewayInvalidStackTypeRule returns new rule with default attributes
-func NewGoogleComputeHaVpnGatewayInvalidStackTypeRule() *GoogleComputeHaVpnGatewayInvalidStackTypeRule {
-	return &GoogleComputeHaVpnGatewayInvalidStackTypeRule{
-		resourceType:  "google_compute_ha_vpn_gateway",
-		attributeName: "stack_type",
+// NewGoogleSccMuteConfigInvalidTypeRule returns new rule with default attributes
+func NewGoogleSccMuteConfigInvalidTypeRule() *GoogleSccMuteConfigInvalidTypeRule {
+	return &GoogleSccMuteConfigInvalidTypeRule{
+		resourceType:  "google_scc_mute_config",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Name() string {
-	return "google_compute_ha_vpn_gateway_invalid_stack_type"
+func (r *GoogleSccMuteConfigInvalidTypeRule) Name() string {
+	return "google_scc_mute_config_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Enabled() bool {
+func (r *GoogleSccMuteConfigInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Severity() tflint.Severity {
+func (r *GoogleSccMuteConfigInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Link() string {
+func (r *GoogleSccMuteConfigInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleSccMuteConfigInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"IPV4_ONLY", "IPV4_IPV6", "IPV6_ONLY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"MUTE_CONFIG_TYPE_UNSPECIFIED", "STATIC", "DYNAMIC", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

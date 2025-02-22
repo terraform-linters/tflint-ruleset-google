@@ -72,7 +72,7 @@ func (r *GoogleComputeProjectCloudArmorTierInvalidCloudArmorTierRule) Check(runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"CA_STANDARD", "CA_ENTERPRISE_PAYGO"}, false)
+			validateFunc := validation.StringInSlice([]string{"CA_STANDARD", "CA_ENTERPRISE_PAYGO", "CA_ENTERPRISE_ANNUAL"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
