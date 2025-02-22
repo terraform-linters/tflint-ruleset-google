@@ -1,3 +1,25 @@
+## 0.31.0 (2025-02-23)
+
+### Breaking Changes
+
+- [#389](https://github.com/terraform-linters/tflint-ruleset-google/pull/389): Update Magic Modules
+  - The following rules are removed
+    - `google_datastore_index_invalid_ancestor`
+    - `google_sql_source_representation_instance_invalid_database_version`
+
+### Enhancements
+
+- [#387](https://github.com/terraform-linters/tflint-ruleset-google/pull/387): Add support for principalSet and principal IAM member types
+- [#392](https://github.com/terraform-linters/tflint-ruleset-google/pull/392): Bump github.com/terraform-linters/tflint-plugin-sdk from 0.20.0 to 0.22.0
+
+### Chores
+
+- [#378](https://github.com/terraform-linters/tflint-ruleset-google/pull/378): Bump github.com/hashicorp/hcl/v2 from 2.21.0 to 2.22.0
+- [#386](https://github.com/terraform-linters/tflint-ruleset-google/pull/386): Bump google.golang.org/api from 0.189.0 to 0.201.0
+- [#390](https://github.com/terraform-linters/tflint-ruleset-google/pull/390): Bump golang.org/x/crypto from 0.28.0 to 0.31.0
+- [#391](https://github.com/terraform-linters/tflint-ruleset-google/pull/391): Bump golang.org/x/net from 0.30.0 to 0.33.0
+- [#393](https://github.com/terraform-linters/tflint-ruleset-google/pull/393): Bump GoReleaser to v2
+
 ## 0.30.0 (2024-07-23)
 
 ### Enhancements
