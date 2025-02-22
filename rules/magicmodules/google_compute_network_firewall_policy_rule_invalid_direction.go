@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeHaVpnGatewayInvalidStackTypeRule checks the pattern is valid
-type GoogleComputeHaVpnGatewayInvalidStackTypeRule struct {
+// GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule checks the pattern is valid
+type GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeHaVpnGatewayInvalidStackTypeRule returns new rule with default attributes
-func NewGoogleComputeHaVpnGatewayInvalidStackTypeRule() *GoogleComputeHaVpnGatewayInvalidStackTypeRule {
-	return &GoogleComputeHaVpnGatewayInvalidStackTypeRule{
-		resourceType:  "google_compute_ha_vpn_gateway",
-		attributeName: "stack_type",
+// NewGoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule returns new rule with default attributes
+func NewGoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule() *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule {
+	return &GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule{
+		resourceType:  "google_compute_network_firewall_policy_rule",
+		attributeName: "direction",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Name() string {
-	return "google_compute_ha_vpn_gateway_invalid_stack_type"
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule) Name() string {
+	return "google_compute_network_firewall_policy_rule_invalid_direction"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Enabled() bool {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Link() string {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidDirectionRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeHaVpnGatewayInvalidStackTypeRule) Check(runner tflint.Runn
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"IPV4_ONLY", "IPV4_IPV6", "IPV6_ONLY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"INGRESS", "EGRESS"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

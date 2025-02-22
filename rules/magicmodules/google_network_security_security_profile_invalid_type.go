@@ -72,7 +72,7 @@ func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Check(runner tflin
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"THREAT_PREVENTION"}, false)
+			validateFunc := validation.StringInSlice([]string{"THREAT_PREVENTION", "CUSTOM_MIRRORING", "CUSTOM_INTERCEPT"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

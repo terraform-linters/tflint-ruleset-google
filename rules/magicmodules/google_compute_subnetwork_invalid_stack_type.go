@@ -72,7 +72,7 @@ func (r *GoogleComputeSubnetworkInvalidStackTypeRule) Check(runner tflint.Runner
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"IPV4_ONLY", "IPV4_IPV6", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"IPV4_ONLY", "IPV4_IPV6", "IPV6_ONLY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

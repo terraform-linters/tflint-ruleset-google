@@ -72,7 +72,7 @@ func (r *GoogleNetworkConnectivityInternalRangeInvalidUsageRule) Check(runner tf
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"FOR_VPC", "EXTERNAL_TO_VPC"}, false)
+			validateFunc := validation.StringInSlice([]string{"FOR_VPC", "EXTERNAL_TO_VPC", "FOR_MIGRATION"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

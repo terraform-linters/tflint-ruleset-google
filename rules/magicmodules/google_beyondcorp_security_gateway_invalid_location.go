@@ -15,49 +15,48 @@
 package magicmodules
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleDatastoreIndexInvalidAncestorRule checks the pattern is valid
-type GoogleDatastoreIndexInvalidAncestorRule struct {
+// GoogleBeyondcorpSecurityGatewayInvalidLocationRule checks the pattern is valid
+type GoogleBeyondcorpSecurityGatewayInvalidLocationRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleDatastoreIndexInvalidAncestorRule returns new rule with default attributes
-func NewGoogleDatastoreIndexInvalidAncestorRule() *GoogleDatastoreIndexInvalidAncestorRule {
-	return &GoogleDatastoreIndexInvalidAncestorRule{
-		resourceType:  "google_datastore_index",
-		attributeName: "ancestor",
+// NewGoogleBeyondcorpSecurityGatewayInvalidLocationRule returns new rule with default attributes
+func NewGoogleBeyondcorpSecurityGatewayInvalidLocationRule() *GoogleBeyondcorpSecurityGatewayInvalidLocationRule {
+	return &GoogleBeyondcorpSecurityGatewayInvalidLocationRule{
+		resourceType:  "google_beyondcorp_security_gateway",
+		attributeName: "location",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleDatastoreIndexInvalidAncestorRule) Name() string {
-	return "google_datastore_index_invalid_ancestor"
+func (r *GoogleBeyondcorpSecurityGatewayInvalidLocationRule) Name() string {
+	return "google_beyondcorp_security_gateway_invalid_location"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleDatastoreIndexInvalidAncestorRule) Enabled() bool {
+func (r *GoogleBeyondcorpSecurityGatewayInvalidLocationRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleDatastoreIndexInvalidAncestorRule) Severity() tflint.Severity {
+func (r *GoogleBeyondcorpSecurityGatewayInvalidLocationRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleDatastoreIndexInvalidAncestorRule) Link() string {
+func (r *GoogleBeyondcorpSecurityGatewayInvalidLocationRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleDatastoreIndexInvalidAncestorRule) Check(runner tflint.Runner) error {
+func (r *GoogleBeyondcorpSecurityGatewayInvalidLocationRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +71,7 @@ func (r *GoogleDatastoreIndexInvalidAncestorRule) Check(runner tflint.Runner) er
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"NONE", "ALL_ANCESTORS", ""}, false)
+			validateFunc := validateRegexp(`^global$`)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
