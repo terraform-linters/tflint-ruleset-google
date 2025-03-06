@@ -1,0 +1,29 @@
+on:
+  push:
+    branches: [ master ]
+  schedule:
+    - cron: '0 0 * * 1'
+  workflow_dispatch: # Enables on-demand/manual triggering
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: git submodule update --init --depth=0
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: 'go.mod'
+      - name: make tflint in tools/magic-modules
+        run: |
+          cd tools/magic-modules
+          make tflint
+        env:
+          OUTPUT_PATH: ${{ github.workspace }}/rules/magicmodules
+      - uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: |
+            Update Magic Modules
+          title: Update Magic Modules
+          delete-branch: true
+          body: |
+            This is an automated pull request triggered by GitHub Actions. To trigger check runs, close and re-open it.
