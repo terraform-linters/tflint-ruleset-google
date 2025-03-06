@@ -1,3 +1,5 @@
+See https://github.com/terraform-linters/tflint-ruleset-google/releases for later releases.
+
 ## 0.31.0 (2025-02-23)
 
 ### Breaking Changes
