@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleGeminiLoggingSettingBindingInvalidProductRule checks the pattern is valid
-type GoogleGeminiLoggingSettingBindingInvalidProductRule struct {
+// GoogleParameterManagerParameterInvalidFormatRule checks the pattern is valid
+type GoogleParameterManagerParameterInvalidFormatRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleGeminiLoggingSettingBindingInvalidProductRule returns new rule with default attributes
-func NewGoogleGeminiLoggingSettingBindingInvalidProductRule() *GoogleGeminiLoggingSettingBindingInvalidProductRule {
-	return &GoogleGeminiLoggingSettingBindingInvalidProductRule{
-		resourceType:  "google_gemini_logging_setting_binding",
-		attributeName: "product",
+// NewGoogleParameterManagerParameterInvalidFormatRule returns new rule with default attributes
+func NewGoogleParameterManagerParameterInvalidFormatRule() *GoogleParameterManagerParameterInvalidFormatRule {
+	return &GoogleParameterManagerParameterInvalidFormatRule{
+		resourceType:  "google_parameter_manager_parameter",
+		attributeName: "format",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Name() string {
-	return "google_gemini_logging_setting_binding_invalid_product"
+func (r *GoogleParameterManagerParameterInvalidFormatRule) Name() string {
+	return "google_parameter_manager_parameter_invalid_format"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Enabled() bool {
+func (r *GoogleParameterManagerParameterInvalidFormatRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Severity() tflint.Severity {
+func (r *GoogleParameterManagerParameterInvalidFormatRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Link() string {
+func (r *GoogleParameterManagerParameterInvalidFormatRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflint.Runner) error {
+func (r *GoogleParameterManagerParameterInvalidFormatRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflin
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"GEMINI_CODE_ASSIST", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"UNFORMATTED", "YAML", "JSON", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
