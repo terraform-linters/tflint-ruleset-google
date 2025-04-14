@@ -72,7 +72,7 @@ func (r *GoogleComputeInterconnectInvalidLinkTypeRule) Check(runner tflint.Runne
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"LINK_TYPE_ETHERNET_10G_LR", "LINK_TYPE_ETHERNET_100G_LR"}, false)
+			validateFunc := validation.StringInSlice([]string{"LINK_TYPE_ETHERNET_10G_LR", "LINK_TYPE_ETHERNET_100G_LR", "LINK_TYPE_ETHERNET_400G_LR4"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

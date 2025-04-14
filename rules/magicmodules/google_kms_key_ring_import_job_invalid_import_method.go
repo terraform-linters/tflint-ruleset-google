@@ -72,7 +72,7 @@ func (r *GoogleKmsKeyRingImportJobInvalidImportMethodRule) Check(runner tflint.R
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"RSA_OAEP_3072_SHA1_AES_256", "RSA_OAEP_4096_SHA1_AES_256"}, false)
+			validateFunc := validation.StringInSlice([]string{"RSA_OAEP_3072_SHA1_AES_256", "RSA_OAEP_4096_SHA1_AES_256", "RSA_OAEP_3072_SHA256_AES_256", "RSA_OAEP_4096_SHA256_AES_256", "RSA_OAEP_3072_SHA256", "RSA_OAEP_4096_SHA256"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

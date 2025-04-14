@@ -72,7 +72,7 @@ func (r *GoogleFirestoreIndexInvalidApiScopeRule) Check(runner tflint.Runner) er
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"ANY_API", "DATASTORE_MODE_API", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"ANY_API", "DATASTORE_MODE_API", "MONGODB_COMPATIBLE_API", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

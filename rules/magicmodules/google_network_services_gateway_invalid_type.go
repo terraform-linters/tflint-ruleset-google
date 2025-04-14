@@ -72,7 +72,7 @@ func (r *GoogleNetworkServicesGatewayInvalidTypeRule) Check(runner tflint.Runner
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"TYPE_UNSPECIFIED", "OPEN_MESH", "SECURE_WEB_GATEWAY"}, false)
+			validateFunc := validation.StringInSlice([]string{"OPEN_MESH", "SECURE_WEB_GATEWAY"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

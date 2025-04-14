@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

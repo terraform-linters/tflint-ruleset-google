@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleGeminiLoggingSettingBindingInvalidProductRule checks the pattern is valid
-type GoogleGeminiLoggingSettingBindingInvalidProductRule struct {
+// GoogleComputeRouterNatInvalidTypeRule checks the pattern is valid
+type GoogleComputeRouterNatInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleGeminiLoggingSettingBindingInvalidProductRule returns new rule with default attributes
-func NewGoogleGeminiLoggingSettingBindingInvalidProductRule() *GoogleGeminiLoggingSettingBindingInvalidProductRule {
-	return &GoogleGeminiLoggingSettingBindingInvalidProductRule{
-		resourceType:  "google_gemini_logging_setting_binding",
-		attributeName: "product",
+// NewGoogleComputeRouterNatInvalidTypeRule returns new rule with default attributes
+func NewGoogleComputeRouterNatInvalidTypeRule() *GoogleComputeRouterNatInvalidTypeRule {
+	return &GoogleComputeRouterNatInvalidTypeRule{
+		resourceType:  "google_compute_router_nat",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Name() string {
-	return "google_gemini_logging_setting_binding_invalid_product"
+func (r *GoogleComputeRouterNatInvalidTypeRule) Name() string {
+	return "google_compute_router_nat_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Enabled() bool {
+func (r *GoogleComputeRouterNatInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Severity() tflint.Severity {
+func (r *GoogleComputeRouterNatInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Link() string {
+func (r *GoogleComputeRouterNatInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRouterNatInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflin
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"GEMINI_CODE_ASSIST", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"PUBLIC", "PRIVATE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
