@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleGeminiLoggingSettingBindingInvalidProductRule checks the pattern is valid
-type GoogleGeminiLoggingSettingBindingInvalidProductRule struct {
+// GoogleFirestoreIndexInvalidDensityRule checks the pattern is valid
+type GoogleFirestoreIndexInvalidDensityRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleGeminiLoggingSettingBindingInvalidProductRule returns new rule with default attributes
-func NewGoogleGeminiLoggingSettingBindingInvalidProductRule() *GoogleGeminiLoggingSettingBindingInvalidProductRule {
-	return &GoogleGeminiLoggingSettingBindingInvalidProductRule{
-		resourceType:  "google_gemini_logging_setting_binding",
-		attributeName: "product",
+// NewGoogleFirestoreIndexInvalidDensityRule returns new rule with default attributes
+func NewGoogleFirestoreIndexInvalidDensityRule() *GoogleFirestoreIndexInvalidDensityRule {
+	return &GoogleFirestoreIndexInvalidDensityRule{
+		resourceType:  "google_firestore_index",
+		attributeName: "density",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Name() string {
-	return "google_gemini_logging_setting_binding_invalid_product"
+func (r *GoogleFirestoreIndexInvalidDensityRule) Name() string {
+	return "google_firestore_index_invalid_density"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Enabled() bool {
+func (r *GoogleFirestoreIndexInvalidDensityRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Severity() tflint.Severity {
+func (r *GoogleFirestoreIndexInvalidDensityRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Link() string {
+func (r *GoogleFirestoreIndexInvalidDensityRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflint.Runner) error {
+func (r *GoogleFirestoreIndexInvalidDensityRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleGeminiLoggingSettingBindingInvalidProductRule) Check(runner tflin
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"GEMINI_CODE_ASSIST", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"SPARSE_ALL", "SPARSE_ANY", "DENSE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

@@ -72,7 +72,7 @@ func (r *GoogleComputeTargetHttpsProxyInvalidTlsEarlyDataRule) Check(runner tfli
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STRICT", "PERMISSIVE", "DISABLED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"STRICT", "PERMISSIVE", "UNRESTRICTED", "DISABLED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
