@@ -8,7 +8,7 @@ require (
 	github.com/hashicorp/hcl/v2 v2.23.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.36.1
 	github.com/terraform-linters/tflint-plugin-sdk v0.22.0
-	google.golang.org/api v0.229.0
+	google.golang.org/api v0.230.0
 )
 
 require (
@@ -62,6 +62,6 @@ require (
 	golang.org/x/tools v0.29.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20250414145226-207652e42e2e // indirect
-	google.golang.org/grpc v1.71.1 // indirect
+	google.golang.org/grpc v1.72.0 // indirect
 	google.golang.org/protobuf v1.36.6 // indirect
 )
