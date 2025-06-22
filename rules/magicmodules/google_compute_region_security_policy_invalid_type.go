@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeRegionBackendServiceInvalidProtocolRule checks the pattern is valid
-type GoogleComputeRegionBackendServiceInvalidProtocolRule struct {
+// GoogleComputeRegionSecurityPolicyInvalidTypeRule checks the pattern is valid
+type GoogleComputeRegionSecurityPolicyInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeRegionBackendServiceInvalidProtocolRule returns new rule with default attributes
-func NewGoogleComputeRegionBackendServiceInvalidProtocolRule() *GoogleComputeRegionBackendServiceInvalidProtocolRule {
-	return &GoogleComputeRegionBackendServiceInvalidProtocolRule{
-		resourceType:  "google_compute_region_backend_service",
-		attributeName: "protocol",
+// NewGoogleComputeRegionSecurityPolicyInvalidTypeRule returns new rule with default attributes
+func NewGoogleComputeRegionSecurityPolicyInvalidTypeRule() *GoogleComputeRegionSecurityPolicyInvalidTypeRule {
+	return &GoogleComputeRegionSecurityPolicyInvalidTypeRule{
+		resourceType:  "google_compute_region_security_policy",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Name() string {
-	return "google_compute_region_backend_service_invalid_protocol"
+func (r *GoogleComputeRegionSecurityPolicyInvalidTypeRule) Name() string {
+	return "google_compute_region_security_policy_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Enabled() bool {
+func (r *GoogleComputeRegionSecurityPolicyInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionSecurityPolicyInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Link() string {
+func (r *GoogleComputeRegionSecurityPolicyInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionSecurityPolicyInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionBackendServiceInvalidProtocolRule) Check(runner tfli
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"HTTP", "HTTPS", "HTTP2", "TCP", "SSL", "UDP", "GRPC", "UNSPECIFIED", "H2C", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"CLOUD_ARMOR", "CLOUD_ARMOR_EDGE", "CLOUD_ARMOR_NETWORK", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
