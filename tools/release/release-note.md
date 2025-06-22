@@ -1,30 +1,27 @@
 ## What's Changed
 
-### Enhancements
-* Update Magic Modules by @github-actions in https://github.com/terraform-linters/tflint-ruleset-google/pull/405
+### Breaking Changes
+* Update Magic Modules by @github-actions in https://github.com/terraform-linters/tflint-ruleset-google/pull/416
+  * Removed the following rules
+    * `google_gemini_data_sharing_with_google_setting_binding`
+    * `google_gemini_gemini_gcp_enablement_setting_binding`
 
 ### Chores
-* Fix broken GitHub Actions badge by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/399
-* Enable Dependabot auto-merge by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/400
-* Bump github.com/google/go-cmp from 0.6.0 to 0.7.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/394
-* Bump actions/attest-build-provenance from 1 to 2 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/397
-* Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.34.0 to 2.36.1 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/395
-* Bump google.golang.org/api from 0.201.0 to 0.223.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/398
-* Add make release for release automation by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/401
-* Automating Magic Modules Updates by GitHub Actions by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/402
-* Install goimports for Magic Modules update by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/403
-* Update submodules in automated maintenance action by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/404
-* Bump google.golang.org/api from 0.223.0 to 0.224.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/406
-* Bump golang.org/x/net from 0.35.0 to 0.36.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/407
-* Pin GitHub Action versions by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/408
-* Bump actions/setup-go from 5.3.0 to 5.4.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/409
-* Bump google.golang.org/api from 0.224.0 to 0.227.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/410
-* Bump google.golang.org/api from 0.227.0 to 0.228.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/411
-* Bump goreleaser/goreleaser-action from 6.2.1 to 6.3.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/412
-* Bump google.golang.org/api from 0.228.0 to 0.229.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/414
-* Go 1.24.2 by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/415
+* Potential fix for code scanning alert no. 5: Incomplete regular expression for hostnames by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/417
+* Set explicit workflow permissions by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/418
+* Bump sigstore/cosign-installer from 3.8.1 to 3.8.2 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/419
+* Bump google.golang.org/api from 0.229.0 to 0.230.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/420
+* Bump actions/attest-build-provenance from 2.2.3 to 2.3.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/421
+* Bump google.golang.org/api from 0.230.0 to 0.231.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/422
+* Bump actions/setup-go from 5.4.0 to 5.5.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/423
+* Bump google.golang.org/api from 0.231.0 to 0.232.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/424
+* Bump google.golang.org/api from 0.232.0 to 0.233.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/425
+* Bump github.com/hashicorp/terraform-plugin-sdk/v2 from 2.36.1 to 2.37.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/426
+* Bump google.golang.org/api from 0.233.0 to 0.234.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/427
+* Bump google.golang.org/api from 0.234.0 to 0.235.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/428
+* Bump google.golang.org/api from 0.235.0 to 0.236.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/429
+* Bump actions/attest-build-provenance from 2.3.0 to 2.4.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/430
+* Bump google.golang.org/api from 0.236.0 to 0.237.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/431
 
-## New Contributors
-* @github-actions made their first contribution in https://github.com/terraform-linters/tflint-ruleset-google/pull/405
 
-**Full Changelog**: https://github.com/terraform-linters/tflint-ruleset-google/compare/v0.31.0...v0.32.0
+**Full Changelog**: https://github.com/terraform-linters/tflint-ruleset-google/compare/v0.32.0...v0.33.0
