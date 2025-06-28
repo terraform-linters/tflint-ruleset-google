@@ -178,6 +178,48 @@ var validMachineTypes = map[string]bool{
 	"c4d-highmem-96-lssd":    true,
 	"c4d-highmem-192-lssd":   true,
 	"c4d-highmem-384-lssd":   true,
+	// C4A
+	"c4a-standard-1":       true,
+	"c4a-standard-2":       true,
+	"c4a-standard-4":       true,
+	"c4a-standard-8":       true,
+	"c4a-standard-16":      true,
+	"c4a-standard-32":      true,
+	"c4a-standard-48":      true,
+	"c4a-standard-64":      true,
+	"c4a-standard-72":      true,
+	"c4a-standard-4-lssd":  true,
+	"c4a-standard-8-lssd":  true,
+	"c4a-standard-16-lssd": true,
+	"c4a-standard-32-lssd": true,
+	"c4a-standard-48-lssd": true,
+	"c4a-standard-64-lssd": true,
+	"c4a-standard-72-lssd": true,
+	"c4a-highcpu-1":        true,
+	"c4a-highcpu-2":        true,
+	"c4a-highcpu-4":        true,
+	"c4a-highcpu-8":        true,
+	"c4a-highcpu-16":       true,
+	"c4a-highcpu-32":       true,
+	"c4a-highcpu-48":       true,
+	"c4a-highcpu-64":       true,
+	"c4a-highcpu-72":       true,
+	"c4a-highmem-1":        true,
+	"c4a-highmem-2":        true,
+	"c4a-highmem-4":        true,
+	"c4a-highmem-8":        true,
+	"c4a-highmem-16":       true,
+	"c4a-highmem-32":       true,
+	"c4a-highmem-48":       true,
+	"c4a-highmem-64":       true,
+	"c4a-highmem-72":       true,
+	"c4a-highmem-4-lssd":   true,
+	"c4a-highmem-8-lssd":   true,
+	"c4a-highmem-16-lssd":  true,
+	"c4a-highmem-32-lssd":  true,
+	"c4a-highmem-48-lssd":  true,
+	"c4a-highmem-64-lssd":  true,
+	"c4a-highmem-72-lssd":  true,
 	// E2
 	"e2-micro":       true,
 	"e2-small":       true,
@@ -218,6 +260,14 @@ var validMachineTypes = map[string]bool{
 	"m3-ultramem-32":  true,
 	"m3-ultramem-64":  true,
 	"m3-ultramem-128": true,
+	// M4
+	"m4-megamem-28":   true,
+	"m4-megamem-56":   true,
+	"m4-megamem-112":  true,
+	"m4-megamem-224":  true,
+	"m4-ultramem-56":  true,
+	"m4-ultramem-112": true,
+	"m4-ultramem-224": true,
 	// N1
 	"n1-standard-1":   true,
 	"n1-standard-2":   true,
@@ -362,8 +412,18 @@ var validMachineTypes = map[string]bool{
 	"a2-ultragpu-8g": true,
 
 	// H100 machine types: https://cloud.google.com/compute/docs/gpus#h100-gpus
-	"a3-highgpu-8g": true,
-	"a3-megagpu-8g": true,
+	"a3-highgpu-1g":  true,
+	"a3-highgpu-2g":  true,
+	"a3-highgpu-4g":  true,
+	"a3-highgpu-8g":  true,
+	"a3-megagpu-8g":  true,
+	"a3-ultragpu-8g": true,
+	"a3-edgegpu-8g":  true,
+
+	// A4
+	"a4-highgpu-8g": true,
+	// A4X
+	"a4x-highgpu-4g": true,
 
 	// L4 machine types: https://cloud.google.com/compute/docs/gpus#l4-gpus
 	"g2-standard-4":  true,
@@ -385,8 +445,11 @@ var validMachineTypes = map[string]bool{
 	"ct5lp-hightpu-8t": true,
 
 	// Z3
-	"z3-highmem-88":  true,
-	"z3-highmem-176": true,
+	"z3-highmem-88":                 true,
+	"z3-highmem-176":                true,
+	"z3-highmem-88-highlssd":        true,
+	"z3-highmem-176-highlssd":       true,
+	"z3-highmem-192-highlssd-metal": true,
 
 	// X4 machine types: https://cloud.google.com/compute/docs/memory-optimized-machines#x4_machine_types
 	"x4-megamem-960-metal":  true,
