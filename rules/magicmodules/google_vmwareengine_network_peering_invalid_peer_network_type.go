@@ -72,7 +72,7 @@ func (r *GoogleVmwareengineNetworkPeeringInvalidPeerNetworkTypeRule) Check(runne
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"STANDARD", "VMWARE_ENGINE_NETWORK", "PRIVATE_SERVICES_ACCESS", "NETAPP_CLOUD_VOLUMES", "THIRD_PARTY_SERVICE", "DELL_POWERSCALE"}, false)
+			validateFunc := validation.StringInSlice([]string{"STANDARD", "VMWARE_ENGINE_NETWORK", "PRIVATE_SERVICES_ACCESS", "NETAPP_CLOUD_VOLUMES", "THIRD_PARTY_SERVICE", "DELL_POWERSCALE", "GOOGLE_CLOUD_NETAPP_VOLUMES"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

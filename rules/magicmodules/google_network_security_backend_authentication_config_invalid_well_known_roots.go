@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleLookerInstanceInvalidPlatformEditionRule checks the pattern is valid
-type GoogleLookerInstanceInvalidPlatformEditionRule struct {
+// GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule checks the pattern is valid
+type GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleLookerInstanceInvalidPlatformEditionRule returns new rule with default attributes
-func NewGoogleLookerInstanceInvalidPlatformEditionRule() *GoogleLookerInstanceInvalidPlatformEditionRule {
-	return &GoogleLookerInstanceInvalidPlatformEditionRule{
-		resourceType:  "google_looker_instance",
-		attributeName: "platform_edition",
+// NewGoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule returns new rule with default attributes
+func NewGoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule() *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule {
+	return &GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule{
+		resourceType:  "google_network_security_backend_authentication_config",
+		attributeName: "well_known_roots",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Name() string {
-	return "google_looker_instance_invalid_platform_edition"
+func (r *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule) Name() string {
+	return "google_network_security_backend_authentication_config_invalid_well_known_roots"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Enabled() bool {
+func (r *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Severity() tflint.Severity {
+func (r *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Link() string {
+func (r *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkSecurityBackendAuthenticationConfigInvalidWellKnownRootsRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Check(runner tflint.Run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"LOOKER_CORE_TRIAL", "LOOKER_CORE_STANDARD", "LOOKER_CORE_STANDARD_ANNUAL", "LOOKER_CORE_ENTERPRISE_ANNUAL", "LOOKER_CORE_EMBED_ANNUAL", "LOOKER_CORE_NONPROD_STANDARD_ANNUAL", "LOOKER_CORE_NONPROD_ENTERPRISE_ANNUAL", "LOOKER_CORE_NONPROD_EMBED_ANNUAL", "LOOKER_CORE_TRIAL_STANDARD", "LOOKER_CORE_TRIAL_ENTERPRISE", "LOOKER_CORE_TRIAL_EMBED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"NONE", "PUBLIC_ROOTS", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
