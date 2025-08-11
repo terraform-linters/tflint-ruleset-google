@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleLookerInstanceInvalidPlatformEditionRule checks the pattern is valid
-type GoogleLookerInstanceInvalidPlatformEditionRule struct {
+// GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule checks the pattern is valid
+type GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleLookerInstanceInvalidPlatformEditionRule returns new rule with default attributes
-func NewGoogleLookerInstanceInvalidPlatformEditionRule() *GoogleLookerInstanceInvalidPlatformEditionRule {
-	return &GoogleLookerInstanceInvalidPlatformEditionRule{
-		resourceType:  "google_looker_instance",
-		attributeName: "platform_edition",
+// NewGoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule returns new rule with default attributes
+func NewGoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule() *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule {
+	return &GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule{
+		resourceType:  "google_discovery_engine_recommendation_engine",
+		attributeName: "industry_vertical",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Name() string {
-	return "google_looker_instance_invalid_platform_edition"
+func (r *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule) Name() string {
+	return "google_discovery_engine_recommendation_engine_invalid_industry_vertical"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Enabled() bool {
+func (r *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Severity() tflint.Severity {
+func (r *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Link() string {
+func (r *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Check(runner tflint.Runner) error {
+func (r *GoogleDiscoveryEngineRecommendationEngineInvalidIndustryVerticalRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleLookerInstanceInvalidPlatformEditionRule) Check(runner tflint.Run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"LOOKER_CORE_TRIAL", "LOOKER_CORE_STANDARD", "LOOKER_CORE_STANDARD_ANNUAL", "LOOKER_CORE_ENTERPRISE_ANNUAL", "LOOKER_CORE_EMBED_ANNUAL", "LOOKER_CORE_NONPROD_STANDARD_ANNUAL", "LOOKER_CORE_NONPROD_ENTERPRISE_ANNUAL", "LOOKER_CORE_NONPROD_EMBED_ANNUAL", "LOOKER_CORE_TRIAL_STANDARD", "LOOKER_CORE_TRIAL_ENTERPRISE", "LOOKER_CORE_TRIAL_EMBED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"GENERIC", "MEDIA", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
