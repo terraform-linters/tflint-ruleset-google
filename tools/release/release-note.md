@@ -1,16 +1,14 @@
 ## What's Changed
 
 ### Enhancements
-* Add c4d machines to validMachineTypes by @mlaver in https://github.com/terraform-linters/tflint-ruleset-google/pull/434
-* Add missing C4A, M4, Z3, A4 machine types by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/435
-* Update Magic Modules by @github-actions in https://github.com/terraform-linters/tflint-ruleset-google/pull/436
+* Update Magic Modules by @github-actions[bot] in https://github.com/terraform-linters/tflint-ruleset-google/pull/438
 
 ### Chores
-* Bump google.golang.org/api from 0.237.0 to 0.238.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/432
-* Bump sigstore/cosign-installer from 3.8.2 to 3.9.1 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/433
-* Bump google.golang.org/api from 0.238.0 to 0.239.0 by @dependabot in https://github.com/terraform-linters/tflint-ruleset-google/pull/437
+* Bump google.golang.org/api from 0.239.0 to 0.241.0 by @dependabot[bot] in https://github.com/terraform-linters/tflint-ruleset-google/pull/439
+* Bump github.com/hashicorp/hcl/v2 from 2.23.0 to 2.24.0 by @dependabot[bot] in https://github.com/terraform-linters/tflint-ruleset-google/pull/440
+* Bump sigstore/cosign-installer from 3.9.1 to 3.9.2 by @dependabot[bot] in https://github.com/terraform-linters/tflint-ruleset-google/pull/441
+* Bump google.golang.org/api from 0.241.0 to 0.242.0 by @dependabot[bot] in https://github.com/terraform-linters/tflint-ruleset-google/pull/442
+* Remove unneeded repository info from goreleaser.yml by @wata727 in https://github.com/terraform-linters/tflint-ruleset-google/pull/443
 
-## New Contributors
-* @mlaver made their first contribution in https://github.com/terraform-linters/tflint-ruleset-google/pull/434
 
-**Full Changelog**: https://github.com/terraform-linters/tflint-ruleset-google/compare/v0.33.0...v0.34.0
+**Full Changelog**: https://github.com/terraform-linters/tflint-ruleset-google/compare/v0.34.0...v0.35.0
