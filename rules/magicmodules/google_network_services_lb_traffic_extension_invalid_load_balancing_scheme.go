@@ -72,7 +72,7 @@ func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"INTERNAL_MANAGED", "EXTERNAL_MANAGED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"INTERNAL_MANAGED", "EXTERNAL_MANAGED"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
