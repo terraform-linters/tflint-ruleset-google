@@ -241,6 +241,7 @@ var Rules = []tflint.Rule{
 	NewGoogleMonitoringSloInvalidSloIdRule(),
 	NewGoogleMonitoringUptimeCheckConfigInvalidCheckerTypeRule(),
 	NewGoogleNetappBackupVaultInvalidBackupVaultTypeRule(),
+	NewGoogleNetappStoragePoolInvalidQosTypeRule(),
 	NewGoogleNetappStoragePoolInvalidServiceLevelRule(),
 	NewGoogleNetappVolumeInvalidSecurityStyleRule(),
 	NewGoogleNetappVolumeQuotaRuleInvalidTypeRule(),
