@@ -72,7 +72,7 @@ func (r *GoogleNetworkServicesGatewayInvalidRoutingModeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"NEXT_HOP_ROUTING_MODE", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"NEXT_HOP_ROUTING_MODE", "EXPLICIT_ROUTING_MODE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

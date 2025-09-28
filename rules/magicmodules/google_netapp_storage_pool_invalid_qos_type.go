@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule checks the pattern is valid
-type GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule struct {
+// GoogleNetappStoragePoolInvalidQosTypeRule checks the pattern is valid
+type GoogleNetappStoragePoolInvalidQosTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule returns new rule with default attributes
-func NewGoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule() *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule {
-	return &GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule{
-		resourceType:  "google_network_services_lb_traffic_extension",
-		attributeName: "load_balancing_scheme",
+// NewGoogleNetappStoragePoolInvalidQosTypeRule returns new rule with default attributes
+func NewGoogleNetappStoragePoolInvalidQosTypeRule() *GoogleNetappStoragePoolInvalidQosTypeRule {
+	return &GoogleNetappStoragePoolInvalidQosTypeRule{
+		resourceType:  "google_netapp_storage_pool",
+		attributeName: "qos_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) Name() string {
-	return "google_network_services_lb_traffic_extension_invalid_load_balancing_scheme"
+func (r *GoogleNetappStoragePoolInvalidQosTypeRule) Name() string {
+	return "google_netapp_storage_pool_invalid_qos_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) Enabled() bool {
+func (r *GoogleNetappStoragePoolInvalidQosTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
+func (r *GoogleNetappStoragePoolInvalidQosTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) Link() string {
+func (r *GoogleNetappStoragePoolInvalidQosTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetappStoragePoolInvalidQosTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleNetworkServicesLbTrafficExtensionInvalidLoadBalancingSchemeRule) 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"INTERNAL_MANAGED", "EXTERNAL_MANAGED"}, false)
+			validateFunc := validation.StringInSlice([]string{"QOS_TYPE_UNSPECIFIED", "AUTO", "MANUAL", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
