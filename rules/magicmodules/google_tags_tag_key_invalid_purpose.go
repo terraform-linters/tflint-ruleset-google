@@ -72,7 +72,7 @@ func (r *GoogleTagsTagKeyInvalidPurposeRule) Check(runner tflint.Runner) error {
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"GCE_FIREWALL", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"GCE_FIREWALL", "DATA_GOVERNANCE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
