@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNetworkConnectivityHubInvalidPresetTopologyRule checks the pattern is valid
-type GoogleNetworkConnectivityHubInvalidPresetTopologyRule struct {
+// GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule checks the pattern is valid
+type GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule returns new rule with default attributes
-func NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule() *GoogleNetworkConnectivityHubInvalidPresetTopologyRule {
-	return &GoogleNetworkConnectivityHubInvalidPresetTopologyRule{
-		resourceType:  "google_network_connectivity_hub",
-		attributeName: "preset_topology",
+// NewGoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule returns new rule with default attributes
+func NewGoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule() *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule {
+	return &GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule{
+		resourceType:  "google_compute_network_firewall_policy",
+		attributeName: "policy_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Name() string {
-	return "google_network_connectivity_hub_invalid_preset_topology"
+func (r *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule) Name() string {
+	return "google_compute_network_firewall_policy_invalid_policy_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Enabled() bool {
+func (r *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Severity() tflint.Severity {
+func (r *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Link() string {
+func (r *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeNetworkFirewallPolicyInvalidPolicyTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tfl
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MESH", "STAR", "HYBRID_INSPECTION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"VPC_POLICY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
