@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNetworkConnectivityHubInvalidPresetTopologyRule checks the pattern is valid
-type GoogleNetworkConnectivityHubInvalidPresetTopologyRule struct {
+// GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule checks the pattern is valid
+type GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule returns new rule with default attributes
-func NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule() *GoogleNetworkConnectivityHubInvalidPresetTopologyRule {
-	return &GoogleNetworkConnectivityHubInvalidPresetTopologyRule{
-		resourceType:  "google_network_connectivity_hub",
-		attributeName: "preset_topology",
+// NewGoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule returns new rule with default attributes
+func NewGoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule() *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule {
+	return &GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule{
+		resourceType:  "google_beyondcorp_security_gateway_application",
+		attributeName: "schema",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Name() string {
-	return "google_network_connectivity_hub_invalid_preset_topology"
+func (r *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule) Name() string {
+	return "google_beyondcorp_security_gateway_application_invalid_schema"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Enabled() bool {
+func (r *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Severity() tflint.Severity {
+func (r *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Link() string {
+func (r *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tflint.Runner) error {
+func (r *GoogleBeyondcorpSecurityGatewayApplicationInvalidSchemaRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tfl
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MESH", "STAR", "HYBRID_INSPECTION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"PROXY_GATEWAY", "API_GATEWAY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

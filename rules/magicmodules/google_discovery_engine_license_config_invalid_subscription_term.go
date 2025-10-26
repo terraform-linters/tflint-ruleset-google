@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNetworkConnectivityHubInvalidPresetTopologyRule checks the pattern is valid
-type GoogleNetworkConnectivityHubInvalidPresetTopologyRule struct {
+// GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule checks the pattern is valid
+type GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule returns new rule with default attributes
-func NewGoogleNetworkConnectivityHubInvalidPresetTopologyRule() *GoogleNetworkConnectivityHubInvalidPresetTopologyRule {
-	return &GoogleNetworkConnectivityHubInvalidPresetTopologyRule{
-		resourceType:  "google_network_connectivity_hub",
-		attributeName: "preset_topology",
+// NewGoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule returns new rule with default attributes
+func NewGoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule() *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule {
+	return &GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule{
+		resourceType:  "google_discovery_engine_license_config",
+		attributeName: "subscription_term",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Name() string {
-	return "google_network_connectivity_hub_invalid_preset_topology"
+func (r *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule) Name() string {
+	return "google_discovery_engine_license_config_invalid_subscription_term"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Enabled() bool {
+func (r *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Severity() tflint.Severity {
+func (r *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Link() string {
+func (r *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tflint.Runner) error {
+func (r *GoogleDiscoveryEngineLicenseConfigInvalidSubscriptionTermRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleNetworkConnectivityHubInvalidPresetTopologyRule) Check(runner tfl
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"MESH", "STAR", "HYBRID_INSPECTION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"SUBSCRIPTION_TERM_UNSPECIFIED", "SUBSCRIPTION_TERM_ONE_MONTH", "SUBSCRIPTION_TERM_ONE_YEAR", "SUBSCRIPTION_TERM_THREE_YEARS", "SUBSCRIPTION_TERM_THREE_MONTHS", "SUBSCRIPTION_TERM_FOURTEEN_DAYS", "SUBSCRIPTION_TERM_CUSTOM"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
