@@ -7,7 +7,7 @@ require (
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/hcl/v2 v2.24.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.38.1
-	github.com/terraform-linters/tflint-plugin-sdk v0.23.0
+	github.com/terraform-linters/tflint-plugin-sdk v0.23.1
 	google.golang.org/api v0.253.0
 )
 
