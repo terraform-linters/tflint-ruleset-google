@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputePublicDelegatedPrefixInvalidModeRule checks the pattern is valid
-type GoogleComputePublicDelegatedPrefixInvalidModeRule struct {
+// GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule checks the pattern is valid
+type GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputePublicDelegatedPrefixInvalidModeRule returns new rule with default attributes
-func NewGoogleComputePublicDelegatedPrefixInvalidModeRule() *GoogleComputePublicDelegatedPrefixInvalidModeRule {
-	return &GoogleComputePublicDelegatedPrefixInvalidModeRule{
-		resourceType:  "google_compute_public_delegated_prefix",
-		attributeName: "mode",
+// NewGoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule returns new rule with default attributes
+func NewGoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule() *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule {
+	return &GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule{
+		resourceType:  "google_compute_public_advertised_prefix",
+		attributeName: "ipv6_access_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Name() string {
-	return "google_compute_public_delegated_prefix_invalid_mode"
+func (r *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule) Name() string {
+	return "google_compute_public_advertised_prefix_invalid_ipv6_access_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Enabled() bool {
+func (r *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Severity() tflint.Severity {
+func (r *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Link() string {
+func (r *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputePublicAdvertisedPrefixInvalidIpv6AccessTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", "INTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
