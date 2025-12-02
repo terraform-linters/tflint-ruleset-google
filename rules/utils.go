@@ -545,9 +545,13 @@ var validMachineTypes = map[string]bool{
 	"z3-highmem-176-highlssd":       true,
 
 	// X4 machine types: https://cloud.google.com/compute/docs/memory-optimized-machines#x4_machine_types
-	"x4-megamem-960-metal":  true,
+	"x4-1440-24t-metal":     true,
+	"x4-1920-32t-metal":     true,
 	"x4-megamem-1440-metal": true,
 	"x4-megamem-1920-metal": true,
+	"x4-megamem-960-metal":  true,
+  "x4-960-12t-metal":      true,
+  "x4-960-16t-metal":      true,
 }
 
 func isCustomType(machineType string) bool {
