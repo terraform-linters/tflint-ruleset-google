@@ -422,7 +422,6 @@ var validMachineTypes = map[string]bool{
 	"n4-highmem-48":  true,
 	"n4-highmem-64":  true,
 	"n4-highmem-80": true,
-
 	// N4D
 	"n4d-standard-2":   true,
 	"n4d-standard-4":   true,
