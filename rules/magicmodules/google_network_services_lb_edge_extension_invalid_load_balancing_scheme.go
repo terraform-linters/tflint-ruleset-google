@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputePublicDelegatedPrefixInvalidModeRule checks the pattern is valid
-type GoogleComputePublicDelegatedPrefixInvalidModeRule struct {
+// GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule checks the pattern is valid
+type GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputePublicDelegatedPrefixInvalidModeRule returns new rule with default attributes
-func NewGoogleComputePublicDelegatedPrefixInvalidModeRule() *GoogleComputePublicDelegatedPrefixInvalidModeRule {
-	return &GoogleComputePublicDelegatedPrefixInvalidModeRule{
-		resourceType:  "google_compute_public_delegated_prefix",
-		attributeName: "mode",
+// NewGoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule returns new rule with default attributes
+func NewGoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule() *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule {
+	return &GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule{
+		resourceType:  "google_network_services_lb_edge_extension",
+		attributeName: "load_balancing_scheme",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Name() string {
-	return "google_compute_public_delegated_prefix_invalid_mode"
+func (r *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule) Name() string {
+	return "google_network_services_lb_edge_extension_invalid_load_balancing_scheme"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Enabled() bool {
+func (r *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Severity() tflint.Severity {
+func (r *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Link() string {
+func (r *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetworkServicesLbEdgeExtensionInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", "INTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"EXTERNAL_MANAGED"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
