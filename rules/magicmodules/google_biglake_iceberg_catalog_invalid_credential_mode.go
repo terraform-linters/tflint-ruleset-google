@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputePublicDelegatedPrefixInvalidModeRule checks the pattern is valid
-type GoogleComputePublicDelegatedPrefixInvalidModeRule struct {
+// GoogleBiglakeIcebergCatalogInvalidCredentialModeRule checks the pattern is valid
+type GoogleBiglakeIcebergCatalogInvalidCredentialModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputePublicDelegatedPrefixInvalidModeRule returns new rule with default attributes
-func NewGoogleComputePublicDelegatedPrefixInvalidModeRule() *GoogleComputePublicDelegatedPrefixInvalidModeRule {
-	return &GoogleComputePublicDelegatedPrefixInvalidModeRule{
-		resourceType:  "google_compute_public_delegated_prefix",
-		attributeName: "mode",
+// NewGoogleBiglakeIcebergCatalogInvalidCredentialModeRule returns new rule with default attributes
+func NewGoogleBiglakeIcebergCatalogInvalidCredentialModeRule() *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule {
+	return &GoogleBiglakeIcebergCatalogInvalidCredentialModeRule{
+		resourceType:  "google_biglake_iceberg_catalog",
+		attributeName: "credential_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Name() string {
-	return "google_compute_public_delegated_prefix_invalid_mode"
+func (r *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule) Name() string {
+	return "google_biglake_iceberg_catalog_invalid_credential_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Enabled() bool {
+func (r *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Severity() tflint.Severity {
+func (r *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Link() string {
+func (r *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleBiglakeIcebergCatalogInvalidCredentialModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", "INTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"CREDENTIAL_MODE_END_USER", "CREDENTIAL_MODE_VENDED_CREDENTIALS", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
