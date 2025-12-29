@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputePublicDelegatedPrefixInvalidModeRule checks the pattern is valid
-type GoogleComputePublicDelegatedPrefixInvalidModeRule struct {
+// GoogleComputeSnapshotInvalidSnapshotTypeRule checks the pattern is valid
+type GoogleComputeSnapshotInvalidSnapshotTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputePublicDelegatedPrefixInvalidModeRule returns new rule with default attributes
-func NewGoogleComputePublicDelegatedPrefixInvalidModeRule() *GoogleComputePublicDelegatedPrefixInvalidModeRule {
-	return &GoogleComputePublicDelegatedPrefixInvalidModeRule{
-		resourceType:  "google_compute_public_delegated_prefix",
-		attributeName: "mode",
+// NewGoogleComputeSnapshotInvalidSnapshotTypeRule returns new rule with default attributes
+func NewGoogleComputeSnapshotInvalidSnapshotTypeRule() *GoogleComputeSnapshotInvalidSnapshotTypeRule {
+	return &GoogleComputeSnapshotInvalidSnapshotTypeRule{
+		resourceType:  "google_compute_snapshot",
+		attributeName: "snapshot_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Name() string {
-	return "google_compute_public_delegated_prefix_invalid_mode"
+func (r *GoogleComputeSnapshotInvalidSnapshotTypeRule) Name() string {
+	return "google_compute_snapshot_invalid_snapshot_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Enabled() bool {
+func (r *GoogleComputeSnapshotInvalidSnapshotTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Severity() tflint.Severity {
+func (r *GoogleComputeSnapshotInvalidSnapshotTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Link() string {
+func (r *GoogleComputeSnapshotInvalidSnapshotTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeSnapshotInvalidSnapshotTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", "INTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"ARCHIVE", "STANDARD", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
