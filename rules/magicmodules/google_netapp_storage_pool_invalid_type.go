@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputePublicDelegatedPrefixInvalidModeRule checks the pattern is valid
-type GoogleComputePublicDelegatedPrefixInvalidModeRule struct {
+// GoogleNetappStoragePoolInvalidTypeRule checks the pattern is valid
+type GoogleNetappStoragePoolInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputePublicDelegatedPrefixInvalidModeRule returns new rule with default attributes
-func NewGoogleComputePublicDelegatedPrefixInvalidModeRule() *GoogleComputePublicDelegatedPrefixInvalidModeRule {
-	return &GoogleComputePublicDelegatedPrefixInvalidModeRule{
-		resourceType:  "google_compute_public_delegated_prefix",
-		attributeName: "mode",
+// NewGoogleNetappStoragePoolInvalidTypeRule returns new rule with default attributes
+func NewGoogleNetappStoragePoolInvalidTypeRule() *GoogleNetappStoragePoolInvalidTypeRule {
+	return &GoogleNetappStoragePoolInvalidTypeRule{
+		resourceType:  "google_netapp_storage_pool",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Name() string {
-	return "google_compute_public_delegated_prefix_invalid_mode"
+func (r *GoogleNetappStoragePoolInvalidTypeRule) Name() string {
+	return "google_netapp_storage_pool_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Enabled() bool {
+func (r *GoogleNetappStoragePoolInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Severity() tflint.Severity {
+func (r *GoogleNetappStoragePoolInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Link() string {
+func (r *GoogleNetappStoragePoolInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.Runner) error {
+func (r *GoogleNetappStoragePoolInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputePublicDelegatedPrefixInvalidModeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DELEGATION", "EXTERNAL_IPV6_FORWARDING_RULE_CREATION", "EXTERNAL_IPV6_SUBNETWORK_CREATION", "INTERNAL_IPV6_SUBNETWORK_CREATION", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"STORAGE_POOL_TYPE_UNSPECIFIED", "FILE", "UNIFIED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
