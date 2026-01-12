@@ -477,6 +477,7 @@ var APIDefinition = map[string]string{
 	"google_netapp_volume_quota_rule":                                            "netapp.googleapis.com",
 	"google_netapp_volume_replication":                                           "netapp.googleapis.com",
 	"google_netapp_volume_snapshot":                                              "netapp.googleapis.com",
+	"google_network_connectivity_destination":                                    "networkconnectivity.googleapis.com",
 	"google_network_connectivity_group":                                          "networkconnectivity.googleapis.com",
 	"google_network_connectivity_hub":                                            "networkconnectivity.googleapis.com",
 	"google_network_connectivity_internal_range":                                 "networkconnectivity.googleapis.com",
