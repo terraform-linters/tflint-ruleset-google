@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionSslPolicyInvalidMinTlsVersionRule) Check(runner tfli
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"TLS_1_0", "TLS_1_1", "TLS_1_2", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"TLS_1_0", "TLS_1_1", "TLS_1_2", "TLS_1_3", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
