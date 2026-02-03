@@ -6,7 +6,7 @@ require (
 	github.com/dave/dst v0.27.3
 	github.com/google/go-cmp v0.7.0
 	github.com/hashicorp/hcl/v2 v2.24.0
-	github.com/hashicorp/terraform-plugin-sdk/v2 v2.38.1
+	github.com/hashicorp/terraform-plugin-sdk/v2 v2.38.2
 	github.com/terraform-linters/tflint-plugin-sdk v0.23.1
 	google.golang.org/api v0.262.0
 )
@@ -31,10 +31,10 @@ require (
 	github.com/hashicorp/go-hclog v1.6.3 // indirect
 	github.com/hashicorp/go-plugin v1.7.0 // indirect
 	github.com/hashicorp/go-uuid v1.0.3 // indirect
-	github.com/hashicorp/go-version v1.7.0 // indirect
+	github.com/hashicorp/go-version v1.8.0 // indirect
 	github.com/hashicorp/logutils v1.0.0 // indirect
 	github.com/hashicorp/terraform-plugin-go v0.29.0 // indirect
-	github.com/hashicorp/terraform-plugin-log v0.9.0 // indirect
+	github.com/hashicorp/terraform-plugin-log v0.10.0 // indirect
 	github.com/hashicorp/yamux v0.1.2 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
