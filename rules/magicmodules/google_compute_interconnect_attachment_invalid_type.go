@@ -72,7 +72,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", "L2_DEDICATED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

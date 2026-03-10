@@ -72,7 +72,7 @@ func (r *GoogleNetworkServicesAuthzExtensionInvalidWireFormatRule) Check(runner 
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"WIRE_FORMAT_UNSPECIFIED", "EXT_PROC_GRPC", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"WIRE_FORMAT_UNSPECIFIED", "EXT_PROC_GRPC", "EXT_AUTHZ_GRPC", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
