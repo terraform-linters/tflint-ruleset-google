@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeInterconnectAttachmentInvalidTypeRule checks the pattern is valid
-type GoogleComputeInterconnectAttachmentInvalidTypeRule struct {
+// GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule checks the pattern is valid
+type GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeInterconnectAttachmentInvalidTypeRule returns new rule with default attributes
-func NewGoogleComputeInterconnectAttachmentInvalidTypeRule() *GoogleComputeInterconnectAttachmentInvalidTypeRule {
-	return &GoogleComputeInterconnectAttachmentInvalidTypeRule{
-		resourceType:  "google_compute_interconnect_attachment",
-		attributeName: "type",
+// NewGoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule returns new rule with default attributes
+func NewGoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule() *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule {
+	return &GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule{
+		resourceType:  "google_compute_region_network_firewall_policy_rule",
+		attributeName: "target_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Name() string {
-	return "google_compute_interconnect_attachment_invalid_type"
+func (r *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule) Name() string {
+	return "google_compute_region_network_firewall_policy_rule_invalid_target_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Enabled() bool {
+func (r *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Link() string {
+func (r *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionNetworkFirewallPolicyRuleInvalidTargetTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", "L2_DEDICATED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"INSTANCES", "INTERNAL_MANAGED_LB", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

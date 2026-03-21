@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeInterconnectAttachmentInvalidTypeRule checks the pattern is valid
-type GoogleComputeInterconnectAttachmentInvalidTypeRule struct {
+// GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule checks the pattern is valid
+type GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeInterconnectAttachmentInvalidTypeRule returns new rule with default attributes
-func NewGoogleComputeInterconnectAttachmentInvalidTypeRule() *GoogleComputeInterconnectAttachmentInvalidTypeRule {
-	return &GoogleComputeInterconnectAttachmentInvalidTypeRule{
-		resourceType:  "google_compute_interconnect_attachment",
-		attributeName: "type",
+// NewGoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule returns new rule with default attributes
+func NewGoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule() *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule {
+	return &GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule{
+		resourceType:  "google_contact_center_insights_auto_labeling_rule",
+		attributeName: "label_key_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Name() string {
-	return "google_compute_interconnect_attachment_invalid_type"
+func (r *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule) Name() string {
+	return "google_contact_center_insights_auto_labeling_rule_invalid_label_key_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Enabled() bool {
+func (r *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Link() string {
+func (r *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleContactCenterInsightsAutoLabelingRuleInvalidLabelKeyTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", "L2_DEDICATED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"LABEL_KEY_TYPE_UNSPECIFIED", "LABEL_KEY_TYPE_CUSTOM", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

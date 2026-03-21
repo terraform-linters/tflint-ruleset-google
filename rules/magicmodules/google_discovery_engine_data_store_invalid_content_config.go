@@ -72,7 +72,7 @@ func (r *GoogleDiscoveryEngineDataStoreInvalidContentConfigRule) Check(runner tf
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"NO_CONTENT", "CONTENT_REQUIRED", "PUBLIC_WEBSITE"}, false)
+			validateFunc := validation.StringInSlice([]string{"NO_CONTENT", "CONTENT_REQUIRED", "PUBLIC_WEBSITE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
