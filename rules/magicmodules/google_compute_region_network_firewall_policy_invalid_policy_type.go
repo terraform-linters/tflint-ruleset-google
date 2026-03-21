@@ -72,7 +72,7 @@ func (r *GoogleComputeRegionNetworkFirewallPolicyInvalidPolicyTypeRule) Check(ru
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"VPC_POLICY", "RDMA_ROCE_POLICY", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"VPC_POLICY", "RDMA_ROCE_POLICY", "RDMA_FALCON_POLICY", "ULL_POLICY", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

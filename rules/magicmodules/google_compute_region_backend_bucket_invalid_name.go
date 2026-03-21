@@ -15,49 +15,48 @@
 package magicmodules
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeInterconnectAttachmentInvalidTypeRule checks the pattern is valid
-type GoogleComputeInterconnectAttachmentInvalidTypeRule struct {
+// GoogleComputeRegionBackendBucketInvalidNameRule checks the pattern is valid
+type GoogleComputeRegionBackendBucketInvalidNameRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeInterconnectAttachmentInvalidTypeRule returns new rule with default attributes
-func NewGoogleComputeInterconnectAttachmentInvalidTypeRule() *GoogleComputeInterconnectAttachmentInvalidTypeRule {
-	return &GoogleComputeInterconnectAttachmentInvalidTypeRule{
-		resourceType:  "google_compute_interconnect_attachment",
-		attributeName: "type",
+// NewGoogleComputeRegionBackendBucketInvalidNameRule returns new rule with default attributes
+func NewGoogleComputeRegionBackendBucketInvalidNameRule() *GoogleComputeRegionBackendBucketInvalidNameRule {
+	return &GoogleComputeRegionBackendBucketInvalidNameRule{
+		resourceType:  "google_compute_region_backend_bucket",
+		attributeName: "name",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Name() string {
-	return "google_compute_interconnect_attachment_invalid_type"
+func (r *GoogleComputeRegionBackendBucketInvalidNameRule) Name() string {
+	return "google_compute_region_backend_bucket_invalid_name"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Enabled() bool {
+func (r *GoogleComputeRegionBackendBucketInvalidNameRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionBackendBucketInvalidNameRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Link() string {
+func (r *GoogleComputeRegionBackendBucketInvalidNameRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionBackendBucketInvalidNameRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +71,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", "L2_DEDICATED", ""}, false)
+			validateFunc := validateRegexp(`^(?:[a-z](?:[-a-z0-9]{0,61}[a-z0-9])?)$`)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

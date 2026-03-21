@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleComputeInterconnectAttachmentInvalidTypeRule checks the pattern is valid
-type GoogleComputeInterconnectAttachmentInvalidTypeRule struct {
+// GoogleMemorystoreInstanceInvalidServerCaModeRule checks the pattern is valid
+type GoogleMemorystoreInstanceInvalidServerCaModeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleComputeInterconnectAttachmentInvalidTypeRule returns new rule with default attributes
-func NewGoogleComputeInterconnectAttachmentInvalidTypeRule() *GoogleComputeInterconnectAttachmentInvalidTypeRule {
-	return &GoogleComputeInterconnectAttachmentInvalidTypeRule{
-		resourceType:  "google_compute_interconnect_attachment",
-		attributeName: "type",
+// NewGoogleMemorystoreInstanceInvalidServerCaModeRule returns new rule with default attributes
+func NewGoogleMemorystoreInstanceInvalidServerCaModeRule() *GoogleMemorystoreInstanceInvalidServerCaModeRule {
+	return &GoogleMemorystoreInstanceInvalidServerCaModeRule{
+		resourceType:  "google_memorystore_instance",
+		attributeName: "server_ca_mode",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Name() string {
-	return "google_compute_interconnect_attachment_invalid_type"
+func (r *GoogleMemorystoreInstanceInvalidServerCaModeRule) Name() string {
+	return "google_memorystore_instance_invalid_server_ca_mode"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Enabled() bool {
+func (r *GoogleMemorystoreInstanceInvalidServerCaModeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleMemorystoreInstanceInvalidServerCaModeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Link() string {
+func (r *GoogleMemorystoreInstanceInvalidServerCaModeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleMemorystoreInstanceInvalidServerCaModeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleComputeInterconnectAttachmentInvalidTypeRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"DEDICATED", "PARTNER", "PARTNER_PROVIDER", "L2_DEDICATED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"GOOGLE_MANAGED_PER_INSTANCE_CA", "GOOGLE_MANAGED_SHARED_CA", "CUSTOMER_MANAGED_CAS_CA", "SERVER_CA_MODE_UNSPECIFIED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
