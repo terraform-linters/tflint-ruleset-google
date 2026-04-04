@@ -15,48 +15,49 @@
 package magicmodules
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
 	"github.com/terraform-linters/tflint-plugin-sdk/hclext"
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleApigeeApiProductInvalidNameRule checks the pattern is valid
-type GoogleApigeeApiProductInvalidNameRule struct {
+// GoogleComputeSubnetworkInvalidResolveSubnetMaskRule checks the pattern is valid
+type GoogleComputeSubnetworkInvalidResolveSubnetMaskRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleApigeeApiProductInvalidNameRule returns new rule with default attributes
-func NewGoogleApigeeApiProductInvalidNameRule() *GoogleApigeeApiProductInvalidNameRule {
-	return &GoogleApigeeApiProductInvalidNameRule{
-		resourceType:  "google_apigee_api_product",
-		attributeName: "name",
+// NewGoogleComputeSubnetworkInvalidResolveSubnetMaskRule returns new rule with default attributes
+func NewGoogleComputeSubnetworkInvalidResolveSubnetMaskRule() *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule {
+	return &GoogleComputeSubnetworkInvalidResolveSubnetMaskRule{
+		resourceType:  "google_compute_subnetwork",
+		attributeName: "resolve_subnet_mask",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleApigeeApiProductInvalidNameRule) Name() string {
-	return "google_apigee_api_product_invalid_name"
+func (r *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule) Name() string {
+	return "google_compute_subnetwork_invalid_resolve_subnet_mask"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleApigeeApiProductInvalidNameRule) Enabled() bool {
+func (r *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleApigeeApiProductInvalidNameRule) Severity() tflint.Severity {
+func (r *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleApigeeApiProductInvalidNameRule) Link() string {
+func (r *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleApigeeApiProductInvalidNameRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeSubnetworkInvalidResolveSubnetMaskRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -71,7 +72,7 @@ func (r *GoogleApigeeApiProductInvalidNameRule) Check(runner tflint.Runner) erro
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-zA-Z][a-zA-Z0-9._\-$ %]*$`)
+			validateFunc := validation.StringInSlice([]string{"ARP_ALL_RANGES", "ARP_PRIMARY_RANGE", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
