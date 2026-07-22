@@ -72,7 +72,7 @@ func (r *GoogleBiglakeIcebergCatalogInvalidCatalogTypeRule) Check(runner tflint.
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"CATALOG_TYPE_GCS_BUCKET"}, false)
+			validateFunc := validation.StringInSlice([]string{"CATALOG_TYPE_GCS_BUCKET", "CATALOG_TYPE_BIGLAKE"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
