@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleRedisClusterInvalidNodeTypeRule checks the pattern is valid
-type GoogleRedisClusterInvalidNodeTypeRule struct {
+// GoogleApigeeDataCollectorInvalidTypeRule checks the pattern is valid
+type GoogleApigeeDataCollectorInvalidTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleRedisClusterInvalidNodeTypeRule returns new rule with default attributes
-func NewGoogleRedisClusterInvalidNodeTypeRule() *GoogleRedisClusterInvalidNodeTypeRule {
-	return &GoogleRedisClusterInvalidNodeTypeRule{
-		resourceType:  "google_redis_cluster",
-		attributeName: "node_type",
+// NewGoogleApigeeDataCollectorInvalidTypeRule returns new rule with default attributes
+func NewGoogleApigeeDataCollectorInvalidTypeRule() *GoogleApigeeDataCollectorInvalidTypeRule {
+	return &GoogleApigeeDataCollectorInvalidTypeRule{
+		resourceType:  "google_apigee_data_collector",
+		attributeName: "type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Name() string {
-	return "google_redis_cluster_invalid_node_type"
+func (r *GoogleApigeeDataCollectorInvalidTypeRule) Name() string {
+	return "google_apigee_data_collector_invalid_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Enabled() bool {
+func (r *GoogleApigeeDataCollectorInvalidTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Severity() tflint.Severity {
+func (r *GoogleApigeeDataCollectorInvalidTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Link() string {
+func (r *GoogleApigeeDataCollectorInvalidTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleApigeeDataCollectorInvalidTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleRedisClusterInvalidNodeTypeRule) Check(runner tflint.Runner) erro
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"REDIS_SHARED_CORE_NANO", "REDIS_HIGHMEM_MEDIUM", "REDIS_HIGHCPU_MEDIUM", "REDIS_STANDARD_LARGE", "REDIS_HIGHMEM_XLARGE", "REDIS_HIGHMEM_2XLARGE", "REDIS_STANDARD_SMALL", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"BOOLEAN", "DATETIME", "FLOAT", "INTEGER", "STRING"}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

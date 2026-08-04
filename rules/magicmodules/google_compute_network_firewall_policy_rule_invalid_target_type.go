@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleRedisClusterInvalidNodeTypeRule checks the pattern is valid
-type GoogleRedisClusterInvalidNodeTypeRule struct {
+// GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule checks the pattern is valid
+type GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleRedisClusterInvalidNodeTypeRule returns new rule with default attributes
-func NewGoogleRedisClusterInvalidNodeTypeRule() *GoogleRedisClusterInvalidNodeTypeRule {
-	return &GoogleRedisClusterInvalidNodeTypeRule{
-		resourceType:  "google_redis_cluster",
-		attributeName: "node_type",
+// NewGoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule returns new rule with default attributes
+func NewGoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule() *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule {
+	return &GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule{
+		resourceType:  "google_compute_network_firewall_policy_rule",
+		attributeName: "target_type",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Name() string {
-	return "google_redis_cluster_invalid_node_type"
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule) Name() string {
+	return "google_compute_network_firewall_policy_rule_invalid_target_type"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Enabled() bool {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Link() string {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleRedisClusterInvalidNodeTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeNetworkFirewallPolicyRuleInvalidTargetTypeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleRedisClusterInvalidNodeTypeRule) Check(runner tflint.Runner) erro
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"REDIS_SHARED_CORE_NANO", "REDIS_HIGHMEM_MEDIUM", "REDIS_HIGHCPU_MEDIUM", "REDIS_STANDARD_LARGE", "REDIS_HIGHMEM_XLARGE", "REDIS_HIGHMEM_2XLARGE", "REDIS_STANDARD_SMALL", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"INSTANCES", "INTERNAL_MANAGED_LB", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {

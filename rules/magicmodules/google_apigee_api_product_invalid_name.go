@@ -71,7 +71,7 @@ func (r *GoogleApigeeApiProductInvalidNameRule) Check(runner tflint.Runner) erro
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validateRegexp(`^[a-z][a-z0-9._\-$ %]*$`)
+			validateFunc := validateRegexp(`^[a-zA-Z][a-zA-Z0-9._\-$ %]*$`)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
