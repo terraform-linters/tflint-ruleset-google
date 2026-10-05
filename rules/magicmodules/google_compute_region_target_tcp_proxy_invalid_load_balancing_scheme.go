@@ -20,44 +20,44 @@ import (
 	"github.com/terraform-linters/tflint-plugin-sdk/tflint"
 )
 
-// GoogleNetworkSecuritySecurityProfileInvalidTypeRule checks the pattern is valid
-type GoogleNetworkSecuritySecurityProfileInvalidTypeRule struct {
+// GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule checks the pattern is valid
+type GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule struct {
 	tflint.DefaultRule
 
 	resourceType  string
 	attributeName string
 }
 
-// NewGoogleNetworkSecuritySecurityProfileInvalidTypeRule returns new rule with default attributes
-func NewGoogleNetworkSecuritySecurityProfileInvalidTypeRule() *GoogleNetworkSecuritySecurityProfileInvalidTypeRule {
-	return &GoogleNetworkSecuritySecurityProfileInvalidTypeRule{
-		resourceType:  "google_network_security_security_profile",
-		attributeName: "type",
+// NewGoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule returns new rule with default attributes
+func NewGoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule() *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule {
+	return &GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule{
+		resourceType:  "google_compute_region_target_tcp_proxy",
+		attributeName: "load_balancing_scheme",
 	}
 }
 
 // Name returns the rule name
-func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Name() string {
-	return "google_network_security_security_profile_invalid_type"
+func (r *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule) Name() string {
+	return "google_compute_region_target_tcp_proxy_invalid_load_balancing_scheme"
 }
 
 // Enabled returns whether the rule is enabled by default
-func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Enabled() bool {
+func (r *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule) Enabled() bool {
 	return true
 }
 
 // Severity returns the rule severity
-func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Severity() tflint.Severity {
+func (r *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule) Severity() tflint.Severity {
 	return tflint.ERROR
 }
 
 // Link returns the rule reference link
-func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Link() string {
+func (r *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule) Link() string {
 	return ""
 }
 
 // Check checks the pattern is valid
-func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Check(runner tflint.Runner) error {
+func (r *GoogleComputeRegionTargetTcpProxyInvalidLoadBalancingSchemeRule) Check(runner tflint.Runner) error {
 	resources, err := runner.GetResourceContent(r.resourceType, &hclext.BodySchema{
 		Attributes: []hclext.AttributeSchema{{Name: r.attributeName}},
 	}, nil)
@@ -72,7 +72,7 @@ func (r *GoogleNetworkSecuritySecurityProfileInvalidTypeRule) Check(runner tflin
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"THREAT_PREVENTION", "URL_FILTERING", "CUSTOM_MIRRORING", "CUSTOM_INTERCEPT", "WILDFIRE_ANALYSIS"}, false)
+			validateFunc := validation.StringInSlice([]string{"EXTERNAL_MANAGED", "INTERNAL_MANAGED", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
