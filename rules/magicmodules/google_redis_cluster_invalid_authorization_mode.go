@@ -72,7 +72,7 @@ func (r *GoogleRedisClusterInvalidAuthorizationModeRule) Check(runner tflint.Run
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"AUTH_MODE_UNSPECIFIED", "AUTH_MODE_IAM_AUTH", "AUTH_MODE_DISABLED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"AUTH_MODE_UNSPECIFIED", "AUTH_MODE_IAM_AUTH", "AUTH_MODE_DISABLED", "AUTH_MODE_TOKEN_AUTH", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
