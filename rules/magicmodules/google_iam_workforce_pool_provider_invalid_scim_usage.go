@@ -72,7 +72,7 @@ func (r *GoogleIamWorkforcePoolProviderInvalidScimUsageRule) Check(runner tflint
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"SCIM_USAGE_UNSPECIFIED", "ENABLED_FOR_GROUPS", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"SCIM_USAGE_UNSPECIFIED", "ENABLED_FOR_GROUPS", "ENABLED_FOR_USERS_GROUPS", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
