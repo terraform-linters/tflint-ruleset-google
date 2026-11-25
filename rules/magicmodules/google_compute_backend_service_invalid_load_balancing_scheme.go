@@ -72,7 +72,7 @@ func (r *GoogleComputeBackendServiceInvalidLoadBalancingSchemeRule) Check(runner
 		}
 
 		err := runner.EvaluateExpr(attribute.Expr, func(val string) error {
-			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL_SELF_MANAGED", "INTERNAL_MANAGED", "EXTERNAL_MANAGED", ""}, false)
+			validateFunc := validation.StringInSlice([]string{"EXTERNAL", "INTERNAL_SELF_MANAGED", "INTERNAL_MANAGED", "EXTERNAL_MANAGED", "EXTERNAL_PASSTHROUGH", ""}, false)
 
 			_, errors := validateFunc(val, r.attributeName)
 			for _, err := range errors {
